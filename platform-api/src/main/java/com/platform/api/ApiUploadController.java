@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 作者: @author Harmon <br>
- * 时间: 2017-09-08 13:20<br>
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- * 描述: ApiUploadController <br>
+ * 描述: ApiUploadController
  */
 @Api(tags = "文件上传-ApiUploadController")
 @RestController

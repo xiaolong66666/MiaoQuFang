@@ -15,11 +15,6 @@ import java.util.Map;
 
 /**
  * 通用字典表Controller
- *
- * @author lipengjun
- * @email 939961241@qq.com
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- * @date 2017-08-22 11:48:16
  */
 @RestController
 @RequestMapping("sys/macro")

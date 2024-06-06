@@ -18,11 +18,6 @@ import java.util.Map;
 
 /**
  * 部门管理Controller
- *
- * @author liepngjun
- * @email 939961241@qq.com
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- * @date 2017-09-17 23:58:47
  */
 @RestController
 @RequestMapping("/sys/dept")

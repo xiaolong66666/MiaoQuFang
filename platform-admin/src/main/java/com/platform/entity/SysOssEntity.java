@@ -10,11 +10,6 @@ import java.util.Date;
 /**
  * 文件上传
  * 表名 sys_oss
- *
- * @author lipengjun
- * @email 939961241@qq.com
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- * @date 2017-03-25 12:13:26
  */
 @Data
 @TableName("sys_oss")

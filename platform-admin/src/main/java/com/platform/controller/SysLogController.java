@@ -14,11 +14,6 @@ import java.util.Map;
 
 /**
  * 系统日志Controller
- *
- * @author lipengjun
- * @email 939961241@qq.com
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- * @date 2017-03-08 10:40:56
  */
 @Controller
 @RequestMapping("/sys/log")

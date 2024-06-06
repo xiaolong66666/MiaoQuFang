@@ -11,11 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-/**
- * @author 李鹏军
- * @email 939961241@qq.com
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- */
 @Service("sysOssService")
 public class SysOssServiceImpl extends ServiceImpl<SysOssDao, SysOssEntity> implements SysOssService {
 

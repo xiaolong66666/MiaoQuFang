@@ -20,11 +20,6 @@ import java.util.Map;
 
 /**
  * 发送短信接口Controller
- *
- * @author liepngjun
- * @email 939961241@qq.com
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- * @date 2018-06-05 13:58:47
  */
 @Api(tags = "发送短信|ApiSmsController")
 @RestController

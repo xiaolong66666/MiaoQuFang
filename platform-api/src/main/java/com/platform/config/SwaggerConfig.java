@@ -14,10 +14,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 import java.util.ArrayList;
 
-/**
- * @author pengjun
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- */
 @Configuration
 @EnableWebMvc
 @EnableSwagger2WebMvc

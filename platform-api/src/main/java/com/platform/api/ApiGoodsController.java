@@ -26,10 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 
 /**
- * 作者: @author Harmon <br>
- * 时间: 2017-08-11 08:32<br>
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- * 描述: ApiIndexController <br>
+ * 描述: ApiIndexController
  */
 @Api(tags = "商品信息-ApiGoodsController")
 @RestController

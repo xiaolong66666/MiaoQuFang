@@ -18,11 +18,6 @@ import java.util.*;
 
 /**
  * API优惠券管理
- *
- * @author lipengjun
- * @email 939961241@qq.com
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- * @date 2017-03-23 15:31
  */
 @Api(tags = "优惠券-ApiCouponController")
 @RestController

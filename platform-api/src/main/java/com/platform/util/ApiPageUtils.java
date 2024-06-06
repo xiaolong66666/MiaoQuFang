@@ -7,11 +7,6 @@ import java.util.List;
 
 /**
  * 分页工具类
- *
- * @author lipengjun
- * @email 939961241@qq.com
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- * @date 2016年11月4日 下午12:59:00
  */
 public class ApiPageUtils implements Serializable {
     private static final long serialVersionUID = 1L;

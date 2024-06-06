@@ -38,11 +38,6 @@ import java.util.Map;
 
 /**
  * API登录授权
- *
- * @author lipengjun
- * @email 939961241@qq.com
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- * @date 2017-03-23 15:31
  */
 @Slf4j
 @Api(tags = "登录授权-ApiAuthController")

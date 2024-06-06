@@ -16,11 +16,6 @@ import java.util.Map;
 
 /**
  * 系统配置信息Controller
- *
- * @author lipengjun
- * @email 939961241@qq.com
- * @gitee https://gitee.com/fuyang_lipengjun/platform
- * @date 2016年12月4日 下午6:55:53
  */
 @RestController
 @RequestMapping("/sys/config")
