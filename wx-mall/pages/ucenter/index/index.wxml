@@ -66,6 +66,6 @@
       </navigator>
     </view>
   </view>
-  <view class='company'>安徽微同科技有限公司提供技术支持 © fly2you.cn</view>
+  <view class='company'>深圳市妙趣坊贸易有限公司</view>
   <!--<view class="logout" bindtap="exitLogin">退出登录</view>-->
 </view>

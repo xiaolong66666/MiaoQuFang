@@ -38,17 +38,17 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         @SuppressWarnings("deprecation")
         ApiInfo info = new ApiInfo(
-                "开源微同商城",
+                "妙趣坊商城",
                 description(),
                 "1.0",
-                "http://fly2you.cn/platform-framework",
-                new Contact("lipengjun", "https://gitee.com/fuyang_lipengjun", "939961241@qq.com"),
+                "#",
+                new Contact("小龙", "#", "2636822826@qq.com"),
                 "Apache 2.0",
-                "http://www.apache.org/licenses/LICENSE-2.0", new ArrayList<>());
+                "#", new ArrayList<>());
         return info;
     }
 
     private String description() {
-        return "减少重复造轮子，开源微信小程序商城（前后端开源：uniapp+Java），拼团、秒杀、优惠券、积分购物、直播卖货、分销等功能。快速搭建一个属于自己的微信小程序商城。QQ交流群：66502035、870579539、151602347欢迎大家进群交流技术。体验地址：http://fly2you.cn/platform-framework/login.html";
+        return "待填入";
     }
 }

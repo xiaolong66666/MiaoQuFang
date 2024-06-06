@@ -6,7 +6,7 @@
  *     日期                       修正者        主要内容
  *     ${datetime}        ${author}     初版做成
  *
- * Copyright (c) 2019-2019 微同科技
+ * Copyright (c) 2019-2019 深圳市妙趣坊贸易有限公司
  */
 package ${package}.service.impl;
 
