@@ -57,16 +57,16 @@ public class ApiAuthController extends ApiBaseAction {
     @IgnoreAuth
     @PostMapping("login")
     @ApiOperation(value = "登录接口")
-    public R login(String mobile, String password) {
-        AbstractAssert.isBlank(mobile, "手机号不能为空");
-        AbstractAssert.isBlank(password, "密码不能为空");
-
+    public R login(@RequestBody UserVo user) {
+        AbstractAssert.isBlank(user.getMobile(), "手机号不能为空");
+        AbstractAssert.isBlank(user.getPassword(), "密码不能为空");
         //用户登录
-        long userId = userService.login(mobile, password);
-
+        long userId = userService.login(user.getMobile(), user.getPassword());
+        UserVo userVo = userService.queryByMobile(user.getMobile());
         //生成token
         Map<String, Object> map = tokenService.createToken(userId);
-
+        map.put("userInfo", userVo);
+        map.put("userId", userId);
         return R.ok(map);
     }
 

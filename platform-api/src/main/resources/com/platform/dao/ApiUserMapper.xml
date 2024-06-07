@@ -134,6 +134,11 @@
         left join nideshop_sms_log b on a.user_id = b.user_id and b.log_date > a.log_date
         where a.user_id = #{userId} and b.id is null
     </select>
+    <select id="queryByUserName" resultType="com.platform.entity.UserInfo">
+        select avatar, city, gender, nickname, province
+        from nideshop_user
+        where username = #{username}
+    </select>
 
     <insert id="saveSmsCodeLog" parameterType="com.platform.entity.SmsLogVo">
         insert into nideshop_sms_log(

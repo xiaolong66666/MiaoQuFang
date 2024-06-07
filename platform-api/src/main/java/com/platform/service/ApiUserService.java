@@ -3,6 +3,7 @@ package com.platform.service;
 import com.platform.dao.ApiUserLevelMapper;
 import com.platform.dao.ApiUserMapper;
 import com.platform.entity.SmsLogVo;
+import com.platform.entity.UserInfo;
 import com.platform.entity.UserLevelVo;
 import com.platform.entity.UserVo;
 import com.platform.utils.RRException;
@@ -96,5 +97,9 @@ public class ApiUserService {
             result = userLevelVo.getName();
         }
         return result;
+    }
+
+    public UserInfo getUserByUserName(String username) {
+        return userDao.queryByUserName(username);
     }
 }

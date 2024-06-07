@@ -1,6 +1,7 @@
 package com.platform.dao;
 
 import com.platform.entity.SmsLogVo;
+import com.platform.entity.UserInfo;
 import com.platform.entity.UserVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -28,4 +29,6 @@ public interface ApiUserMapper extends BaseDao<UserVo> {
      * @return
      */
     int saveSmsCodeLog(SmsLogVo smsLogVo);
+
+    UserInfo queryByUserName(String username);
 }
