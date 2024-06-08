@@ -77,7 +77,7 @@
 			login: function() {
 				//登录远程服务器
         let that = this;
-        util.request(api.LoginByAccount,
+        util.request(api.Login,
             {
               mobile: that.mobile,
               password: that.password

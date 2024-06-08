@@ -9,10 +9,7 @@ import com.platform.utils.Query;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -58,10 +55,10 @@ public class ApiBrandController extends ApiBaseAction {
     @ApiOperation(value = "品牌详情")
     @IgnoreAuth
     @PostMapping("detail")
-    public Object detail(@RequestParam Integer id) {
+    public Object detail(@RequestBody BrandVo brand) {
         Map<String, Object> resultObj = new HashMap<>();
         //查询列表数据
-        BrandVo entity = brandService.queryObject(id);
+        BrandVo entity = brandService.queryObject(brand.getId());
         //
         resultObj.put("brand", entity);
         return toResponseSuccess(resultObj);

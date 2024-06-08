@@ -11,7 +11,6 @@ module.exports = {
 	CatalogCurrent: 'catalog/current', //分类目录当前分类数据接口
 
 	AuthLoginByWeixin: 'auth/login_by_weixin', //微信登录
-	LoginByAccount: 'auth/login', //账号登录
 	GoodsCount: 'goods/count', //统计商品总数
 	GoodsList: 'goods/list', //获得商品列表
 	GoodsCategory: 'goods/category', //获得分类数据

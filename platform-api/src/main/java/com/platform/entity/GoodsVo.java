@@ -83,4 +83,7 @@ public class GoodsVo implements Serializable {
     // 冗余
     // 产品Id
     private Integer productId;
+
+    //查询参数
+    private Long referrer;
 }

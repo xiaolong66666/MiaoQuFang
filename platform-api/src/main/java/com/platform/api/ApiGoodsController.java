@@ -1,5 +1,7 @@
 package com.platform.api;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alipay.api.domain.GoodsDetail;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.platform.annotation.IgnoreAuth;
@@ -17,11 +19,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -112,8 +112,10 @@ public class ApiGoodsController extends ApiBaseAction {
     @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "商品id", paramType = "path", required = true),
             @ApiImplicitParam(name = "referrer", value = "商品referrer", paramType = "path", required = false)})
     @PostMapping(value = "detail")
-    public Object detail(Integer id, Long referrer) {
+    public Object detail(@RequestBody GoodsVo goods) {
         Map<String, Object> resultObj = new HashMap<>();
+        Integer id = goods.getId();
+        Long referrer = goods.getReferrer();
         //
         Long userId = getUserId();
         GoodsVo info = goodsService.queryObject(id);
@@ -276,7 +278,8 @@ public class ApiGoodsController extends ApiBaseAction {
     @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "分类id", paramType = "path", required = true)})
     @IgnoreAuth
     @PostMapping(value = "category")
-    public Object category(Integer id) {
+    public Object category(@RequestBody CategoryVo category) {
+        Integer id = category.getId();
         Map<String, Object> resultObj = new HashMap<>();
         //
         CategoryVo currentCategory = categoryService.queryObject(id);
@@ -499,7 +502,8 @@ public class ApiGoodsController extends ApiBaseAction {
     @ApiOperation(value = "商品详情页")
     @IgnoreAuth
     @PostMapping(value = "related")
-    public Object related(Integer id) {
+    public Object related(@RequestBody JSONObject jsonParam) {
+        Integer id = jsonParam.getInteger("id");
         Map<String, Object> resultObj = new HashMap<>();
         Map<String, Object> param = new HashMap<>();
         param.put("goodsId", id);
