@@ -143,6 +143,7 @@
         select
             id as userId,
             username,
+            password,
             gender,
             user_level_id as userLevelId,
             mobile,
