@@ -139,6 +139,9 @@
         from nideshop_user
         where username = #{username}
     </select>
+    <select id="queryByUsername" resultType="com.platform.entity.UserVo">
+        select * from nideshop_user where `username` = #{username}
+    </select>
 
     <insert id="saveSmsCodeLog" parameterType="com.platform.entity.SmsLogVo">
         insert into nideshop_sms_log(

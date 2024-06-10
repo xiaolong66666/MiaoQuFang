@@ -12,8 +12,8 @@
               type="text"
               data-type="account"
               placeholder-class="inp-palcehoder"
-              placeholder="请输入手机号"
-              v-model="mobile"
+              placeholder="请输入账号"
+              v-model="username"
           >
         </view>
       </view>
@@ -69,7 +69,7 @@
 	export default {
 		data() {
 			return {
-        mobile: '19076194847',
+        username: '小龙',
         password: '123456',
 			}
 		},
@@ -79,7 +79,7 @@
         let that = this;
         util.request(api.Login,
             {
-              mobile: that.mobile,
+              username: that.username,
               password: that.password
             }
             , 'POST', 'application/json').then(res => {
@@ -97,7 +97,6 @@
               showCancel: false
             });
           }
-
         });
         if (that.navUrl && that.navUrl == '/pages/index/index') {
         uni.switchTab({

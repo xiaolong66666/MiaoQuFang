@@ -58,15 +58,14 @@ public class ApiAuthController extends ApiBaseAction {
     @PostMapping("login")
     @ApiOperation(value = "登录接口")
     public R login(@RequestBody UserVo user) {
-        AbstractAssert.isBlank(user.getMobile(), "手机号不能为空");
+        AbstractAssert.isBlank(user.getUsername(), "账号不能为空");
         AbstractAssert.isBlank(user.getPassword(), "密码不能为空");
         //用户登录
-        long userId = userService.login(user.getMobile(), user.getPassword());
-        UserVo userVo = userService.queryByMobile(user.getMobile());
+        UserVo userVo = userService.login(user.getUsername(), user.getPassword());
         //生成token
-        Map<String, Object> map = tokenService.createToken(userId);
+        Map<String, Object> map = tokenService.createToken(userVo.getUserId());
         map.put("userInfo", userVo);
-        map.put("userId", userId);
+        map.put("userId", userVo.getUserId());
         return R.ok(map);
     }
 

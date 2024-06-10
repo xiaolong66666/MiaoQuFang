@@ -69,16 +69,20 @@ public class ApiUserService {
         return userDao.queryByMobile(mobile);
     }
 
-    public long login(String mobile, String password) {
-        UserVo user = queryByMobile(mobile);
-        AbstractAssert.isNull(user, "手机号或密码错误");
+    public UserVo queryByUsername(String username) {
+        return userDao.queryByUsername(username);
+    }
+
+    public UserVo login(String username, String password) {
+        UserVo user = queryByUsername(username);
+        AbstractAssert.isNull(user, "账号或密码错误");
 
         //密码错误
         if (!user.getPassword().equals(DigestUtils.sha256Hex(password))) {
-            throw new RRException("手机号或密码错误");
+            throw new RRException("账号或密码错误");
         }
 
-        return user.getUserId();
+        return user;
     }
 
     public SmsLogVo querySmsCodeByUserId(Long userId) {
