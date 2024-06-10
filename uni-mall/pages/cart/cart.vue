@@ -619,7 +619,7 @@
 		position: fixed;
 		bottom: 0;
 		left: 0;
-		height: 100rpx;
+		height: 250rpx;
 		width: 100%;
 		background: #fff;
 		display: flex;

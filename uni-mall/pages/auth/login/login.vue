@@ -84,11 +84,14 @@
             }
             , 'POST', 'application/json').then(res => {
           if (res.code === 0) {
-            console.log("登录成功")
             //存储用户信息
             uni.setStorageSync('userInfo', res.userInfo);
             uni.setStorageSync('token', res.token);
             uni.setStorageSync('userId', res.userId);
+            //跳转至首页
+            uni.switchTab({
+              url: '/pages/index/index'
+            });
           } else {
             // util.showErrorToast(res.errmsg)
             uni.showModal({
@@ -98,24 +101,12 @@
             });
           }
         });
-        if (that.navUrl && that.navUrl == '/pages/index/index') {
+			},
+      toIndex: function() {
         uni.switchTab({
-            url: that.navUrl,
-        })
-        } else if (that.navUrl) {
-        uni.redirectTo({
-            url: that.navUrl,
-        })
-        }
-			}
-		},
-		onLoad: function(options) {
-			let that = this;
-			if (uni.getStorageSync("navUrl")) {
-				that.navUrl = uni.getStorageSync("navUrl")
-			} else {
-				that.navUrl = '/pages/index/index'
-			}
+          url: '/pages/index/index'
+        });
+      },
 		}
 	}
 </script>
