@@ -116,9 +116,6 @@
 			} else {
 				that.navUrl = '/pages/index/index'
 			}
-			if (uni.getUserProfile) {
-				that.canIUseGetUserProfile = true
-			}
 		}
 	}
 </script>
