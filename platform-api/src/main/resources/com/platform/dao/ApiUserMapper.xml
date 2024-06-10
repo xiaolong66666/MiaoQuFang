@@ -148,7 +148,7 @@
             mobile,
             avatar,
             nickname,
-            birthday,
+            birthday
             from nideshop_user where `username` = #{username}
     </select>
 
