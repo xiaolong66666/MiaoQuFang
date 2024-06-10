@@ -22,6 +22,11 @@ public class J2CacheUtils {
      */
     private static String SYS_CACHE_NAME = "sysCache";
 
+    /**
+     * 验证码缓存
+     */
+    public static String CODE_CACHE_NAME = "codeCache";
+
     private static CacheChannel cache = J2Cache.getChannel();
 
     /**
@@ -52,6 +57,27 @@ public class J2CacheUtils {
      */
     public static void remove(String key) {
         remove(SYS_CACHE_NAME, key);
+    }
+
+    /**
+     * 获取CODE_CACHE_NAME缓存
+     */
+    public static Object getCode(String key) {
+        return get(CODE_CACHE_NAME, key);
+    }
+
+    /**
+     * 写入CODE_CACHE_NAME缓存
+     */
+    public static void putCode(String key, Object value) {
+        put(CODE_CACHE_NAME, key, value);
+    }
+
+    /**
+     * 从CODE_CACHE_NAME缓存中移除
+     */
+    public static void removeCode(String key) {
+        remove(CODE_CACHE_NAME, key);
     }
 
     /**

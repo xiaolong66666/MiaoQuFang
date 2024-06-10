@@ -64,4 +64,12 @@
            overflowToDisk="false">
     </cache>
 
+    <cache name="codeCache"
+           maxElementsInMemory="50000"
+           eternal="false"
+           timeToIdleSeconds="60"
+           timeToLiveSeconds="60"
+           overflowToDisk="false">
+    </cache>
+
 </ehcache>

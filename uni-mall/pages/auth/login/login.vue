@@ -120,13 +120,6 @@
 			if (uni.getUserProfile) {
 				that.canIUseGetUserProfile = true
 			}
-			uni.login({
-				success: function(res) {
-					if (res.code) {
-						that.code = res.code
-					}
-				}
-			});
 		}
 	}
 </script>

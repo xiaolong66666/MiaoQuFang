@@ -7,7 +7,7 @@
 		<view class="separate"></view>
 		<view>
 			<view>
-				<view class="login-title">关联手机号</view>
+				<view class="login-title">修改密码</view>
 				<form @submit="bindLoginMobilecode">
 					<form @submit="bindGetPassCode">
 						<view class="login">
