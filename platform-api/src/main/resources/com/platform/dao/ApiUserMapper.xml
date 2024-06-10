@@ -140,7 +140,16 @@
         where username = #{username}
     </select>
     <select id="queryByUsername" resultType="com.platform.entity.UserVo">
-        select * from nideshop_user where `username` = #{username}
+        select
+            id as userId,
+            username,
+            gender,
+            user_level_id as userLevelId,
+            mobile,
+            avatar,
+            nickname,
+            birthday,
+            from nideshop_user where `username` = #{username}
     </select>
 
     <insert id="saveSmsCodeLog" parameterType="com.platform.entity.SmsLogVo">
