@@ -228,7 +228,11 @@
 			//每次重新加载界面，清空数据
 			app.globalData.userCoupon = 'NO_USE_COUPON'
 			app.globalData.courseCouponCode = {}
-		}
+		},
+    onPullDownRefresh: function() {
+      this.getCheckoutInfo();
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

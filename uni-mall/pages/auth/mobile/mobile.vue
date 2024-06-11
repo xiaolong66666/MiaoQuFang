@@ -115,7 +115,10 @@
 					}
 				})
 			}
-		}
+		},
+    onPullDownRefresh: function() {
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

@@ -47,7 +47,11 @@
 		},
 		onShow: function() {
 			this.loadListData()
-		}
+		},
+    onPullDownRefresh: function() {
+      this.loadListData()
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

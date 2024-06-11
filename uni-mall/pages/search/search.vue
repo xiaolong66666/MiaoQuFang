@@ -66,7 +66,7 @@
 			</view>
 		</view>
 
-		<view class="search-result-empty" v-if="!goodsList.length && searchStatus">
+		<view class="search-result-empty" v-if="goodsList.length < 1 && searchStatus">
 			<image class="icon" src="/static/images/img.png"></image>
 			<text class="text">您寻找的商品还未上架</text>
 		</view>
@@ -85,15 +85,15 @@
 				helpKeyword: [],
 				historyKeyword: [],
 				categoryFilter: false,
-				currentSortType: 'default',
-				currentSortOrder: '',
+				// currentSortType: 'default',
+				// currentSortOrder: '',
 				filterCategory: [],
 				defaultKeyword: {},
 				hotKeyword: [],
 				page: 1,
 				size: 20,
-				// currentSortType: 'id',
-				// currentSortOrder: 'desc',
+				currentSortType: 'id',
+				currentSortOrder: 'desc',
 				categoryId: 0
 			}
 		},
@@ -154,10 +154,6 @@
 					categoryId: that.categoryId
 				}).then(function(res) {
 					if (res.errno === 0) {
-            // console.log("*****************************")
-            // console.log(res.data.goodsList)
-            // console.log(res.data.filterCategory)
-            // console.log("*****************************")
 						that.searchStatus = true
 						that.categoryFilter = false
 						that.goodsList = res.data.goodsList
@@ -235,7 +231,12 @@
 		},
 		onLoad: function() {
 			this.getSearchKeyword();
-		}
+		},
+    onPullDownRefresh() {
+      // 增加下拉刷新数据的功能
+      this.getSearchKeyword();
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

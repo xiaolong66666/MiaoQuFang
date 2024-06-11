@@ -538,7 +538,11 @@
 					that.winHeight = calc
 				}
 			});
-		}
+		},
+    onPullDownRefresh: function() {
+      this.getGoodsInfo();
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

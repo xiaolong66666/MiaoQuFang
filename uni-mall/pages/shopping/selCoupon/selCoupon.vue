@@ -66,7 +66,11 @@
 		onLoad: function(options) {
 			this.buyType = options.buyType
 			this.loadListData()
-		}
+		},
+    onPullDownRefresh: function() {
+      this.loadListData()
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

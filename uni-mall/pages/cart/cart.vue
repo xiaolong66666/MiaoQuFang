@@ -282,7 +282,11 @@
 			// 页面显示
 			this.getCartList();
 		},
-		onLoad: function() {}
+		onLoad: function() {},
+    onPullDownRefresh: function() {
+      this.getCartList();
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

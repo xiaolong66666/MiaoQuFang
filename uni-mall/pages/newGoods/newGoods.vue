@@ -129,7 +129,12 @@
 		},
 		onLoad: function() {
 			this.getData();
-		}
+		},
+    onPullDownRefresh() {
+      // 增加下拉刷新数据的功能
+      this.getData();
+      uni.stopPullDownRefresh();
+    },
 	}
 </script>
 

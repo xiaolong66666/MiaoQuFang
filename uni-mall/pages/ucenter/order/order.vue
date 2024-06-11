@@ -74,7 +74,12 @@
 		},
 		onShow: function(options) {
 			this.getOrderList();
-		}
+		},
+    onPullDownRefresh: function() {
+      this.page = 1;
+      this.orderList = [];
+      this.getOrderList();
+    }
 	}
 </script>
 

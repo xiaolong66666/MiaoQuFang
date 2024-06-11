@@ -83,7 +83,12 @@
 			// 页面初始化 options为页面跳转所带来的参数
 			this.getTopic();
 
-		}
+		},
+    // 增加下拉刷新数据的功能
+    onPullDownRefresh() {
+      this.getTopic();
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

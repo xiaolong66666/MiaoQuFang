@@ -99,6 +99,12 @@
       this.getCommentCount();
       this.getCommentList();
     },
+    onPullDownRefresh() {
+      // 增加下拉刷新数据的功能
+      this.getCommentCount();
+      this.getCommentList();
+      uni.stopPullDownRefresh();
+    },
     onReachBottom: function(){
       if ( this.showType == 0) {
         if (this.allCount / this.size < this.allPage) {

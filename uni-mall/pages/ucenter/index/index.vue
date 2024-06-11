@@ -193,7 +193,12 @@
 			if (wx.getUserProfile) {
 				this.canIUseGetUserProfile = true
 			}
-		}
+		},
+    onPullDownRefresh: function() {
+      // 下拉刷新
+      this.onShow();
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

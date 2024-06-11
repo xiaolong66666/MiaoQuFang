@@ -93,6 +93,7 @@
 		"style": {
 			"navigationBarTitleText": "订单详情",
 			"navigationBarBackgroundColor": "#fff",
+			"enablePullDownRefresh": true,
 			"navigationBarTextStyle": "black",
 			"app-plus": {
 				"bounce": "vertical"
@@ -102,6 +103,7 @@
 		"path": "pages/ucenter/feedback/feedback",
 		"style": {
 			"navigationBarTitleText": "反馈",
+			"enablePullDownRefresh": true,
 			"app-plus": {
 				"bounce": "vertical"
 			}
@@ -109,6 +111,7 @@
 	}, {
 		"path": "pages/ucenter/coupon/coupon",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "我的优惠券",
 			"app-plus": {
 				"bounce": "vertical"
@@ -126,6 +129,7 @@
 	}, {
 		"path": "pages/auth/login/login",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "登录",
 			"app-plus": {
 				"bounce": "vertical"
@@ -134,6 +138,7 @@
 	}, {
 		"path": "pages/auth/register/register",
 		"style": {
+			"enablePullDownRefresh": true,
 			"app-plus": {
 				"bounce": "vertical"
 			}
@@ -141,6 +146,7 @@
 	}, {
 		"path": "pages/auth/reset/reset",
 		"style": {
+			"enablePullDownRefresh": true,
 			"app-plus": {
 				"bounce": "vertical"
 			}
@@ -148,6 +154,7 @@
 	}, {
 		"path": "pages/payResult/payResult",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "付款结果",
 			"navigationBarBackgroundColor": "#fafafa",
 			"app-plus": {
@@ -172,6 +179,7 @@
 		"path": "pages/topic/topic",
 		"style": {
 			"navigationBarTitleText": "精选专题",
+			"enablePullDownRefresh": true,
 			"app-plus": {
 				"bounce": "vertical"
 			}
@@ -179,6 +187,7 @@
 	}, {
 		"path": "pages/comment/comment",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "评价",
 			"app-plus": {
 				"bounce": "vertical"
@@ -187,6 +196,7 @@
 	}, {
 		"path": "pages/commentPost/commentPost",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "填写留言",
 			"app-plus": {
 				"bounce": "vertical"
@@ -195,6 +205,7 @@
 	}, {
 		"path": "pages/topicComment/topicComment",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "专题评论",
 			"app-plus": {
 				"bounce": "vertical"
@@ -221,6 +232,7 @@
 	}, {
 		"path": "pages/search/search",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "搜索",
 			"navigationBarBackgroundColor": "#fff",
 			"navigationBarTextStyle": "black",
@@ -231,6 +243,7 @@
 	}, {
 		"path": "pages/category/category",
 		"style": {
+			"enablePullDownRefresh": true,
 			"app-plus": {
 				"bounce": "vertical"
 			}
@@ -247,6 +260,7 @@
 	}, {
 		"path": "pages/shopping/checkout/checkout",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "提交订单",
 			"app-plus": {
 				"bounce": "vertical"
@@ -255,6 +269,7 @@
 	}, {
 		"path": "pages/shopping/selCoupon/selCoupon",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "选择优惠券",
 			"app-plus": {
 				"bounce": "vertical"
@@ -274,6 +289,7 @@
 	}, {
 		"path": "pages/shopping/addressAdd/addressAdd",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "收货地址",
 			"navigationBarBackgroundColor": "#fff",
 			"navigationBarTextStyle": "black",
@@ -284,6 +300,7 @@
 	}, {
 		"path": "pages/goods/goods",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "商品详情",
 			"navigationBarBackgroundColor": "#fff",
 			"navigationBarTextStyle": "black",
@@ -295,6 +312,7 @@
 	}, {
 		"path": "pages/topicDetail/topicDetail",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "专题详情",
 			"app-plus": {
 				"bounce": "vertical"
@@ -303,6 +321,7 @@
 	}, {
 		"path": "pages/auth/mobile/mobile",
 		"style": {
+			"enablePullDownRefresh": true,
 			"app-plus": {
 				"bounce": "vertical"
 			}
@@ -310,6 +329,7 @@
 	}, {
 		"path": "pages/ucenter/help/help",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "帮助中心",
 			"app-plus": {
 				"bounce": "vertical"
@@ -318,6 +338,7 @@
 	}, {
 		"path": "pages/ucenter/helpInfo/helpInfo",
 		"style": {
+			"enablePullDownRefresh": true,
 			"navigationBarTitleText": "帮助中心",
 			"app-plus": {
 				"bounce": "vertical"

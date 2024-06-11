@@ -70,7 +70,11 @@
 		},
 		onShow: function() {
 			this.getAddressList();
-		}
+		},
+    onPullDownRefresh: function() {
+      this.getAddressList();
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

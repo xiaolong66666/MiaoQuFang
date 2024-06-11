@@ -260,7 +260,12 @@
 		onLoad: function(options) {
 			this.orderId = options.id;
 			this.getOrderDetail();
-		}
+		},
+    onPullDownRefresh() {
+      // 增加下拉刷新数据的功能
+      this.getOrderDetail();
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

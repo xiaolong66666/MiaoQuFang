@@ -33,7 +33,11 @@
 		},
 		onLoad: function() {
 			this.getHelpList()
-		}
+		},
+    onPullDownRefresh: function() {
+      this.getHelpList()
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

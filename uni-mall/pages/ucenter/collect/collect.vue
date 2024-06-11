@@ -85,6 +85,7 @@
 		onPullDownRefresh() {
 			var self = this;
 			this.getCollectList();
+      uni.stopPullDownRefresh();
 		},
 		onShow: function() {
 			this.getCollectList();

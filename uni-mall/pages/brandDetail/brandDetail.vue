@@ -74,7 +74,11 @@
 			var that = this;
 			that.id = parseInt(options.id);
 			this.getBrand();
-		}
+		},
+    onPullDownRefresh: function() {
+      this.getBrand();
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

@@ -56,7 +56,11 @@
 			// 页面初始化 options为页面跳转所带来的参数
 			this.orderId = options.orderId || 24
 			this.status = options.status
-		}
+		},
+    onPullDownRefresh() {
+      // 增加下拉刷新数据的功能
+      uni.stopPullDownRefresh();
+    },
 	}
 </script>
 

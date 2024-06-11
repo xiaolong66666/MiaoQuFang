@@ -90,7 +90,12 @@
 		},
 		onLoad: function() {
 			this.getCatalog();
-		}
+		},
+    onPullDownRefresh() {
+      // 增加下拉刷新数据的功能
+      this.getCatalog();
+      uni.stopPullDownRefresh();
+    },
 	}
 </script>
 

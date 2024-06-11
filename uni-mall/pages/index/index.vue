@@ -194,6 +194,7 @@
 		// 增加下拉刷新数据的功能
 		onPullDownRefresh() {
 			this.getIndexData();
+      uni.stopPullDownRefresh();
 		},
 		onShareAppMessage: function() {
 			return {

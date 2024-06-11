@@ -60,7 +60,11 @@
 			var that = this;
 			that.typeId= parseInt(options.typeId)
 			that.valueId= parseInt(options.valueId)
-		}
+		},
+    onPullDownRefresh() {
+      // 增加下拉刷新数据的功能
+      uni.stopPullDownRefresh();
+    },
 	}
 </script>
 

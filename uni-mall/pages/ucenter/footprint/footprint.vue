@@ -94,6 +94,7 @@
 			// 增加下拉刷新数据的功能
 			var self = this;
 			this.getFootprintList();
+      uni.stopPullDownRefresh();
 		},
 		onShow: function() {
 			this.getFootprintList();

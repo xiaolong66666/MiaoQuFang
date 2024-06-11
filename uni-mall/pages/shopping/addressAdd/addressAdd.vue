@@ -331,7 +331,11 @@
 
 			this.getRegionList(1);
 
-		}
+		},
+    onPullDownRefresh: function() {
+      this.getRegionList(1);
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

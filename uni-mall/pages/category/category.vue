@@ -143,7 +143,17 @@
 				}
 			});
 			this.getCategoryInfo();
-		}
+		},
+    // 增加下拉刷新数据的功能
+    onPullDownRefresh() {
+      uni.getSystemInfo({
+        success: function(res) {
+          that.scrollHeight = res.windowHeight
+        }
+      });
+      this.getCategoryInfo();
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

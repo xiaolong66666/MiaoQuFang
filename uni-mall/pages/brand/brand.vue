@@ -54,7 +54,11 @@
 		},
 		onLoad: function() {
 			this.getBrandList();
-		}
+		},
+    onPullDownRefresh: function() {
+      this.getBrandList();
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

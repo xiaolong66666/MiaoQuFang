@@ -33,7 +33,11 @@
 		onLoad: function(options) {
 			this.getHelpList(options.id)
 
-		}
+		},
+    onPullDownRefresh: function() {
+      this.getHelpList()
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 

@@ -331,7 +331,12 @@
 
 			this.getRegionList(1);
 
-		}
+		},
+    onPullDownRefresh() {
+      // 增加下拉刷新数据的功能
+      this.getRegionList(1);
+      uni.stopPullDownRefresh();
+    }
 	}
 </script>
 
