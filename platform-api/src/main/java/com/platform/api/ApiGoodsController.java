@@ -305,19 +305,20 @@ public class ApiGoodsController extends ApiBaseAction {
             @ApiImplicitParam(name = "isHot", value = "热卖商品", paramType = "path", required = true)})
     @IgnoreAuth
     @PostMapping(value = "list")
-    public Object list(@LoginUser UserVo loginUser, Integer categoryId,
-                       Integer brandId, String keyword, Integer isNew, Integer isHot,
-                       @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,
-                       String sort, String order) {
+    public Object list(@LoginUser UserVo loginUser,@RequestBody CommonVo commonVo) {
+        String keyword = commonVo.getKeyword();
+        String sort = commonVo.getSort();
+        String order = commonVo.getOrder();
+        Integer categoryId = commonVo.getCategoryId();
         Map<String, Object> params = new HashMap<>();
         params.put("isDelete", 0);
         params.put("isOnSale", 1);
-        params.put("brandId", brandId);
+        params.put("brandId", commonVo.getBrandId());
         params.put("keyword", keyword);
-        params.put("isNew", isNew);
-        params.put("isHot", isHot);
-        params.put("page", page);
-        params.put("limit", size);
+        params.put("isNew", commonVo.getIsNew());
+        params.put("isHot", commonVo.getIsHot());
+        params.put("page", commonVo.getPage() == null ? 1 : commonVo.getPage());
+        params.put("limit", commonVo.getSize() == null ? 10 : commonVo.getSize());
         params.put("order", sort);
         params.put("sidx", order);
         //

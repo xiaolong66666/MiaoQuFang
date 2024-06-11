@@ -2,7 +2,7 @@
 	<scroll-view class="container" style="height: 100%;">
 		<view class="search-header">
 			<view class="input-box">
-				<image class="icon" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/search2-2fb94833aa.png"></image>
+				<image class="icon" src="/static/search.png"></image>
 				<input name="input" class="keywrod" :focus="true" v-model="keyword" confirm-type="search" @input="inputChange"
 				 @focus="inputFocus" @confirm="onKeywordConfirm" :placeholder="defaultKeyword.keyword" />
 				<image class="del" v-if="keyword" @tap="clearKeyword" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/clearIpt-f71b83e3c2.png"></image>
@@ -249,7 +249,7 @@
 
 	.search-header {
 		position: fixed;
-		top: 0;
+		top: 3rem;
 		width: 750rpx;
 		height: 91rpx;
 		display: flex;

@@ -88,4 +88,7 @@
     <delete id="deleteByUserId">
 		delete from nideshop_search_history where  user_id = #{userId}
 	</delete>
+
+
+
 </mapper>

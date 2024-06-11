@@ -190,6 +190,10 @@ public class RegionCacheUtil implements InitializingBean {
         if (null == parentId) {
             return resultObj;
         }
+        //sysRegionEntityList为空时进行初始化
+        if (null == sysRegionEntityList) {
+            init();
+        }
         if (null != sysRegionEntityList) {
             for (SysRegionEntity areaVo : sysRegionEntityList) {
                 if (null != areaVo.getParentId() && parentId.equals(areaVo.getParentId())) {

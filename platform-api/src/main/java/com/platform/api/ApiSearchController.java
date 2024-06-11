@@ -2,6 +2,7 @@ package com.platform.api;
 
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
+import com.platform.entity.CommonVo;
 import com.platform.entity.KeywordsVo;
 import com.platform.entity.SearchHistoryVo;
 import com.platform.entity.UserVo;
@@ -15,6 +16,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,7 +54,7 @@ public class ApiSearchController extends ApiBaseAction {
         KeywordsVo defaultKeyword = null != keywordsEntityList && keywordsEntityList.size() > 0 ? keywordsEntityList.get(0) : null;
         //取出热闹关键词
         param = new HashMap<>();
-        param.put("fields", "distinct keyword,is_hot");
+        param.put("fields", "distinct id,keyword,is_hot");
         param.put("page", 1);
         param.put("limit", 10);
         param.put("sidx", "id");
@@ -62,7 +64,7 @@ public class ApiSearchController extends ApiBaseAction {
         //
         param = new HashMap<>();
         param.put("userId", loginUser.getUserId());
-        param.put("fields", "distinct keyword");
+        param.put("fields", "distinct id,keyword");
         param.put("page", 1);
         param.put("limit", 10);
         param.put("sidx", "id");
@@ -90,7 +92,8 @@ public class ApiSearchController extends ApiBaseAction {
     @ApiImplicitParams({@ApiImplicitParam(name = "keyword", value = "关键字", paramType = "path", required = true)})
     @IgnoreAuth
     @PostMapping("helper")
-    public Object helper(@LoginUser UserVo loginUser, String keyword) {
+    public Object helper(@LoginUser UserVo loginUser, @RequestBody CommonVo commonVo) {
+        String keyword = commonVo.getKeyword();
         Map<String, Object> param = new HashMap<>();
         param.put("fields", "distinct keyword");
         param.put("keyword", keyword);

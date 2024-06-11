@@ -2,6 +2,7 @@ package com.platform.api;
 
 import com.platform.annotation.IgnoreAuth;
 import com.platform.cache.RegionCacheUtil;
+import com.platform.entity.CommonVo;
 import com.platform.entity.RegionVo;
 import com.platform.entity.SysRegionEntity;
 import com.platform.util.ApiBaseAction;
@@ -9,6 +10,7 @@ import com.platform.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +27,8 @@ public class ApiRegionController extends ApiBaseAction {
     @ApiOperation(value = "地区列表")
     @IgnoreAuth
     @PostMapping("list")
-    public Object list(Integer parentId) {
+    public Object list(@RequestBody CommonVo commonVo) {
+        Integer parentId = commonVo.getParentId();
         List<SysRegionEntity> regionEntityList = RegionCacheUtil.getChildrenByParentId(parentId);
         List<RegionVo> regionVoList = new ArrayList<RegionVo>();
         if (null != regionEntityList && regionEntityList.size() > 0) {
