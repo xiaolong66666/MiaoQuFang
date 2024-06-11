@@ -2,8 +2,8 @@
 	<scroll-view class="container" style="height: 100%;">
 		<view class="search-header">
 			<view class="input-box">
-				<image class="icon" src="/static/search.png"></image>
-				<input name="input" class="keywrod" :focus="true" v-model="keyword" confirm-type="search" @input="inputChange"
+				<image class="icon" src="/static/images/search.png"></image>
+				<input name="input" class="keyword" :focus="true" v-model="keyword" confirm-type="search" @input="inputChange"
 				 @focus="inputFocus" @confirm="onKeywordConfirm" :placeholder="defaultKeyword.keyword" />
 				<image class="del" v-if="keyword" @tap="clearKeyword" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/clearIpt-f71b83e3c2.png"></image>
 			</view>
@@ -67,7 +67,7 @@
 		</view>
 
 		<view class="search-result-empty" v-if="!goodsList.length && searchStatus">
-			<image class="icon" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/noSearchResult-7572a94f32.png"></image>
+			<image class="icon" src="/static/images/img.png"></image>
 			<text class="text">您寻找的商品还未上架</text>
 		</view>
 	</scroll-view>
@@ -79,7 +79,7 @@
 	export default {
 		data() {
 			return {
-				keywrod: '',
+				keyword: '',
 				searchStatus: false,
 				goodsList: [],
 				helpKeyword: [],
@@ -92,8 +92,8 @@
 				hotKeyword: [],
 				page: 1,
 				size: 20,
-				currentSortType: 'id',
-				currentSortOrder: 'desc',
+				// currentSortType: 'id',
+				// currentSortOrder: 'desc',
 				categoryId: 0
 			}
 		},
@@ -154,14 +154,17 @@
 					categoryId: that.categoryId
 				}).then(function(res) {
 					if (res.errno === 0) {
+            // console.log("*****************************")
+            // console.log(res.data.goodsList)
+            // console.log(res.data.filterCategory)
+            // console.log("*****************************")
 						that.searchStatus = true
 						that.categoryFilter = false
-						that.goodsList = res.data.data
+						that.goodsList = res.data.goodsList
 						that.filterCategory = res.data.filterCategory
 						that.page = res.data.currentPage
 						that.size = res.data.numsPerPage
 					}
-
 					//重新获取关键词
 					that.getSearchKeyword();
 				});
@@ -289,7 +292,7 @@
 		z-index: 10;
 	}
 
-	.search-header .keywrod {
+	.search-header .keyword {
 		position: absolute;
 		top: 0;
 		left: 40rpx;

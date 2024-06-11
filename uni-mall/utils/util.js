@@ -1,7 +1,7 @@
 const utils = {
 	// 域名
 	// domain: 'https://fly2you.cn/',
-	domain: 'http://172.20.10.2:8080/',
+	domain: 'http://127.0.0.1:8080/',
 	//接口地址
 	interfaceUrl: function() {
 		return utils.domain + 'platform-framework/api/'
