@@ -1,4 +1,5 @@
 package com.platform.api;
+import com.platform.annotation.IgnoreAuth;
 import com.platform.service.impl.SeedMailServiceImpl;
 import com.platform.util.CodeUtils;
 import com.platform.utils.R;
@@ -16,6 +17,7 @@ public class SendMailController {
     @Autowired
     private CodeUtils codeUtils;
     //生成验证码
+    @IgnoreAuth
     @GetMapping
     public R sendMessage(String mail) throws MessagingException {
         SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();

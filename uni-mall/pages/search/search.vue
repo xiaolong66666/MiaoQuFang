@@ -5,7 +5,7 @@
 				<image class="icon" src="/static/images/search.png"></image>
 				<input name="input" class="keyword" :focus="true" v-model="keyword" confirm-type="search" @input="inputChange"
 				 @focus="inputFocus" @confirm="onKeywordConfirm" :placeholder="defaultKeyword.keyword" />
-				<image class="del" v-if="keyword" @tap="clearKeyword" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/clearIpt-f71b83e3c2.png"></image>
+				<image class="del" v-if="keyword" @tap="clearKeyword" src="/static/images/clear.png"></image>
 			</view>
 			<view class="right" @tap="closeSearch">取消</view>
 		</view>
@@ -13,7 +13,7 @@
 			<view class="serach-keywords search-history" v-if="!keyword  && historyKeyword.length">
 				<view class="h">
 					<text class="title">历史记录</text>
-					<image class="icon" @tap="clearHistory" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/del1-93f0a4add4.png"></image>
+					<image class="icon" @tap="clearHistory" src="/static/images/del.png"></image>
 				</view>
 				<view class="b">
 					<view class="item" @tap="onKeywordTap" :data-keyword="item" v-for="(item, index) in historyKeyword" :key="index"
@@ -431,17 +431,17 @@
 	}
 
 	.sort-box .item.by-price {
-		background: url(//yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/no-3127092a69.png) 155rpx center no-repeat;
+		background: url(/h5/static/images/no.png) 155rpx center no-repeat;
 		background-size: 15rpx 21rpx;
 	}
 
 	.sort-box .item.by-price.active.asc {
-		background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/up-636b92c0a5.png) 155rpx center no-repeat;
+		background: url(/h5/static/images/up.png) 155rpx center no-repeat;
 		background-size: 15rpx 21rpx;
 	}
 
 	.sort-box .item.by-price.active.desc {
-		background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/down-95e035f3e5.png) 155rpx center no-repeat;
+		background: url(/h5/static/images/down.png) 155rpx center no-repeat;
 		background-size: 15rpx 21rpx;
 	}
 

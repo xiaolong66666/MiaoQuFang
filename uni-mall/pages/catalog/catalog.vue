@@ -132,7 +132,7 @@
 	}
 
 	.search .icon {
-		background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/search2-2fb94833aa.png) center no-repeat;
+		background: url(/h5/static/images/search.png) center no-repeat;
 		background-size: 100%;
 		width: 28rpx;
 		height: 28rpx;

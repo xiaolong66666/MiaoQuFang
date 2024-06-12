@@ -69,8 +69,12 @@
 				</navigator>
 			</view>
 		</view>
-		<view class='company'>妙趣坊</view>
+		<view class='company'>
+      妙趣坊
+      <p>历史上首家由00后大厂程序员投资的一家成人用品企业</p>
+    </view>
 		<view class="logout" v-if="userInfo.userName!='点击去登录'" @tap="exitLogin">退出登录</view>
+		<view class="logout" v-else @tap="goLogin">点击去登录</view>
 	</view>
 </template>
 
@@ -145,6 +149,11 @@
 					console.log(err)
 				});
 			},
+      goLogin: function() {
+        uni.navigateTo({
+          url: '/pages/auth/login/login'
+        });
+      },
 			exitLogin: function() {
 				uni.showModal({
 					title: '',
@@ -157,7 +166,7 @@
 							app.globalData.userInfo = {
                 nickname: 'Hi,游客',
 								userName: '点击去登录',
-								avatar: 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/150547696d798c.png'
+								avatar: '/static/images/unlogin_avatar.png'
 							}
 							util.toast('退出成功');
 							uni.switchTab({
@@ -196,7 +205,6 @@
 		},
     onPullDownRefresh: function() {
       // 下拉刷新
-      this.onShow();
       uni.stopPullDownRefresh();
     }
 	}
@@ -320,47 +328,47 @@
 	}
 
 	.user-menu .icon.order {
-		background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -437.5rpx no-repeat;
+		background: url(/h5/static/images/ucenter.png) 0 -437.5rpx no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.coupon {
-		background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -62.4997rpx no-repeat;
+		background: url(/h5/static/images/ucenter.png) 0 -62.4997rpx no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.gift {
-		background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -187.5rpx no-repeat;
+		background: url(/h5/static/images/ucenter.png) 0 -187.5rpx no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.address {
-		background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 0 no-repeat;
+		background: url(/h5/static/images/ucenter.png) 0 0 no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.security {
-		background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -500rpx no-repeat;
+		background: url(/h5/static/images/ucenter.png) 0 -500rpx no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.kefu {
-		background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -312.5rpx no-repeat;
+		background: url(/h5/static/images/ucenter.png) 0 -312.5rpx no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.help {
-		background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -250rpx no-repeat;
+		background: url(/h5/static/images/ucenter.png) 0 -250rpx no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.feedback {
-		background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -125rpx no-repeat;
+		background: url(/h5/static/images/ucenter.png) 0 -125rpx no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.phone {
-		background: url(https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/15011540ebe21.png) no-repeat;
+		background: url(/h5/static/images/phone.png) no-repeat;
 		background-size: 52.803rpx;
 	}
 
@@ -399,6 +407,6 @@
 	.company {
 		font-size: 20rpx;
 		text-align: center;
-		margin-top: 50px;
+		margin-top: 40px;
 	}
 </style>

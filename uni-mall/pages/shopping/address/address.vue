@@ -11,12 +11,12 @@
 					<view class="address">{{item.fullRegion+item.detailInfo}}</view>
 				</view>
 				<view class="r">
-					<image @click.stop.prevent="addressAddOrUpdate" :data-address-id="item.id" class="del" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/address-edit-7fee7b0d63.png"></image>
+					<image @click.stop.prevent="addressAddOrUpdate" :data-address-id="item.id" class="del" src="/static/images/address_eidt.png"></image>
 				</view>
 			</view>
 		</view>
 		<view class="empty-view" v-if="addressList.length <= 0">
-			<image class="icon" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/noAddress-26d570cefa.png"></image>
+			<image class="icon" src="/static/images/no_address.png"></image>
 			<text class="text">收货地址在哪里</text>
 		</view>
 		<view class="add-address" @tap="addressAddOrUpdate" :data-address-id="0">新建</view>
@@ -85,7 +85,7 @@
 
 	.address-list {
 		padding-left: 31.25rpx;
-		background: #fff url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/address-bg-bd30f2bfeb.png) 0 0 repeat-x;
+		background: #fff url(/h5/static/images/address_bg_bd.png) 0 0 repeat-x;
 		background-size: auto 10.5rpx;
 		margin-bottom: 90rpx;
 	}

@@ -9,7 +9,7 @@
 			<scroll-view class="comments">
 				<view class="h">
 					<text class="t">精选留言</text>
-					<image @tap="postComment" class="i" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/comment-add-2aca147c3f.png"></image>
+					<image @tap="postComment" class="i" src="/static/images/comment_add.png"></image>
 				</view>
 				<view class="has-comments" v-if="commentList.length > 0">
 					<view class="b">
@@ -32,7 +32,7 @@
 				</view>
 				<view class="no-comments" v-if="commentList.length <= 0">
 					<view class="b">
-						<image class="icon" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/no-comment-560f87660a.png"></image>
+						<image class="icon" src="/static/images/no_comment.png"></image>
 						<text class="txt">等你来留言</text>
 					</view>
 				</view>

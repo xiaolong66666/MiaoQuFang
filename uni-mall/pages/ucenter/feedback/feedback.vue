@@ -4,12 +4,12 @@
 			<view class="picker">
 				<view class="fb-type">
 					<view class="type-label">{{array[index]}}</view>
-					<image class="type-icon" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/pickerArrow-a8b918f05f.png"></image>
+					<image class="type-icon" src="/static/images/pick_arrow.png"></image>
 				</view>
 			</view>
 		</picker>
 		<view class="fb-body">
-			<textarea class="content" placeholder="对我们网站、商品、服务，你还有什么建议吗？你还希望在严选上买到什么？请告诉我们..." @input="contentInput" :maxlength="500"
+			<textarea class="content" placeholder="对我们网站、商品、服务，你还有什么建议吗？你还希望在妙趣坊上买到什么？请告诉我们..." @input="contentInput" :maxlength="500"
 			 :auto-focus="true" v-model="content"></textarea>
 			<view class="text-count">{{contentLength}}/500</view>
 		</view>

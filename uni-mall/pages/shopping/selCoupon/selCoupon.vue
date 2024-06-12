@@ -167,7 +167,7 @@
 		line-height: 72rpx;
 		text-align: right;
 		padding-right: 30rpx;
-		background: url(https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/15032866437ca8.png) 590rpx center no-repeat;
+		background: url(/h5/static/images/question.png) 590rpx center no-repeat;
 		background-size: 28rpx;
 		color: #999;
 		font-size: 24rpx;

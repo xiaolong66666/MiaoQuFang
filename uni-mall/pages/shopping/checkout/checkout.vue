@@ -245,7 +245,7 @@
 	.address-box {
 		width: 100%;
 		height: 166.55rpx;
-		background: url('http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/address-bg-bd30f2bfeb.png') 0 0 repeat-x;
+		background: url(/h5/static/images/address_bg_bd.png) 0 0 repeat-x;
 		background-size: 62.5rpx 10.5rpx;
 		margin-bottom: 20rpx;
 		padding-top: 10.5rpx;
