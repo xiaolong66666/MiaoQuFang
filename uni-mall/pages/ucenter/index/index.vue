@@ -44,10 +44,10 @@
 			</view>
 			<button class='service' open-type="contact">
 				<view class="item no-border">
-					<navigator url="url" class="a">
-						<text class="icon kefu"></text>
-						<text class="txt">联系客服</text>
-					</navigator>
+          <a href="https://work.weixin.qq.com/kfid/kfce9524b2cf9333141" class="a no-underline">
+            <text class="icon kefu"></text>
+            <text class="txt">联系客服</text>
+          </a>
 				</view>
 			</button>
 			<view class="item item-bottom">
@@ -309,6 +309,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+    text-decoration: none;
 	}
 
 	.user-menu .item.no-border {

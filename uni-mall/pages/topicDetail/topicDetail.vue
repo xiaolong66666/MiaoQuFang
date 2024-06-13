@@ -116,7 +116,6 @@
 		},
     onPullDownRefresh: function() {
       // 下拉刷新
-      this.getCommentList();
       uni.stopPullDownRefresh();
     }
 	}

@@ -2,6 +2,8 @@ package com.platform.api;
 
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
+import com.platform.entity.CommentVo;
+import com.platform.entity.CommonVo;
 import com.platform.entity.TopicVo;
 import com.platform.entity.UserVo;
 import com.platform.service.ApiTopicService;
@@ -11,10 +13,7 @@ import com.platform.utils.Query;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +52,8 @@ public class ApiTopicController extends ApiBaseAction {
     @ApiOperation(value = "专题详情")
     @IgnoreAuth
     @PostMapping("detail")
-    public Object detail(@LoginUser UserVo loginUser, Integer id) {
+    public Object detail(@LoginUser UserVo loginUser, @RequestBody CommonVo commonVo) {
+        Integer id = commonVo.getId();
         TopicVo topicEntity = topicService.queryObject(id);
         return toResponseSuccess(topicEntity);
     }

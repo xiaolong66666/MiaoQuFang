@@ -15,6 +15,8 @@ public class CommonVo {
     private String sort;
     private String order;
     private Integer orderId;
+    //通用id
+    private Integer id;
 
 
 }
