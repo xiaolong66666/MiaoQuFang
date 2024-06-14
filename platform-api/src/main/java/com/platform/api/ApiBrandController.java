@@ -1,5 +1,6 @@
 package com.platform.api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.BrandVo;
 import com.platform.service.ApiBrandService;
@@ -31,8 +32,16 @@ public class ApiBrandController extends ApiBaseAction {
     @ApiOperation(value = "分页获取品牌")
     @IgnoreAuth
     @PostMapping("list")
-    public Object list(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                       @RequestParam(value = "size", defaultValue = "10") Integer size) {
+    public Object list(@RequestBody JSONObject jsonParam) {
+        Integer page = jsonParam.getInteger("page");
+        Integer size = jsonParam.getInteger("size");
+        //初始化分页参数
+        if (page == null) {
+            page = 1;
+        }
+        if (size == null) {
+            size = 10;
+        }
         //查询列表数据
         Map<String, Object> params = new HashMap<>();
         params.put("fields", "id, name, floor_price, app_list_pic_url");
@@ -55,11 +64,14 @@ public class ApiBrandController extends ApiBaseAction {
     @ApiOperation(value = "品牌详情")
     @IgnoreAuth
     @PostMapping("detail")
-    public Object detail(@RequestBody BrandVo brand) {
+    public Object detail(@RequestBody JSONObject jsonParam) {
+        //判断id是否为空
+        if (jsonParam.getInteger("id") == null) {
+            return toResponseFail("参数错误");
+        }
         Map<String, Object> resultObj = new HashMap<>();
         //查询列表数据
-        BrandVo entity = brandService.queryObject(brand.getId());
-        //
+        BrandVo entity = brandService.queryObject(jsonParam.getInteger("id"));
         resultObj.put("brand", entity);
         return toResponseSuccess(resultObj);
     }

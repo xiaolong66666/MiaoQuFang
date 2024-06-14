@@ -1,8 +1,8 @@
 package com.platform.api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.cache.RegionCacheUtil;
-import com.platform.entity.CommonVo;
 import com.platform.entity.RegionVo;
 import com.platform.entity.SysRegionEntity;
 import com.platform.util.ApiBaseAction;
@@ -27,8 +27,8 @@ public class ApiRegionController extends ApiBaseAction {
     @ApiOperation(value = "地区列表")
     @IgnoreAuth
     @PostMapping("list")
-    public Object list(@RequestBody CommonVo commonVo) {
-        Integer parentId = commonVo.getParentId();
+    public Object list(@RequestBody JSONObject jsonParam) {
+        Integer parentId = jsonParam.getInteger("parentId");
         List<SysRegionEntity> regionEntityList = RegionCacheUtil.getChildrenByParentId(parentId);
         List<RegionVo> regionVoList = new ArrayList<RegionVo>();
         if (null != regionEntityList && regionEntityList.size() > 0) {
@@ -56,7 +56,8 @@ public class ApiRegionController extends ApiBaseAction {
     @ApiOperation(value = "根据省查市")
     @IgnoreAuth
     @PostMapping("cityList")
-    public Object provinceList(String proviceName) {
+    public Object provinceList(@RequestBody JSONObject jsonParam) {
+        String proviceName = jsonParam.getString("proviceName");
         List<SysRegionEntity> regionEntityList = RegionCacheUtil.getChildrenCity(proviceName);
         List<RegionVo> regionVoList = new ArrayList<RegionVo>();
         if (null != regionEntityList && regionEntityList.size() > 0) {
@@ -70,7 +71,9 @@ public class ApiRegionController extends ApiBaseAction {
     @ApiOperation(value = "根据省市查区")
     @IgnoreAuth
     @PostMapping("distinctList")
-    public Object distinctList(String proviceName, String cityName) {
+    public Object distinctList(@RequestBody JSONObject jsonParam) {
+        String proviceName = jsonParam.getString("proviceName");
+        String cityName = jsonParam.getString("cityName");
         List<SysRegionEntity> regionEntityList = RegionCacheUtil.getChildrenDistrict(proviceName, cityName);
         List<RegionVo> regionVoList = new ArrayList<RegionVo>();
         if (null != regionEntityList && regionEntityList.size() > 0) {
@@ -84,7 +87,8 @@ public class ApiRegionController extends ApiBaseAction {
     @ApiOperation(value = "地区详情")
     @IgnoreAuth
     @PostMapping("info")
-    public Object info(Integer regionId) {
+    public Object info(@RequestBody JSONObject jsonParam) {
+        Integer regionId = jsonParam.getInteger("regionId");
         SysRegionEntity regionEntity = RegionCacheUtil.getAreaByAreaId(regionId);
         return toResponseSuccess(new RegionVo(regionEntity));
     }
@@ -92,7 +96,10 @@ public class ApiRegionController extends ApiBaseAction {
     @ApiOperation(value = "区域名称转区域ID")
     @IgnoreAuth
     @PostMapping("regionIdsByNames")
-    public Object regionIdsByNames(String provinceName, String cityName, String districtName) {
+    public Object regionIdsByNames(@RequestBody JSONObject jsonParam) {
+        String provinceName = jsonParam.getString("provinceName");
+        String cityName = jsonParam.getString("cityName");
+        String districtName = jsonParam.getString("districtName");
         Map<String, Integer> resultObj = new HashMap<String, Integer>();
         Integer provinceId = 0;
         Integer cityId = 0;

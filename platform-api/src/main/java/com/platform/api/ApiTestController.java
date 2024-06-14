@@ -1,5 +1,6 @@
 package com.platform.api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
 import com.platform.entity.UserVo;
@@ -9,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,7 +53,8 @@ public class ApiTestController {
     @ApiOperation(value = "根据手机号查询用户信息")
     @IgnoreAuth
     @PostMapping("userListByMobile")
-    public R userList(String mobile) {
+    public R userList(@RequestBody JSONObject jsonParam) {
+        String mobile = jsonParam.getString("mobile");
         UserVo userEntity = userService.queryByMobile(mobile);
         return R.ok().put("dto", userEntity);
     }

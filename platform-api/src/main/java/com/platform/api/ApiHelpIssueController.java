@@ -1,5 +1,6 @@
 package com.platform.api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.HelpIssueVo;
 import com.platform.entity.HelpTypeVo;
@@ -10,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,8 +50,8 @@ public class ApiHelpIssueController extends ApiBaseAction {
     @ApiOperation(value = "查看问题列表")
     @PostMapping("/issueList")
     @IgnoreAuth
-    public Object issueList(Long typeId) {
-
+    public Object issueList(@RequestBody JSONObject jsonParam) {
+        Integer typeId = jsonParam.getInteger("typeId");
         Map<String, Object> params = new HashMap<>();
         params.put("typeId", typeId);
         List<HelpIssueVo> helpIssueList = helpIssueService.queryList(params);

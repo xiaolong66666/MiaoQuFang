@@ -1,6 +1,6 @@
 const utils = {
 	// 域名
-	domain: 'http://172.20.10.2:8080/',
+	domain: 'http://192.168.100.105:8080/',
 	//接口地址
 	interfaceUrl: function() {
 		return utils.domain + 'platform-framework/api/'

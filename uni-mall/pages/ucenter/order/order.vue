@@ -59,11 +59,14 @@
 				let that = this;
 				let orderIndex = event.currentTarget.dataset.orderIndex;
 				let order = that.orderList[orderIndex];
-				util.payOrder(parseInt(order.id)).then(res => {
-					that.getOrderList();
-				}).catch(res => {
-					util.toast('支付失败');
-				});
+        uni.redirectTo({
+          url: '/pages/payResult/payResult?orderId=' + order.id
+        });
+				// util.payOrder(parseInt(order.id)).then(res => {
+				// 	that.getOrderList();
+				// }).catch(res => {
+				// 	util.toast('支付失败');
+				// });
 			}
 		},
 		/**

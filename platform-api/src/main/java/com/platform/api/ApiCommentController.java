@@ -112,7 +112,9 @@ public class ApiCommentController extends ApiBaseAction {
      */
     @ApiOperation(value = "评论数量")
     @PostMapping("count")
-    public Object count(Integer typeId, Integer valueId) {
+    public Object count(@RequestBody JSONObject jsonParam) {
+        Integer typeId = jsonParam.getInteger("typeId");
+        Integer valueId = jsonParam.getInteger("valueId");
         Map<String, Object> resultObj = new HashMap<>();
         //
         Map<String, Object> param = new HashMap<>();
@@ -137,9 +139,21 @@ public class ApiCommentController extends ApiBaseAction {
     @ApiOperation(value = "选择评论类型")
     @IgnoreAuth
     @PostMapping("list")
-    public Object list(Integer typeId, Integer valueId, Integer showType,
-                       @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,
-                       String sort, String order) {
+    public Object list(@RequestBody JSONObject jsonParam) {
+        Integer typeId = jsonParam.getInteger("typeId");
+        Integer valueId = jsonParam.getInteger("valueId");
+        Integer showType = jsonParam.getInteger("showType");
+        Integer page = jsonParam.getInteger("page");
+        Integer size = jsonParam.getInteger("size");
+        String sort = jsonParam.getString("sort");
+        String order = jsonParam.getString("order");
+        //初始化分页参数
+        if (null == page || page < 1) {
+            page = 1;
+        }
+        if (null == size || size < 1) {
+            size = 10;
+        }
         Map<String, Object> param = new HashMap<>();
         param.put("typeId", typeId);
         param.put("valueId", valueId);

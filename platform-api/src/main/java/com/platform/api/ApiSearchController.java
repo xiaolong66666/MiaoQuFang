@@ -1,8 +1,8 @@
 package com.platform.api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
-import com.platform.entity.CommonVo;
 import com.platform.entity.KeywordsVo;
 import com.platform.entity.SearchHistoryVo;
 import com.platform.entity.UserVo;
@@ -92,8 +92,8 @@ public class ApiSearchController extends ApiBaseAction {
     @ApiImplicitParams({@ApiImplicitParam(name = "keyword", value = "关键字", paramType = "path", required = true)})
     @IgnoreAuth
     @PostMapping("helper")
-    public Object helper(@LoginUser UserVo loginUser, @RequestBody CommonVo commonVo) {
-        String keyword = commonVo.getKeyword();
+    public Object helper(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonParam) {
+        String keyword = jsonParam.getString("keyword");
         Map<String, Object> param = new HashMap<>();
         param.put("fields", "distinct keyword");
         param.put("keyword", keyword);

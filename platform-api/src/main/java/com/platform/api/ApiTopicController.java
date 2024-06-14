@@ -1,9 +1,8 @@
 package com.platform.api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
-import com.platform.entity.CommentVo;
-import com.platform.entity.CommonVo;
 import com.platform.entity.TopicVo;
 import com.platform.entity.UserVo;
 import com.platform.service.ApiTopicService;
@@ -31,8 +30,16 @@ public class ApiTopicController extends ApiBaseAction {
     @ApiOperation(value = "专题列表")
     @IgnoreAuth
     @PostMapping("list")
-    public Object list(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                       @RequestParam(value = "size", defaultValue = "10") Integer size) {
+    public Object list(@RequestBody JSONObject jsonParam) {
+        Integer page = jsonParam.getInteger("page");
+        Integer size = jsonParam.getInteger("size");
+        //初始化分页数据
+        if (null == page) {
+            page = 1;
+        }
+        if (null == size) {
+            size = 10;
+        }
         Map<String, Object> param = new HashMap<>();
         param.put("page", page);
         param.put("limit", size);
@@ -52,8 +59,8 @@ public class ApiTopicController extends ApiBaseAction {
     @ApiOperation(value = "专题详情")
     @IgnoreAuth
     @PostMapping("detail")
-    public Object detail(@LoginUser UserVo loginUser, @RequestBody CommonVo commonVo) {
-        Integer id = commonVo.getId();
+    public Object detail(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonParam) {
+        Integer id = jsonParam.getInteger("id");
         TopicVo topicEntity = topicService.queryObject(id);
         return toResponseSuccess(topicEntity);
     }
@@ -63,7 +70,7 @@ public class ApiTopicController extends ApiBaseAction {
     @ApiOperation(value = "关联专题")
     @IgnoreAuth
     @PostMapping("related")
-    public Object related(@LoginUser UserVo loginUser, Integer id) {
+    public Object related(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonParam) {
         Map<String, Object> param = new HashMap<>();
         param.put("limit", 4);
         List<TopicVo> topicEntities = topicService.queryList(param);

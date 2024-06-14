@@ -91,7 +91,8 @@ public class ApiGoodsController extends ApiBaseAction {
     @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "商品id", paramType = "path", required = true)})
     @IgnoreAuth
     @PostMapping(value = "sku")
-    public Object sku(Integer id) {
+    public Object sku(@RequestBody JSONObject jsonParam) {
+        Integer id = jsonParam.getInteger("id");
         Map<String, Object> resultObj = new HashMap<>();
         //
         Map<String, Object> param = new HashMap<>();
@@ -112,7 +113,8 @@ public class ApiGoodsController extends ApiBaseAction {
     @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "商品id", paramType = "path", required = true),
             @ApiImplicitParam(name = "referrer", value = "商品referrer", paramType = "path", required = false)})
     @PostMapping(value = "detail")
-    public Object detail(@RequestBody GoodsVo goods) {
+    public Object detail(@RequestBody JSONObject jsonParam) {
+        GoodsVo goods = jsonParam.toJavaObject(GoodsVo.class);
         Map<String, Object> resultObj = new HashMap<>();
         Integer id = goods.getId();
         Long referrer = goods.getReferrer();
@@ -278,8 +280,8 @@ public class ApiGoodsController extends ApiBaseAction {
     @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "分类id", paramType = "path", required = true)})
     @IgnoreAuth
     @PostMapping(value = "category")
-    public Object category(@RequestBody CategoryVo category) {
-        Integer id = category.getId();
+    public Object category(@RequestBody JSONObject jsonParam) {
+        Integer id = jsonParam.getInteger("id");
         Map<String, Object> resultObj = new HashMap<>();
         //
         CategoryVo currentCategory = categoryService.queryObject(id);
@@ -305,20 +307,26 @@ public class ApiGoodsController extends ApiBaseAction {
             @ApiImplicitParam(name = "isHot", value = "热卖商品", paramType = "path", required = true)})
     @IgnoreAuth
     @PostMapping(value = "list")
-    public Object list(@LoginUser UserVo loginUser,@RequestBody CommonVo commonVo) {
-        String keyword = commonVo.getKeyword();
-        String sort = commonVo.getSort();
-        String order = commonVo.getOrder();
-        Integer categoryId = commonVo.getCategoryId();
+    public Object list(@LoginUser UserVo loginUser,@RequestBody JSONObject jsonParam) {
+        Integer categoryId = jsonParam.getInteger("categoryId");
+        Integer brandId = jsonParam.getInteger("brandId");
+        String keyword = jsonParam.getString("keyword");
+        Integer isNew = jsonParam.getInteger("isNew");
+        Integer isHot = jsonParam.getInteger("isHot");
+        Integer page = jsonParam.getInteger("page");
+        Integer size = jsonParam.getInteger("size");
+        String sort = jsonParam.getString("sort");
+        String order = jsonParam.getString("order");
+        //
         Map<String, Object> params = new HashMap<>();
         params.put("isDelete", 0);
         params.put("isOnSale", 1);
-        params.put("brandId", commonVo.getBrandId());
+        params.put("brandId", brandId);
         params.put("keyword", keyword);
-        params.put("isNew", commonVo.getIsNew());
-        params.put("isHot", commonVo.getIsHot());
-        params.put("page", commonVo.getPage() == null ? 1 : commonVo.getPage());
-        params.put("limit", commonVo.getSize() == null ? 10 : commonVo.getSize());
+        params.put("isNew", isNew);
+        params.put("isHot", isHot);
+        params.put("page", page == null ? 1 : page);
+        params.put("limit", size == null ? 10 : size);
         params.put("order", sort);
         params.put("sidx", order);
         //
@@ -415,8 +423,11 @@ public class ApiGoodsController extends ApiBaseAction {
     @ApiOperation(value = "商品列表筛选的分类列表")
     @IgnoreAuth
     @PostMapping(value = "filter")
-    public Object filter(Integer categoryId,
-                         String keyword, Integer isNew, Integer isHot) {
+    public Object filter(@RequestBody JSONObject jsonParam) {
+        Integer categoryId = jsonParam.getInteger("categoryId");
+        String keyword = jsonParam.getString("keyword");
+        Integer isNew = jsonParam.getInteger("isNew");
+        Integer isHot = jsonParam.getInteger("isHot");
         Map<String, Object> params = new HashMap<>();
         params.put("isDelete", 0);
         params.put("isOnSale", 1);
@@ -557,10 +568,22 @@ public class ApiGoodsController extends ApiBaseAction {
     @ApiOperation(value = "获取商品列表")
     @IgnoreAuth
     @PostMapping(value = "productlist")
-    public Object productlist(Integer categoryId,
-                              Integer isNew, Integer discount,
-                              @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,
-                              String sort, String order) {
+    public Object productlist(@RequestBody JSONObject jsonParam) {
+        Integer isNew = jsonParam.getInteger("isNew");
+        Integer isHot = jsonParam.getInteger("isHot");
+        Integer page = jsonParam.getInteger("page");
+        Integer size = jsonParam.getInteger("size");
+        String sort = jsonParam.getString("sort");
+        String order = jsonParam.getString("order");
+        Integer discount = jsonParam.getInteger("discount");
+        Integer categoryId = jsonParam.getInteger("categoryId");
+        //初始化分页
+        if (null == page) {
+            page = 1;
+        }
+        if (null == size) {
+            size = 10;
+        }
         Map<String, Object> params = new HashMap<>();
         params.put("isNew", isNew);
         params.put("page", page);

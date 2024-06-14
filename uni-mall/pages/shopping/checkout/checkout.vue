@@ -191,15 +191,18 @@
 				}, 'POST', 'application/json').then(res => {
 					if (res.errno === 0) {
 						const orderId = res.data.orderInfo.id;
-						util.payOrder(parseInt(orderId)).then(res => {
-							uni.redirectTo({
-								url: '/pages/payResult/payResult?status=1&orderId=' + orderId
-							});
-						}).catch(res => {
-							uni.redirectTo({
-								url: '/pages/payResult/payResult?status=0&orderId=' + orderId
-							});
-						});
+            uni.redirectTo({
+              url: '/pages/payResult/payResult?orderId=' + orderId
+            });
+						// util.payOrder(parseInt(orderId)).then(res => {
+						// 	uni.redirectTo({
+						// 		url: '/pages/payResult/payResult?status=1&orderId=' + orderId
+						// 	});
+						// }).catch(res => {
+						// 	uni.redirectTo({
+						// 		url: '/pages/payResult/payResult?status=0&orderId=' + orderId
+						// 	});
+						// });
 					} else {
 						util.toast('下单失败');
 					}

@@ -1,5 +1,6 @@
 package com.platform.api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.platform.annotation.LoginUser;
 import com.platform.entity.FootprintVo;
@@ -32,7 +33,8 @@ public class ApiFootprintController extends ApiBaseAction {
     @ApiOperation(value = "删除足迹")
     @ApiImplicitParams({@ApiImplicitParam(name = "footprintId", value = "足迹id", paramType = "path", required = true)})
     @PostMapping("delete")
-    public Object delete(@LoginUser UserVo loginUser, Integer footprintId) {
+    public Object delete(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonParam) {
+        Integer footprintId = jsonParam.getInteger("footprintId");
         if (footprintId == null) {
             return toResponseFail("删除出错");
         }
@@ -55,9 +57,15 @@ public class ApiFootprintController extends ApiBaseAction {
      */
     @ApiOperation(value = "获取足迹列表")
     @PostMapping("list")
-    public Object list(@LoginUser UserVo loginUser,
-                       @RequestParam(value = "page", defaultValue = "1") Integer page,
-                       @RequestParam(value = "size", defaultValue = "10") Integer size) {
+    public Object list(@LoginUser UserVo loginUser,@RequestBody JSONObject jsonParam) {
+        Integer page = jsonParam.getInteger("page");
+        Integer size = jsonParam.getInteger("size");
+        if (null == page) {
+            page = 1;
+        }
+        if (null == size) {
+            size = 10;
+        }
         Map<String, Object> resultObj = new HashMap<String, Object>();
 
         //查询列表数据
@@ -110,9 +118,7 @@ public class ApiFootprintController extends ApiBaseAction {
      */
     @ApiOperation(value = "分享足迹")
     @PostMapping("sharelist")
-    public Object sharelist(@LoginUser UserVo loginUser,
-                            @RequestParam(value = "page", defaultValue = "1") Integer page,
-                            @RequestParam(value = "size", defaultValue = "10") Integer size) {
+    public Object sharelist(@LoginUser UserVo loginUser,@RequestBody JSONObject jsonParam) {
         Map<String, List<FootprintVo>> resultObj = new HashMap<String, List<FootprintVo>>();
 
         //查询列表数据

@@ -51,7 +51,12 @@ public class ApiCouponController extends ApiBaseAction {
      */
     @ApiOperation(value = "根据商品获取可用优惠券列表")
     @PostMapping("/listByGoods")
-    public Object listByGoods(@RequestParam(defaultValue = "cart") String type, @LoginUser UserVo loginUser) {
+    public Object listByGoods(@RequestBody JSONObject jsonParams,@LoginUser UserVo loginUser) {
+        String type = jsonParams.getString("type");
+        //设置type=cart默认值
+        if (StringUtils.isNullOrEmpty(type)) {
+            type = "cart";
+        }
         BigDecimal goodsTotalPrice = new BigDecimal("0.00");
         if ("cart".equals(type)) {
             Map<String, Object> param = new HashMap<>();
@@ -179,8 +184,9 @@ public class ApiCouponController extends ApiBaseAction {
      */
     @ApiOperation(value = "转发领取红包")
     @PostMapping("transActivit")
-    public Object transActivit(@LoginUser UserVo loginUser, String sourceKey, Long referrer) {
-        JSONObject jsonParam = getJsonRequest();
+    public Object transActivit(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonParams) {
+        String sourceKey = jsonParams.getString("sourceKey");
+        Long referrer = jsonParams.getLong("referrer");
         // 是否领取过了
         Map<String, Object> params = new HashMap<>();
         params.put("userId", loginUser.getUserId());

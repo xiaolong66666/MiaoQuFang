@@ -1,5 +1,6 @@
 package com.platform.api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.binarywang.wxpay.bean.result.WxPayRefundResult;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
@@ -18,10 +19,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -95,7 +93,8 @@ public class ApiOrderController extends ApiBaseAction {
      */
     @ApiOperation(value = "获取订单详情")
     @PostMapping("detail")
-    public Object detail(Integer orderId, @LoginUser UserVo loginUser) {
+    public Object detail(@RequestBody JSONObject params, @LoginUser UserVo loginUser) {
+        Integer orderId = params.getInteger("orderId");
         Map<String, Object> resultObj = new HashMap<>();
         //
         OrderVo orderInfo = orderService.queryObject(orderId);

@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,7 +48,8 @@ public class ApiAddressController extends ApiBaseAction {
     @ApiOperation(value = "获取收货地址的详情", response = Map.class)
     @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "收获地址ID", required = true, dataType = "Integer")})
     @PostMapping("detail")
-    public Object detail(Integer id, @LoginUser UserVo loginUser) {
+    public Object detail(@RequestBody JSONObject params, @LoginUser UserVo loginUser) {
+        Integer id = params.getInteger("id");
         AddressVo entity = addressService.queryObject(id);
         if (null == entity) {
             return toResponseFail("地址不存在");

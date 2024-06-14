@@ -1,5 +1,6 @@
 package com.platform.api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult;
 import com.github.binarywang.wxpay.bean.request.BaseWxPayRequest;
@@ -11,7 +12,6 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
 import com.platform.cache.J2CacheUtils;
-import com.platform.entity.CommonVo;
 import com.platform.entity.OrderGoodsVo;
 import com.platform.entity.OrderVo;
 import com.platform.entity.UserVo;
@@ -59,8 +59,8 @@ public class ApiPayController extends ApiBaseAction {
      */
     @ApiOperation(value = "获取支付的请求参数")
     @PostMapping("prepay")
-    public Object payPrepay(@LoginUser UserVo loginUser, @RequestBody CommonVo commonVo) {
-        Integer orderId = commonVo.getOrderId();
+    public Object payPrepay(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonParam) {
+        Integer orderId = jsonParam.getInteger("orderId");
         OrderVo orderInfo = orderService.queryObject(orderId);
 
         if (null == orderInfo) {
@@ -119,7 +119,8 @@ public class ApiPayController extends ApiBaseAction {
      */
     @ApiOperation(value = "查询订单状态")
     @PostMapping("query")
-    public Object orderQuery(@LoginUser UserVo loginUser, Integer orderId) {
+    public Object orderQuery(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonParam) {
+        Integer orderId = jsonParam.getInteger("orderId");
         if (orderId == null) {
             return toResponseFail("订单不存在");
         }
@@ -144,10 +145,14 @@ public class ApiPayController extends ApiBaseAction {
                 Integer num = (Integer) J2CacheUtils.get(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId + "");
                 if (num == null) {
                     J2CacheUtils.put(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId + "", 1);
-                    this.orderQuery(loginUser, orderId);
+                    JSONObject jsonParam1 = new JSONObject();
+                    jsonParam1.put("orderId", orderId);
+                    this.orderQuery(loginUser, jsonParam1);
                 } else if (num <= 3) {
                     J2CacheUtils.remove(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId);
-                    this.orderQuery(loginUser, orderId);
+                    JSONObject jsonParam1 = new JSONObject();
+                    jsonParam1.put("orderId", orderId);
+                    this.orderQuery(loginUser, jsonParam1);
                 } else {
                     return toResponseFail("查询失败,error=" + tradeState);
                 }
@@ -214,7 +219,8 @@ public class ApiPayController extends ApiBaseAction {
      */
     @ApiOperation(value = "订单退款请求")
     @PostMapping("refund")
-    public Object refund(Integer orderId) {
+    public Object refund(@RequestBody JSONObject jsonParam) {
+        Integer orderId = jsonParam.getInteger("orderId");
         //
         OrderVo orderInfo = orderService.queryObject(orderId);
 

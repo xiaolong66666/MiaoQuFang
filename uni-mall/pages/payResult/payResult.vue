@@ -2,27 +2,37 @@
 <template>
 	<view class="container">
 		<view class="pay-result">
-			<view class="success" v-if="status == true">
-				<view class="msg">付款成功</view>
+			<view class="success">
+        <view style="display: flex; justify-content: center; align-items: center;">
+          <image src="/static/images/pay.png" mode="aspectFit" @tap = 'previewImg()' style="width: 400rpx;height: 400rpx;"/>
+        </view>
+				<view class="msg">等待工作人员核实......</view>
 				<view class="btns">
 					<navigator class="btn" url="/pages/ucenter/order/order" open-type="redirect">查看订单</navigator>
-					<navigator class="btn" url="/pages/index/index" open-type="switchTab">继续逛</navigator>
+          <a href="https://work.weixin.qq.com/kfid/kfce9524b2cf9333141" class="btn">联系客服</a>
 				</view>
 			</view>
-			<view class="error" v-if="status != true">
-				<view class="msg">付款失败</view>
-				<view class="tips">
-					<view class="p">请在
-						<text class="time">1小时</text>
-						内完成付款
-					</view>
-					<view class="p">否则订单将会被系统取消</view>
-				</view>
-				<view class="btns">
-					<navigator class="btn" url="/pages/ucenter/order/order" open-type="redirect">查看订单</navigator>
-					<view class="btn" @tap='payOrder'>重新付款</view>
-				</view>
-			</view>
+<!--			<view class="success" v-if="status == true">-->
+<!--				<view class="msg">付款成功</view>-->
+<!--				<view class="btns">-->
+<!--					<navigator class="btn" url="/pages/ucenter/order/order" open-type="redirect">查看订单</navigator>-->
+<!--					<navigator class="btn" url="/pages/index/index" open-type="switchTab">继续逛</navigator>-->
+<!--				</view>-->
+<!--			</view>-->
+<!--			<view class="error" v-if="status != true">-->
+<!--				<view class="msg">付款失败</view>-->
+<!--				<view class="tips">-->
+<!--					<view class="p">请在-->
+<!--						<text class="time">1小时</text>-->
+<!--						内完成付款-->
+<!--					</view>-->
+<!--					<view class="p">否则订单将会被系统取消</view>-->
+<!--				</view>-->
+<!--				<view class="btns">-->
+<!--					<navigator class="btn" url="/pages/ucenter/order/order" open-type="redirect">查看订单</navigator>-->
+<!--					<view class="btn" @tap='payOrder'>重新付款</view>-->
+<!--				</view>-->
+<!--			</view>-->
 		</view>
 	</view>
 </template>
@@ -38,7 +48,13 @@
 			}
 		},
 		methods: {
-			updateSuccess: function() {
+      previewImg() {
+        uni.previewImage({
+          current: '/static/images/pay.png',
+          urls: ['/static/images/pay.png']
+        });
+      },
+      updateSuccess: function() {
 				let that = this
 				util.request(api.OrderQuery, {
 					orderId: that.orderId
@@ -55,7 +71,7 @@
 		onLoad: function(options) {
 			// 页面初始化 options为页面跳转所带来的参数
 			this.orderId = options.orderId || 24
-			this.status = options.status
+			// this.status = options.status
 		},
     onPullDownRefresh() {
       // 增加下拉刷新数据的功能
