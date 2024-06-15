@@ -97,6 +97,11 @@ public class ApiUserService extends ApiBaseAction {
             userVo.setAvatar("http://192.168.100.105/images/common/logo.png");
             userVo.setNickname(name);
             save(userVo);
+        }else {
+            //更新登录信息
+            userVo.setLastLoginIp(this.getClientIp());
+            userVo.setLastLoginTime(new Date());
+            update(userVo);
         }
 
         return userVo;
