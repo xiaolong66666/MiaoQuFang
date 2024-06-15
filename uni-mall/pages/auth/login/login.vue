@@ -3,41 +3,19 @@
     <image src="/static/images/logo.png" />
     <!-- 登录 -->
     <view class="login-form">
-      <view :class="['item','']">
-        <view class="account">
-          <text class="input-item">
-            账号
-          </text>
-          <input
-              type="text"
-              data-type="account"
-              placeholder-class="inp-palcehoder"
-              placeholder="请输入账号"
-              v-model="username"
-          >
+      <view class="list">
+        <view class="label"><span>*</span>邮箱账号 </view>
+        <view class="right">
+          <input type="email" placeholder="请输入" @blur="mailBlur" v-model="formData.mail"
+                 placeholder-style="color:#A1A2A1;font-size:28rpx">
         </view>
       </view>
-      <view :class="['item','']">
-        <view class="account">
-          <text class="input-item">
-            密码
-          </text>
-          <input
-              type="password"
-              data-type="password"
-              placeholder-class="inp-palcehoder"
-              placeholder="请输入密码"
-              v-model="password"
-          >
-        </view>
-      </view>
-      <view class="operate">
-        <view
-            class="to-register"
-            @tap="toRegitser"
-        >
-          还没有账号？
-          <text>去注册></text>
+      <view class="list">
+        <view class="label"><span>*</span>验证码</view>
+        <view class="right">
+          <input type="number" placeholder="请输入" v-model="formData.checkCode"
+                 placeholder-style="color:#A1A2A1;font-size:28rpx">
+          <button class="send-code" :disabled="disabled" @click="sendCode">{{sendTxt}}</button>
         </view>
       </view>
     </view>
@@ -69,20 +47,61 @@
 	export default {
 		data() {
 			return {
-        username: '小龙',
-        password: '123456',
+        formData: {
+          mail: '2636822826@qq.com',
+          checkCode: '',
+        },
+        timer: 60,
+        sendTxt: '获取验证码',
+        disabled: false,
 			}
 		},
 		methods: {
+      mailBlur: function(){
+        //邮箱正则
+        let pattern = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9_-]+\.[a-zA-Z0-9-.]+/;
+        if (pattern.test(this.formData.mail)) {
+          return true;
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: '请输入正确的邮箱格式'
+          })
+          // this.formData.mail = '';
+          return false;
+        }
+      },
 			login: function() {
+        if (!this.formData.mail) {
+          uni.showToast({
+            title: '请输入邮箱',
+            icon: 'none'
+          });
+          return;
+        }
+        if (!this.formData.checkCode) {
+          uni.showToast({
+            title: '请输入验证码',
+            icon: 'none'
+          });
+          return;
+        }
+        //校验邮箱格式
+        let pattern = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9_-]+\.[a-zA-Z0-9-.]+/;
+        if (!pattern.test(this.formData.mail)) {
+          uni.showToast({
+            title: '请输入正确的邮箱',
+            icon: 'none'
+          });
+          return;
+        }
 				//登录远程服务器
         let that = this;
         util.request(api.Login,
-            {
-              username: that.username,
-              password: that.password
-            }
-            , 'POST', 'application/json').then(res => {
+          {
+            mail: that.formData.mail,
+            checkCode: that.formData.checkCode
+          }, 'POST', 'application/json').then(res => {
           if (res.code === 0) {
             //存储用户信息
             uni.setStorageSync('userInfo', res.userInfo);
@@ -102,6 +121,55 @@
           }
         });
 			},
+      // 获取验证码
+      sendCode: function() {
+        let that = this;
+        if (!that.formData.mail) {
+          uni.showToast({
+            title: '请输入邮箱',
+            icon: 'none'
+          });
+          return;
+        }
+        //校验邮箱格式
+        let pattern = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9_-]+\.[a-zA-Z0-9-.]+/;
+        if (!pattern.test(this.formData.mail)) {
+          uni.showToast({
+            title: '请输入正确的邮箱',
+            icon: 'none'
+          });
+          return;
+        }
+        if (that.disabled) {
+          return;
+        }
+        that.disabled = true;
+        let timer = setInterval(() => {
+          that.timer--;
+          that.sendTxt = that.timer + 's';
+          if (that.timer <= 0) {
+            clearInterval(timer);
+            that.timer = 60;
+            that.sendTxt = '获取验证码';
+            that.disabled = false;
+          }
+        }, 1000);
+        util.request(api.SendCode, {
+          mail: that.formData.mail
+        }, 'POST').then(res => {
+          if (res.code === 0) {
+            uni.showToast({
+              title: '发送成功',
+              icon: 'none'
+            });
+          } else {
+            uni.showToast({
+              title: res.msg,
+              icon: 'none'
+            });
+          }
+        });
+      },
       toIndex: function() {
         uni.switchTab({
           url: '/pages/index/index'

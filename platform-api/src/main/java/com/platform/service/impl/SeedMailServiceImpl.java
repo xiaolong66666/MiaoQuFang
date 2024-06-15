@@ -17,7 +17,7 @@ public class SeedMailServiceImpl implements SendMailService {
     }
 
     //发送人
-    private String from="1755647807@qq.com";
+    private String from="2636822826@qq.com";
     //接收人
     private String to;
 
@@ -25,7 +25,7 @@ public class SeedMailServiceImpl implements SendMailService {
         this.to = to;
     }
     //标题
-    private String title="校园志愿服务管理平台";
+    private String title="妙趣坊商城";
     //验证码
     private String code;
 
@@ -38,7 +38,7 @@ public class SeedMailServiceImpl implements SendMailService {
     private String context;
     @Override
     public void seedMessage() throws MessagingException {
-        this.context="欢迎"+this.to+"来到志愿者平台！您的验证码是："+this.code;
+        this.context="欢迎"+this.to+"登录妙趣坊商城！您的验证码是："+this.code;
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,true);
         helper.setFrom(from);

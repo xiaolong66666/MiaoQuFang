@@ -7,15 +7,15 @@
 				<view class="l">实付：<text class="cost">￥{{orderInfo.actualPrice}}</text></view>
 				<view class="r">
 					<view v-if="orderInfo.handleOption.pay">
-						<view class="btn" @tap="cancelOrder">取消订单</view>
-						<view class="btn active" @tap="payOrder">立即支付</view>
+						<view class="btn" v-if="orderInfo.orderStatusText !== '已取消'" @tap="cancelOrder">取消订单</view>
+						<view class="btn  active" v-if="orderInfo.orderStatusText !== '已取消'" @tap="payOrder">立即支付</view>
 					</view>
 					<view v-else-if="orderInfo.handleOption.confirm">
-						<view class="btn" @tap="cancelOrder">取消订单</view>
-						<view class="btn active" @tap="confirmOrder">确认收货</view>
+						<view class="btn" v-if="orderInfo.orderStatus !== '已取消'" @tap="cancelOrder">取消订单</view>
+						<view class="btn active" v-if="orderInfo.orderStatusText !== '已取消'" @tap="confirmOrder">确认收货</view>
 					</view>
 					<view v-else>
-						<view class="btn active" @tap="cancelOrder">取消订单</view>
+						<view class="btn active" v-if="orderInfo.orderStatusText !== '已取消'" @tap="cancelOrder">取消订单</view>
 					</view>
 				</view>
 			</view>
@@ -177,12 +177,15 @@
 				});
 			},
 			payOrder() {
-				let that = this;
-				util.payOrder(parseInt(that.orderId)).then(res => {
-					that.getOrderDetail();
-				}).catch(res => {
-					util.toast('支付失败');
-				});
+        uni.redirectTo({
+          url: '/pages/payResult/payResult?orderId=' + this.orderId
+        });
+				// let that = this;
+				// util.payOrder(parseInt(that.orderId)).then(res => {
+				// 	that.getOrderDetail();
+				// }).catch(res => {
+				// 	util.toast('支付失败');
+				// });
 			},
 			confirmOrder() {
 				//确认收货

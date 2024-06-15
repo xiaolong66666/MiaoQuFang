@@ -1,3 +1,54 @@
+.list {
+  margin-top: 27rpx;
+}
+
+.label {
+  font-size: 36rpx;
+  font-weight: 400;
+  color: #333333;
+  padding-left: 27rpx;
+  margin-bottom: 11rpx;
+
+  span {
+    color: #FC5756;
+  }
+}
+.right {
+  width: 660rpx;
+  height: 90rpx;
+  background: #F8F9FD;
+  border-radius: 45rpx;
+  line-height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 30rpx;
+  font-size: 30rpx;
+  font-weight: 400;
+  color: #999999;
+
+  input {
+    font-size: 34rpx;
+    display: inline-block;
+  }
+
+  .send-code {
+    width: 200rpx;
+    height: 50rpx;
+    background: #ECECEC;
+    border-radius: 25rpx;
+    font-size: 30rpx;
+    font-weight: 400;
+    color: #333333;
+    line-height: 50rpx;
+    text-align: center;
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 .con {
   background: #fff;
   height: 100%;

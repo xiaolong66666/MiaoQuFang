@@ -130,7 +130,7 @@
 		"path": "pages/auth/login/login",
 		"style": {
 			"enablePullDownRefresh": true,
-			"navigationBarTitleText": "登录",
+			"navigationBarTitleText": "欢迎来到妙趣坊~",
 			"app-plus": {
 				"bounce": "vertical"
 			}

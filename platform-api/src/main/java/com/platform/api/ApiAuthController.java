@@ -50,18 +50,17 @@ public class ApiAuthController extends ApiBaseAction {
     private TokenService tokenService;
     @Autowired
     private WeixinMaService weixinMaService;
-
     /**
      * 登录
      */
     @IgnoreAuth
     @PostMapping("login")
     @ApiOperation(value = "登录接口")
-    public R login(@RequestBody UserVo user) {
-        AbstractAssert.isBlank(user.getUsername(), "账号不能为空");
-        AbstractAssert.isBlank(user.getPassword(), "密码不能为空");
+    public R login(@RequestBody JSONObject jsonParam) {
+        AbstractAssert.isBlank(jsonParam.getString("mail"), "邮箱不能为空");
+        AbstractAssert.isBlank(jsonParam.getString("checkCode"), "验证码不能为空");
         //用户登录
-        UserVo userVo = userService.login(user.getUsername(), user.getPassword());
+        UserVo userVo = userService.login((String) jsonParam.get("mail"), (String) jsonParam.get("checkCode"));
         //生成token
         Map<String, Object> map = tokenService.createToken(userVo.getUserId());
         map.put("userInfo", userVo);

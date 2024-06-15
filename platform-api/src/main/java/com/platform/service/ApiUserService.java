@@ -1,11 +1,14 @@
 package com.platform.service;
 
+import com.platform.cache.J2CacheUtils;
 import com.platform.dao.ApiUserLevelMapper;
 import com.platform.dao.ApiUserMapper;
 import com.platform.entity.SmsLogVo;
 import com.platform.entity.UserInfo;
 import com.platform.entity.UserLevelVo;
 import com.platform.entity.UserVo;
+import com.platform.util.ApiBaseAction;
+import com.platform.utils.CharUtil;
 import com.platform.utils.RRException;
 import com.platform.validator.AbstractAssert;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -18,7 +21,7 @@ import java.util.Map;
 
 
 @Service
-public class ApiUserService {
+public class ApiUserService extends ApiBaseAction {
     @Autowired
     private ApiUserMapper userDao;
     @Autowired
@@ -73,16 +76,30 @@ public class ApiUserService {
         return userDao.queryByUsername(username);
     }
 
-    public UserVo login(String username, String password) {
-        UserVo user = queryByUsername(username);
-        AbstractAssert.isNull(user, "账号或密码错误");
-
-        //密码错误
-        if (!user.getPassword().equals(DigestUtils.sha256Hex(password))) {
-            throw new RRException("账号或密码错误");
+    public UserVo login(String mail, String checkCode) {
+        UserVo userVo = queryByUsername(mail);
+        //校验验证码
+        String code = (String) J2CacheUtils.getCode(mail);
+        if (!checkCode.equals(code)) {
+            throw new RRException("验证码错误");
         }
 
-        return user;
+        if (null == userVo) {
+            //账号不存在,创建账号
+            userVo = new UserVo();
+            String name = "妙友" + CharUtil.getRandomString(12);
+            userVo.setUsername(name);
+            userVo.setPassword(DigestUtils.sha256Hex("123456"));
+            userVo.setRegisterTime(new Date());
+            userVo.setRegisterIp(this.getClientIp());
+            userVo.setLastLoginIp(this.getClientIp());
+            userVo.setLastLoginTime(new Date());
+            userVo.setAvatar("http://192.168.100.105/images/common/logo.png");
+            userVo.setNickname(name);
+            save(userVo);
+        }
+
+        return userVo;
     }
 
     public SmsLogVo querySmsCodeByUserId(Long userId) {

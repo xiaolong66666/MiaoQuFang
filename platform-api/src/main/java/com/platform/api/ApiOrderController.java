@@ -58,9 +58,15 @@ public class ApiOrderController extends ApiBaseAction {
      */
     @ApiOperation(value = "获取订单列表")
     @PostMapping("list")
-    public Object list(@LoginUser UserVo loginUser,
-                       @RequestParam(value = "page", defaultValue = "1") Integer page,
-                       @RequestParam(value = "size", defaultValue = "10") Integer size) {
+    public Object list(@LoginUser UserVo loginUser,@RequestBody JSONObject jsonParams) {
+        Integer page = jsonParams.getInteger("page");
+        Integer size = jsonParams.getInteger("size");
+        if (null == page) {
+            page = 1;
+        }
+        if (null == size) {
+            size = 10;
+        }
         //
         Map<String, Object> params = new HashMap<>();
         params.put("userId", loginUser.getUserId());
@@ -134,7 +140,8 @@ public class ApiOrderController extends ApiBaseAction {
 
     @ApiOperation(value = "修改订单")
     @PostMapping("updateSuccess")
-    public Object updateSuccess(Integer orderId, @LoginUser UserVo loginUser) {
+    public Object updateSuccess(@RequestBody JSONObject jsonParams, @LoginUser UserVo loginUser) {
+        Integer orderId = jsonParams.getInteger("orderId");
         OrderVo orderInfo = orderService.queryObject(orderId);
         if (orderInfo == null) {
             return toResponseFail("订单不存在");
@@ -181,8 +188,8 @@ public class ApiOrderController extends ApiBaseAction {
      */
     @ApiOperation(value = "取消订单")
     @PostMapping("cancelOrder")
-    public Object cancelOrder(Integer orderId, @LoginUser UserVo loginUser) {
-
+    public Object cancelOrder(@RequestBody JSONObject jsonPrams , @LoginUser UserVo loginUser) {
+        Integer orderId = jsonPrams.getInteger("orderId");
         OrderVo orderVo = orderService.queryObject(orderId);
         if (null == orderVo) {
             return toResponseFail("订单不存在！");
@@ -223,8 +230,9 @@ public class ApiOrderController extends ApiBaseAction {
      */
     @ApiOperation(value = "确认收货")
     @PostMapping("confirmOrder")
-    public Object confirmOrder(Integer orderId, @LoginUser UserVo loginUser) {
+    public Object confirmOrder(@RequestBody JSONObject jsonParams, @LoginUser UserVo loginUser) {
         try {
+            Integer orderId = jsonParams.getInteger("orderId");
             OrderVo orderVo = orderService.queryObject(orderId);
             if (null == orderVo) {
                 return toResponseFail("订单不存在！");
