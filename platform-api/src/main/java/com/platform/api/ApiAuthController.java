@@ -63,6 +63,9 @@ public class ApiAuthController extends ApiBaseAction {
         UserVo userVo = userService.login((String) jsonParam.get("mail"), (String) jsonParam.get("checkCode"));
         //生成token
         Map<String, Object> map = tokenService.createToken(userVo.getUserId());
+        //隐藏密码、电话号码
+        userVo.setPassword("");
+        userVo.setMobile("");
         map.put("userInfo", userVo);
         map.put("userId", userVo.getUserId());
         return R.ok(map);

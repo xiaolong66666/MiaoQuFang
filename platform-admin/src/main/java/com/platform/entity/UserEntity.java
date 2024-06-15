@@ -3,6 +3,7 @@ package com.platform.entity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -51,4 +52,6 @@ public class UserEntity implements Serializable {
      */
     //会员级别
     private String levelName;
+    //会员积分
+    private BigDecimal points;
 }

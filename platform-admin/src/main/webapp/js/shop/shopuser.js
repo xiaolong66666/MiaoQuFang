@@ -4,7 +4,7 @@ $(function () {
         colModel: [{
             label: 'id', name: 'id', index: 'id', key: true, hidden: true
         }, {
-            label: '会员名称', name: 'username', index: 'username', width: 80
+            label: '会员邮箱', name: 'username', index: 'username', width: 80
         }, {
             label: '会员密码', name: 'password', index: 'password', hidden: true
         }, {
@@ -27,6 +27,8 @@ $(function () {
             label: '最后登录Ip', name: 'lastLoginIp', index: 'last_login_ip', hidden: true
         }, {
             label: '会员等级', name: 'levelName', width: 40
+        }, {
+            label: '积分余额', name: 'points', width: 40
         }, {
             label: '微信名', name: 'nickname', index: 'nickname', width: 80
         }, {

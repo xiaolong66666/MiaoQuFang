@@ -3,6 +3,7 @@ package com.platform.entity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -43,4 +44,6 @@ public class UserVo implements Serializable {
     private String avatar;
     //微信Id
     private String weixinOpenid;
+    //用户积分
+    private BigDecimal points;
 }

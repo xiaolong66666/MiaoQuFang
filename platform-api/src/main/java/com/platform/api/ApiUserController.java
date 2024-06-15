@@ -117,4 +117,18 @@ public class ApiUserController extends ApiBaseAction {
         userService.update(userVo);
         return this.toResponseSuccess("手机绑定成功");
     }
+
+    /**
+     *获取用户积分
+     */
+    @ApiOperation(value = "获取用户积分")
+    @PostMapping("points")
+    public Object getUserPoints(@LoginUser UserVo loginUser) {
+        //如果用户不存在，返回数据0
+        if (null == loginUser) {
+            return this.toResponseSuccess(0);
+        }
+        UserVo userVo = userService.queryObject(loginUser.getUserId());
+        return this.toResponseSuccess(userVo.getPoints());
+    }
 }

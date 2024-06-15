@@ -2,11 +2,15 @@
 	<view class="container">
 		<button v-if="canIUseGetUserProfile" class="userinfo" @tap="getUserProfile">
 			<image class="userinfo-avatar" :src="userInfo.avatar" background-size="cover"></image>
-			<text class="userinfo-nickname">{{ userInfo.nickname}}</text>
+			<text class="userinfo-nickname">
+        {{ userInfo.nickname}}(余额:{{userPoints}})
+      </text>
 		</button>
 		<button v-else class="userinfo" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">
 			<image class="userinfo-avatar" :src="userInfo.avatar" background-size="cover"></image>
-			<text class="userinfo-nickname">{{ userInfo.nickname}}</text>
+			<text class="userinfo-nickname">
+        {{ userInfo.nickname}}(余额:{{userPoints}})
+      </text>
 		</button>
 		<view style="height:20rpx;background: #eee;width:100%;"></view>
 		<view class="my-item" style='background:none;display:flex;flex-direction:column;height:auto;'></view>
@@ -65,7 +69,7 @@
 			<view class="item item-bottom" v-if="!hasMobile">
 				<navigator url="/pages/auth/mobile/mobile" class="a">
 					<text class="icon phone"></text>
-					<text class="txt">绑定手机</text>
+					<text class="txt">修改邮箱</text>
 				</navigator>
 			</view>
 		</view>
@@ -87,7 +91,8 @@
 			return {
 				canIUseGetUserProfile: false,
 				userInfo: {},
-				hasMobile: ''
+				hasMobile: '',
+        userPoints: 0
 			}
 		},
 		methods: {
@@ -175,7 +180,17 @@
 						}
 					}
 				})
-			}
+			},
+      getPoints(){
+        let that = this;
+        util.request(api.Points).then(res => {
+          if (res.errno === 0) {
+            console.log(res.data);
+            that.userPoints = res.data;
+          }
+        });
+
+      }
 		},
 		onShow: function() {
 			let that = this;
@@ -198,6 +213,8 @@
 			that.userInfo = app.globalData.userInfo
 		},
 		onLoad: function() {
+      //获取积分
+      this.getPoints();
 			// 页面初始化 options为页面跳转所带来的参数
 			if (wx.getUserProfile) {
 				this.canIUseGetUserProfile = true
@@ -205,6 +222,7 @@
 		},
     onPullDownRefresh: function() {
       // 下拉刷新
+      this.getPoints();
       uni.stopPullDownRefresh();
     }
 	}

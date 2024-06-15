@@ -13,6 +13,7 @@ module.exports = {
 	AuthLoginByWeixin: 'auth/login_by_weixin', //微信登录
 	GoodsCount: 'goods/count', //统计商品总数
 	GoodsList: 'goods/list', //获得商品列表
+	Points: 'user/points', //积分商品列表
 	GoodsCategory: 'goods/category', //获得分类数据
 	GoodsDetail: 'goods/detail', //获得商品的详情
 	GoodsHot: 'goods/hot', //人气推荐
