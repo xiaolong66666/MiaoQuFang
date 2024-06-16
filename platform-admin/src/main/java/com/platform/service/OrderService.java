@@ -35,4 +35,6 @@ public interface OrderService {
     int confirm(Integer id);
 
     int sendGoods(OrderEntity order);
+
+    int confirmPay(Integer id);
 }

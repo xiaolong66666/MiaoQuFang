@@ -19,8 +19,8 @@ public class SendMailController {
     private CodeUtils codeUtils;
     //生成验证码
     @IgnoreAuth
-    @PostMapping
-    public R sendMessage(@RequestBody JSONObject jsonObject) throws MessagingException {
+    @PostMapping("code")
+    public R sendLoginCode(@RequestBody JSONObject jsonObject) throws MessagingException {
         String mail = jsonObject.getString("mail");
         //通过mail查找缓存中的验证码
         Object code = J2CacheUtils.getCode(mail);
@@ -29,9 +29,24 @@ public class SendMailController {
         }
         SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
         seedMailService.setJavaMailSender(javaMailSender);
-        seedMailService.setCode(codeUtils.generator(mail));
+        String generator = codeUtils.generator(mail);
+        seedMailService.setCode(generator);
         seedMailService.setTo(mail);
+        seedMailService.setContext("欢迎"+mail+"来到妙趣坊商城！您的验证码是："+generator+"，请在60秒内使用。");
         seedMailService.seedMessage();
         return R.ok("验证码发送成功!");
+    }
+
+    //发送自定义邮件
+    @PostMapping("message")
+    public R sendMessage(@RequestBody JSONObject jsonObject) throws MessagingException {
+        String mail = jsonObject.getString("mail");
+        String context = jsonObject.getString("context");
+        SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
+        seedMailService.setJavaMailSender(javaMailSender);
+        seedMailService.setTo(mail);
+        seedMailService.setContext(context);
+        seedMailService.seedMessage();
+        return R.ok("邮件发送成功!");
     }
 }

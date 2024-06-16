@@ -122,6 +122,19 @@ public class OrderController {
     }
 
     /**
+     * 确认付款
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/confirmPay")
+    @RequiresPermissions("order:pay")
+    public R confirmPay(@RequestBody Integer id) {
+        orderService.confirmPay(id);
+
+        return R.ok();
+    }
+    /**
      * 发货
      *
      * @param order

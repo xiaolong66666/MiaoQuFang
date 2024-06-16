@@ -144,6 +144,30 @@ let vm = new Vue({
                 }
             });
         },
+        // 确认付款
+        confirmPay: function (event) {
+            let id = getSelectedRow("#jqGrid");
+            if (id == null) {
+                return;
+            }
+            confirm('确定付款？', function () {
+                Ajax.request({
+                    type: "POST",
+                    url: "../order/confirmPay",
+                    contentType: "application/json",
+                    params: JSON.stringify(id),
+                    successCallback: function (r) {
+                        if (r.code == 0) {
+                            alert('操作成功', function (index) {
+                                vm.reload();
+                            });
+                        } else {
+                            alert(r.msg);
+                        }
+                    }
+                });
+            });
+        },
         confirm: function (event) {
             let id = getSelectedRow("#jqGrid");
             if (id == null) {

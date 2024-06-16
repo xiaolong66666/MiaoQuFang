@@ -69,7 +69,7 @@ module.exports = {
 	SmsCode: 'user/smscode', //发送短信
 	BindMobile: 'user/bindMobile', //绑定手机
 	Login: 'auth/login', //账号登录
-	SendCode: 'mail', //发送验证码
+	SendCode: 'mail/code', //发送验证码
 	Code:  'auth/', //静默登录
 	Register: 'auth/register', //注册
 	CouponList: 'coupon/list', // 优惠券列表

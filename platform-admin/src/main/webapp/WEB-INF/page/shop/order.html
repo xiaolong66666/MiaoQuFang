@@ -35,6 +35,9 @@
                 <i-button @click="query">查询</i-button>
             </div>
             <div class="buttons-group">
+                #if($shiro.hasPermission("order:pay"))
+                <i-button type="warning" @click="confirmPay">确认付款</i-button>
+                #end
                 #if($shiro.hasPermission("order:sendGoods"))
                 <i-button type="warning" @click="sendGoods">发货</i-button>
                 #end

@@ -36,9 +36,12 @@ public class SeedMailServiceImpl implements SendMailService {
     private CodeUtils codeUtils;
     //正文
     private String context;
+
+    public void setContext(String context) {
+        this.context = context;
+    }
     @Override
     public void seedMessage() throws MessagingException {
-        this.context="欢迎"+this.to+"登录妙趣坊商城！您的验证码是："+this.code;
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,true);
         helper.setFrom(from);

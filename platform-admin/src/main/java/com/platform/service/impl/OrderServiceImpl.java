@@ -89,4 +89,24 @@ public class OrderServiceImpl implements OrderService {
         order.setShippingStatus(1);//已发货
         return orderDao.update(order);
     }
+
+    @Override
+    public int confirmPay(Integer id) {
+        OrderEntity orderEntity = queryObject(id);
+        Integer payStatus = orderEntity.getPayStatus();//付款状态
+        Integer orderStatus = orderEntity.getOrderStatus();//订单状态
+        //无法修改付款状态
+        if (0 != orderStatus && 201 != orderStatus) {
+            throw new RRException("无法修改付款状态！");
+        }
+        if (2 == payStatus) {
+            //取消付款
+            orderEntity.setPayStatus(0);
+            orderEntity.setOrderStatus(0);
+            return orderDao.update(orderEntity);
+        }
+        orderEntity.setPayStatus(2);
+        orderEntity.setOrderStatus(201);
+        return orderDao.update(orderEntity);
+    }
 }
