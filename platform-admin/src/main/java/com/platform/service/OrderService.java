@@ -36,5 +36,5 @@ public interface OrderService {
 
     int sendGoods(OrderEntity order);
 
-    int confirmPay(Integer id);
+    int confirmPay(Integer id, Integer status);
 }

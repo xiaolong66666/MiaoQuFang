@@ -145,7 +145,7 @@ let vm = new Vue({
             });
         },
         // 确认付款
-        confirmPay: function (event) {
+        confirmPay: function (payStatus) {
             let id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
@@ -155,7 +155,10 @@ let vm = new Vue({
                     type: "POST",
                     url: "../order/confirmPay",
                     contentType: "application/json",
-                    params: JSON.stringify(id),
+                    params: {
+                        orderId: id,
+                        payStatus: payStatus
+                    },
                     successCallback: function (r) {
                         if (r.code == 0) {
                             alert('操作成功', function (index) {

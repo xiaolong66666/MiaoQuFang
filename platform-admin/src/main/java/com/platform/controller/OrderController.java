@@ -1,5 +1,6 @@
 package com.platform.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.platform.entity.OrderEntity;
 import com.platform.service.OrderService;
 import com.platform.utils.PageUtils;
@@ -124,13 +125,14 @@ public class OrderController {
     /**
      * 确认付款
      *
-     * @param id
      * @return
      */
     @RequestMapping("/confirmPay")
     @RequiresPermissions("order:pay")
-    public R confirmPay(@RequestBody Integer id) {
-        orderService.confirmPay(id);
+    public R confirmPay(@RequestBody JSONObject jsonParam) {
+        Integer id = jsonParam.getInteger("id");
+        Integer payStatus = jsonParam.getInteger("payStatus");
+        orderService.confirmPay(id,payStatus);
 
         return R.ok();
     }
