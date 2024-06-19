@@ -111,8 +111,8 @@
                     <i-option v-for="user in users" :value="user.id" :key="user.id">{{user.username}}</i-option>
                 </i-select>
             </Form-item>
-            <Form-item v-if="selectData.sendType == 1" label="短信通知">
-                <Checkbox v-model="sendSms">发送短信</Checkbox>
+            <Form-item v-if="selectData.sendType == 1" label="邮箱通知">
+                <Checkbox v-model="sendSms">发送邮箱</Checkbox>
             </Form-item>
             <Form-item>
                 <i-button type="primary" @click="publishSubmit">提交</i-button>

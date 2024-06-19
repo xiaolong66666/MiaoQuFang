@@ -13,8 +13,10 @@ import com.platform.utils.R;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +38,8 @@ public class CouponServiceImpl implements CouponService {
     private CouponGoodsDao couponGoodsDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     @Override
     public CouponEntity queryObject(Integer id) {
@@ -103,8 +107,16 @@ public class CouponServiceImpl implements CouponService {
                 userCouponDao.save(userCouponVo);
                 if (sendSms) {
                     UserEntity userEntity = userDao.queryObject(userId);
-                    // todo 发送短信
-
+                    // todo 发送邮箱
+                    SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
+                    seedMailService.setJavaMailSender(javaMailSender);
+                    seedMailService.setTo(userEntity.getUsername());
+                    seedMailService.setContext("您的账号："+userEntity.getUsername()+"已收到优惠券，请尽快使用");
+                    try {
+                        seedMailService.seedMessage();
+                    } catch (MessagingException e) {
+                        return R.error("邮箱服务异常！请联系小龙...");
+                    }
                 }
             }
         } else if (3 == sendType) {
