@@ -60,8 +60,6 @@ image {
   height: 150rpx;
   margin: auto;
   border-radius: 50%;
-  width: 150rpx;
-  height: 150rpx;
   margin-bottom: 8%;
 }
 .login-form {
@@ -80,11 +78,6 @@ image {
   font-size: 26rpx;
   padding: 8rpx;
   margin-top: 80rpx;
-  border: 1rpx solid #0ab906;
-  border-radius: 6rpx;
-  font-size: 26rpx;
-  padding: 8rpx;
-  margin-top: 80rpx;
 }
 .to-idx-btn {
   width: 90%;
@@ -96,10 +89,6 @@ image {
   font-size: 26rpx;
   padding: 8rpx;
   margin-top: 30rpx;
-  border-radius: 6rpx;
-  font-size: 26rpx;
-  padding: 8rpx;
-  margin-top: 30rpx;
 }
 .form-title {
   width: 100%;
@@ -107,12 +96,9 @@ image {
   font-size: 32rpx;
   text-align: center;
   color: #00a0e9;
-  margin-bottom: 50rpx;
-  font-size: 32rpx;
 }
 .item {
   display: block;
-  margin-bottom: 30rpx;
   margin-bottom: 30rpx;
 }
 .account {
@@ -125,7 +111,6 @@ image {
   input {
     padding-left: 20rpx;
     width: 75%;
-    padding-left: 20rpx;
   }
 }
 button {
@@ -142,7 +127,6 @@ button {
 .to-register {
   font-size: 28rpx;
   color: #00AAFF;
-  font-size: 28rpx;
 }
 .error {
   .error-text {
@@ -151,8 +135,6 @@ button {
     font-size: 28rpx;
     color: #e43130;
     text-align: left;
-    margin-top: 10rpx;
-    font-size: 28rpx;
     margin-top: 10rpx;
     .warning-icon {
       display: inline-block;
@@ -163,11 +145,6 @@ button {
       background: #e43130;
       border-radius: 50%;
       text-align: center;
-      margin-right: 12rpx;
-      font-size: 22rpx;
-      width: 26rpx;
-      height: 26rpx;
-      line-height: 26rpx;
       margin-right: 12rpx;
       font-size: 22rpx;
     }

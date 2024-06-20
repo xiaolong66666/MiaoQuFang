@@ -6,15 +6,13 @@
       <view class="list">
         <view class="label"><span>*</span>邮箱账号 </view>
         <view class="right">
-          <input type="email" placeholder="请输入" @blur="mailBlur" v-model="formData.mail"
-                 placeholder-style="color:#A1A2A1;font-size:28rpx">
+          <input type="email" placeholder="请输入" @blur="mailBlur" v-model="formData.mail">
         </view>
       </view>
       <view class="list">
         <view class="label"><span>*</span>验证码</view>
         <view class="right">
-          <input type="number" placeholder="请输入" v-model="formData.checkCode"
-                 placeholder-style="color:#A1A2A1;font-size:28rpx">
+          <input type="number" placeholder="请输入" v-model="formData.checkCode">
           <button class="send-code" :disabled="disabled" @click="sendCode">{{sendTxt}}</button>
         </view>
       </view>
