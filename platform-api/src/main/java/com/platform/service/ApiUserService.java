@@ -10,7 +10,6 @@ import com.platform.entity.UserVo;
 import com.platform.util.ApiBaseAction;
 import com.platform.utils.CharUtil;
 import com.platform.utils.RRException;
-import com.platform.validator.AbstractAssert;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,7 +93,7 @@ public class ApiUserService extends ApiBaseAction {
             userVo.setRegisterIp(this.getClientIp());
             userVo.setLastLoginIp(this.getClientIp());
             userVo.setLastLoginTime(new Date());
-            userVo.setAvatar("http://192.168.100.105/images/common/logo.png");
+            userVo.setAvatar("http://112.74.53.128:8080/h5/static/images/logo.png");
             userVo.setNickname(name);
             save(userVo);
         }else {

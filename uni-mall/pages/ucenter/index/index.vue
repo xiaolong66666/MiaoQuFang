@@ -74,8 +74,7 @@
 			</view>
 		</view>
 		<view class='company'>
-      妙趣坊
-      <p>历史上首家由00后大厂程序员投资的一家成人用品企业</p>
+      深圳市妙趣坊贸易有限公司
     </view>
 		<view class="logout" v-if="userInfo.userName!='点击去登录'" @tap="exitLogin">退出登录</view>
 		<view class="logout" v-else @tap="goLogin">点击去登录</view>
