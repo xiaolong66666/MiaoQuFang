@@ -82,6 +82,10 @@ public class GoodsEntity implements Serializable {
     private Integer isHot;
     //市场价
     private BigDecimal marketPrice;
+    //厂家
+    private String manufacturer;
+    //商品链接
+    private String goodsUrl;
     /**
      * 用户ID
      */

@@ -26,7 +26,17 @@ $(function () {
                 label: '热销', name: 'isHot', index: 'is_hot', width: 80, formatter: function (value) {
                     return transIsNot(value);
                 }
-            }]
+            },
+            {
+                label: '厂家', name: 'manufacturer', index: 'manufacturer', width: 80, formatter: function (value, options, row) {
+                    //返回厂家a标签，及属性goodsUrl
+                    if (value != null && value != '') {
+                        return '<a href="' + row.goodsUrl + '">' + value + '</a>';
+                    }
+                    return '';
+                }
+            }
+        ]
     });
     $('#goodsDesc').editable({
         inlineMode: false,

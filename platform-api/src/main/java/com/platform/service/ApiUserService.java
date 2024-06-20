@@ -87,7 +87,7 @@ public class ApiUserService extends ApiBaseAction {
             //账号不存在,创建账号
             userVo = new UserVo();
             String name = "妙友" + CharUtil.getRandomString(12);
-            userVo.setUsername(name);
+            userVo.setUsername(mail);
             userVo.setPassword(DigestUtils.sha256Hex("123456"));
             userVo.setRegisterTime(new Date());
             userVo.setRegisterIp(this.getClientIp());
