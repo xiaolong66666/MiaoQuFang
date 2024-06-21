@@ -2,6 +2,7 @@ package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.qcloudsms.SmsSingleSenderResult;
+import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
 import com.platform.cache.J2CacheUtils;
 import com.platform.entity.SmsConfig;
@@ -120,6 +121,7 @@ public class ApiUserController extends ApiBaseAction {
     /**
      *获取用户积分
      */
+    @IgnoreAuth
     @ApiOperation(value = "获取用户积分")
     @PostMapping("points")
     public Object getUserPoints(@LoginUser UserVo loginUser) {

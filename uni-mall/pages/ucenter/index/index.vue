@@ -73,9 +73,9 @@
 				</navigator>
 			</view>
 		</view>
-		<view class='company'>
-      深圳市妙趣坊贸易有限公司
-    </view>
+<!--		<view class='company'>-->
+<!--      深圳市妙趣坊贸易有限公司-->
+<!--    </view>-->
 		<view class="logout" v-if="userInfo.userName!='点击去登录'" @tap="exitLogin">退出登录</view>
 		<view class="logout" v-else @tap="goLogin">点击去登录</view>
 	</view>
@@ -181,6 +181,10 @@
 				})
 			},
       getPoints(){
+        //如果用户已登录，不发送请求
+        if (!app.globalData.token) {
+          return;
+        }
         let that = this;
         util.request(api.Points).then(res => {
           if (res.errno === 0) {
