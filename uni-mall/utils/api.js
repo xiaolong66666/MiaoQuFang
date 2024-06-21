@@ -68,6 +68,7 @@ module.exports = {
 	FeedbackAdd: 'feedback/save', //添加反馈
 	SmsCode: 'user/smscode', //发送短信
 	BindMobile: 'user/bindMobile', //绑定手机
+	BindMail: 'user/bindEmail', //绑定邮箱
 	Login: 'auth/login', //账号登录
 	SendCode: 'mail/code', //发送验证码
 	Code:  'auth/', //静默登录

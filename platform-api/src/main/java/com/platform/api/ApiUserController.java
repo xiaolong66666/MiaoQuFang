@@ -3,20 +3,19 @@ package com.platform.api;
 import com.alibaba.fastjson.JSONObject;
 import com.github.qcloudsms.SmsSingleSenderResult;
 import com.platform.annotation.LoginUser;
+import com.platform.cache.J2CacheUtils;
 import com.platform.entity.SmsConfig;
 import com.platform.entity.SmsLogVo;
 import com.platform.entity.UserVo;
 import com.platform.service.ApiUserService;
 import com.platform.service.SysConfigService;
 import com.platform.util.ApiBaseAction;
-import com.platform.utils.CharUtil;
-import com.platform.utils.Constant;
-import com.platform.utils.SmsUtil;
-import com.platform.utils.StringUtils;
+import com.platform.utils.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -130,5 +129,29 @@ public class ApiUserController extends ApiBaseAction {
         }
         UserVo userVo = userService.queryObject(loginUser.getUserId());
         return this.toResponseSuccess(userVo.getPoints());
+    }
+
+    //更换邮箱账号
+    @ApiOperation(value = "更换邮箱账号")
+    @PostMapping("bindEmail")
+    public Object bindEmail(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonObject) {
+        Long userId = loginUser.getUserId();
+        if (null == userId) {
+            return toResponseFail("请先登录");
+        }
+        //
+        String mail = jsonObject.getString("username");
+        String checkCode = jsonObject.getString("checkCode");
+        //校验验证码
+        String code = (String) J2CacheUtils.getCode(mail);
+        if (!checkCode.equals(code)) {
+            throw new RRException("验证码错误");
+        }
+        //更新用户信息
+        UserVo userVo = new UserVo();
+        userVo.setUserId(userId);
+        userVo.setUsername(mail);
+        userService.update(userVo);
+        return this.toResponseSuccess("更新成功！");
     }
 }

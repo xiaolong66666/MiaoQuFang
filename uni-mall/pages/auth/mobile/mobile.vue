@@ -7,19 +7,22 @@
 		<view class="separate"></view>
 		<view>
 			<view>
-				<view class="login-title">修改密码</view>
+				<view class="login-title">修改邮箱</view>
 				<form @submit="bindLoginMobilecode">
 					<form @submit="bindGetPassCode">
 						<view class="login">
-							<view class="first-line"><input type="digit" name="mobile" @input="bindInputMobile" placeholder="输入手机号" v-model="mobile"
-								 auto-focus /></view>
+							<view class="first-line">
+                <input type="email" name="mobile" v-model="mobile" placeholder="输入邮箱" auto-focus />
+              </view>
 							<view class="second-line">
-								<input type="digit" name="code" placeholder="四位验证码" />
+								<input type="digit" name="code" v-model="checkCode" placeholder="验证码" />
 								<button @tap="countDownPassCode" :disabled="disableGetMobileCode">{{getCodeButtonText}}</button>
 							</view>
 						</view>
 					</form>
-					<view class="third-line"><button formType="submit" :disabled="disableSubmitMobileCode">提交</button></view>
+					<view class="third-line">
+            <button  @tap="bindLoginMobilecode" :disabled="disableSubmitMobileCode">提交</button>
+          </view>
 				</form>
 			</view>
 		</view>
@@ -34,6 +37,7 @@
 		data() {
 			return {
 				mobile: '',
+        checkCode: '',
 				userInfo: app.globalData.userInfo,
 				disableGetMobileCode: false,
 				disableSubmitMobileCode: true,
@@ -43,11 +47,11 @@
 		methods: {
 			bindCheckMobile: function(mobile) {
 				if (!mobile) {
-					util.toast('请输入手机号码')
+					util.toast('请输入邮箱账号')
 					return false
 				}
-				if (!mobile.match(/^1[3-9][0-9]\d{8}$/)) {
-					util.toast('手机号格式不正确，仅支持国内手机号码')
+				if (!mobile.match(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9_-]+\.[a-zA-Z0-9-.]+/)) {
+					util.toast('邮箱格式不正确，请输入正确的邮箱账号!')
 					return false
 				}
 				return true
@@ -57,19 +61,15 @@
 				this.disableGetMobileCode = true
 			},
 
-			bindInputMobile: function(e) {
-				this.mobile = e.detail.value
-			},
-
 			countDownPassCode: function() {
 				var that = this
 				if (!that.bindCheckMobile(that.mobile)) {
 					return
 				}
-				util.request(api.SmsCode, {
-					phone: that.mobile
+				util.request(api.SendCode, {
+					mail: that.mobile
 				}, 'POST', 'application/json').then(function(res) {
-					if (res.errno == 0) {
+					if (res.code === 0) {
 						util.toast('发送成功')
 						var pages = getCurrentPages()
 						var i = 60;
@@ -93,17 +93,17 @@
 
 			},
 
-			bindLoginMobilecode: function(e) {
-				var mobile = this.mobile;
-				if (!this.bindCheckMobile(mobile)) {
+			bindLoginMobilecode: function() {
+				let that = this;
+				if (!this.bindCheckMobile(this.mobile)) {
 					return
 				}
-				if (!(e.detail.value.code && e.detail.value.code.length === 4)) {
+				if (!(this.checkCode)) {
 					return
 				}
-				util.request(api.BindMobile, {
-          mobileCode: e.detail.value.code,
-					mobile: mobile
+				util.request(api.BindMail, {
+          checkCode: that.checkCode,
+					username: that.mobile,
 				}, "POST", "application/json").then(function(res) {
 					if (res.errno === 0) {
 						util.toast('操作成功')
