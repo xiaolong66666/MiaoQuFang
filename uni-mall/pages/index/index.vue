@@ -182,13 +182,12 @@
 					if (res.errno === 0) {
 						that.banner = res.data.banner
 					}
-				});label
+				});
 				util.request(api.IndexUrlChannel).then(function(res) {
 					if (res.errno === 0) {
 						that.channel = res.data.channel
 					}
 				});
-
 			},
 		},
 		// 增加下拉刷新数据的功能

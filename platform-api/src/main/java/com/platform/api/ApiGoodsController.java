@@ -361,7 +361,9 @@ public class ApiGoodsController extends ApiBaseAction {
         if (null != categoryEntityList && categoryEntityList.size() > 0) {
             List<Integer> categoryIds = new ArrayList<>();
             for (GoodsVo goodsVo : categoryEntityList) {
-                categoryIds.add(goodsVo.getCategoryId());
+                if (goodsVo != null && goodsVo.getCategoryId() != null){
+                    categoryIds.add(goodsVo.getCategoryId());
+                }
             }
             //查找二级分类的parentId
             Map<String, Object> categoryParam = new HashMap<>();
