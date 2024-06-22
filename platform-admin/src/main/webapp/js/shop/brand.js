@@ -46,11 +46,12 @@ var vm = new Vue({
     data: {
         showList: true,
         title: null,
-        brand: {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 0,newSortOrder:0},
+        brand: {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 0,newSortOrder:0,simpleDesc:''},
         ruleValidate: {
             name: [
                 {required: true, message: '品牌名称不能为空', trigger: 'blur'}
             ]
+
         },
         q: {
             name: ''
@@ -63,7 +64,7 @@ var vm = new Vue({
         add: function () {
             vm.showList = false;
             vm.title = "新增";
-            vm.brand = {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 0};
+            vm.brand = {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 0,newSortOrder:0,simpleDesc:''};
         },
         update: function (event) {
             var id = getSelectedRow("#jqGrid");
