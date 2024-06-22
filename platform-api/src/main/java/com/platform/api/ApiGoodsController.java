@@ -342,7 +342,8 @@ public class ApiGoodsController extends ApiBaseAction {
             SearchHistoryVo searchHistoryVo = new SearchHistoryVo();
             searchHistoryVo.setAddTime(System.currentTimeMillis() / 1000);
             searchHistoryVo.setKeyword(keyword);
-            searchHistoryVo.setUserId(null != loginUser ? loginUser.getUserId().toString() : "");
+            Long userId = getUserId();
+            searchHistoryVo.setUserId(null != userId ? String.valueOf(userId): "");
             searchHistoryVo.setFrom("");
             searchHistoryService.save(searchHistoryVo);
 

@@ -1,5 +1,4 @@
 package com.platform.entity;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.platform.utils.JsonTimeSerializer;
 import lombok.Data;
@@ -23,6 +22,7 @@ public class SearchHistoryEntity implements Serializable {
     //搜索来源，如PC、小程序、APP等
     private String from;
     //搜索时间
+    @JsonSerialize(using = JsonTimeSerializer.class)
     private Long addTime;
     //会员Id
     private String userId;

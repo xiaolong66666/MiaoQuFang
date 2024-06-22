@@ -59,7 +59,7 @@ var vm = new Vue({
             ]
         },
         q: {
-            nickname: ''
+            username: ''
         },
         userLevels: []
     },
@@ -123,7 +123,7 @@ var vm = new Vue({
             });
         },
         exportUser: function () {
-            exportFile('#rrapp', '../user/export', {'nickname': vm.q.nickname});
+            exportFile('#rrapp', '../user/export', {'username': vm.q.username});
         },
         coupon: function () {
             var id = getSelectedRow("#jqGrid");
@@ -183,7 +183,7 @@ var vm = new Vue({
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'nickname': vm.q.nickname},
+                postData: {'username': vm.q.username},
                 page: page,
             }).trigger("reloadGrid");
             vm.handleReset('formValidate');
