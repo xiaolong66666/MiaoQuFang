@@ -46,7 +46,7 @@ var vm = new Vue({
     data: {
         showList: true,
         title: null,
-        brand: {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 0},
+        brand: {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 0,newSortOrder:0},
         ruleValidate: {
             name: [
                 {required: true, message: '品牌名称不能为空', trigger: 'blur'}
