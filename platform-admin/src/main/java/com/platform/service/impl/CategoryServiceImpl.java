@@ -61,6 +61,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public int deleteBatch(Integer[] ids) {
+        //判断id是否包含0，如果包含0，则是非法删除
+        for (Integer id : ids) {
+            if (id == 0) {
+                return 0;
+            }
+        }
         categoryDao.deleteByParentBatch(ids);
         return categoryDao.deleteBatch(ids);
     }

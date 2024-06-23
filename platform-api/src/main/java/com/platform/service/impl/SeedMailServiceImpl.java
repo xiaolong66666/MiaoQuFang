@@ -18,7 +18,12 @@ public class SeedMailServiceImpl implements SendMailService {
     //发送人
     private String from="2636822826@qq.com";
     //标题
-    private String title="妙趣坊商城";
+    private String title;
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     //验证码
     private String code;
 

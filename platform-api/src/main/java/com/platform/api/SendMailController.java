@@ -28,9 +28,10 @@ public class SendMailController {
         SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
         String generator = codeUtils.generator(mail);
         seedMailService.setCode(generator);
+        seedMailService.setTitle("妙趣坊商城验证码:"+generator);
         ThreadPoolUtils.execute(() -> {
             try {
-                seedMailService.seedMessage(mail,"欢迎"+mail+"来到妙趣坊商城！您的验证码是："+generator+"，请在60秒内使用。");
+                seedMailService.seedMessage(mail,"欢迎"+mail+"来到妙趣坊商城！验证码将在1分钟后失效! 请尽快使用!");
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
@@ -44,6 +45,7 @@ public class SendMailController {
         String mail = jsonObject.getString("mail");
         String context = jsonObject.getString("context");
         SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
+        seedMailService.setTitle("妙趣坊商城通知");
         ThreadPoolUtils.execute(() -> {
             try {
                 seedMailService.seedMessage(mail,context);
