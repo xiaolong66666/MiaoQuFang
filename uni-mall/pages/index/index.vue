@@ -117,7 +117,7 @@
 			<view class="b">
 				<view class="item" v-for="(iitem, iindex) in item.goodsList" :key="iindex">
 					<view :class="'item ' + iindex % 2 == 0 ? '' : 'item-b'">
-						<navigator :url="'/pages/goods/goods?id='+item.id">
+						<navigator :url="'/pages/goods/goods?id='+iitem.id">
 							<image class="img" :src="iitem.listPicUrl" background-size="cover"></image>
 							<text class="name">{{iitem.name}}</text>
 							<text class="price">￥{{iitem.retailPrice}}</text>

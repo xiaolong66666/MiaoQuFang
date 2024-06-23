@@ -244,12 +244,15 @@ public class ApiIndexController extends ApiBaseAction {
                 }
             }
             //
-            param = new HashMap<String, Object>();
-            param.put("categoryIds", childCategoryIds);
-            param.put("fields", "id as id, name, list_pic_url, retail_price as retail_price");
-            param.put("isDelete", "0");
-            PageHelper.startPage(0, 7, false);
-            List<GoodsVo> categoryGoods = goodsService.queryList(param);
+            List<GoodsVo> categoryGoods = null;
+            if (childCategoryIds != null && childCategoryIds.size() > 0) {
+                param = new HashMap<String, Object>();
+                param.put("categoryIds", childCategoryIds);
+                param.put("fields", "id as id, name, list_pic_url, retail_price as retail_price");
+                param.put("isDelete", "0");
+                PageHelper.startPage(0, 7, false);
+                categoryGoods = goodsService.queryList(param);
+            }
             Map<String, Object> newCategory = new HashMap<String, Object>();
             newCategory.put("id", categoryItem.getId());
             newCategory.put("name", categoryItem.getName());
