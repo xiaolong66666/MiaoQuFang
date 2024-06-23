@@ -490,7 +490,7 @@ public class ApiGoodsController extends ApiBaseAction {
         Map<String, Object> bannerInfo = new HashMap<>();
         bannerInfo.put("url", "");
         bannerInfo.put("name", "坚持初心，为你寻觅世间好物");
-        bannerInfo.put("imgUrl", "https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/1504208321fef4.png");
+        bannerInfo.put("imgUrl", "/h5/static/images/new.png");
         resultObj.put("bannerInfo", bannerInfo);
         return toResponseSuccess(resultObj);
     }

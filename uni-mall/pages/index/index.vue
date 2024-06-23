@@ -69,7 +69,7 @@
 			<view class="h">
 				<view>
 					<navigator url="../newGoods/newGoods">
-						<text class="txt">周一周四 · 新品首发</text>
+						<text class="txt">周一周五 · 新品首发</text>
 					</navigator>
 				</view>
 			</view>
