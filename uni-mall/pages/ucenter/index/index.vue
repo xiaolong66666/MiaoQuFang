@@ -66,12 +66,12 @@
 					<text class="txt">意见反馈</text>
 				</navigator>
 			</view>
-			<view class="item item-bottom" v-if="!hasMobile">
-				<navigator url="/pages/auth/mobile/mobile" class="a">
-					<text class="icon phone"></text>
-					<text class="txt">修改邮箱</text>
-				</navigator>
-			</view>
+<!--			<view class="item item-bottom" v-if="!hasMobile">-->
+<!--				<navigator url="/pages/auth/mobile/mobile" class="a">-->
+<!--					<text class="icon phone"></text>-->
+<!--					<text class="txt">修改邮箱</text>-->
+<!--				</navigator>-->
+<!--			</view>-->
 		</view>
 <!--		<view class='company'>-->
 <!--      深圳市妙趣坊贸易有限公司-->

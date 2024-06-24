@@ -134,26 +134,26 @@ public class ApiUserController extends ApiBaseAction {
     }
 
     //更换邮箱账号
-    @ApiOperation(value = "更换邮箱账号")
-    @PostMapping("bindEmail")
-    public Object bindEmail(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonObject) {
-        Long userId = loginUser.getUserId();
-        if (null == userId) {
-            return toResponseFail("请先登录");
-        }
-        //
-        String mail = jsonObject.getString("username");
-        String checkCode = jsonObject.getString("checkCode");
-        //校验验证码
-        String code = (String) J2CacheUtils.getCode(mail);
-        if (!checkCode.equals(code)) {
-            throw new RRException("验证码错误");
-        }
-        //更新用户信息
-        UserVo userVo = new UserVo();
-        userVo.setUserId(userId);
-        userVo.setUsername(mail);
-        userService.update(userVo);
-        return this.toResponseSuccess("更新成功！");
-    }
+//    @ApiOperation(value = "更换邮箱账号")
+//    @PostMapping("bindEmail")
+//    public Object bindEmail(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonObject) {
+//        Long userId = loginUser.getUserId();
+//        if (null == userId) {
+//            return toResponseFail("请先登录");
+//        }
+//        //
+//        String mail = jsonObject.getString("username");
+//        String checkCode = jsonObject.getString("checkCode");
+//        //校验验证码
+//        String code = (String) J2CacheUtils.getCode(mail);
+//        if (!checkCode.equals(code)) {
+//            throw new RRException("验证码错误");
+//        }
+//        //更新用户信息
+//        UserVo userVo = new UserVo();
+//        userVo.setUserId(userId);
+//        userVo.setUsername(mail);
+//        userService.update(userVo);
+//        return this.toResponseSuccess("更新成功！");
+//    }
 }
