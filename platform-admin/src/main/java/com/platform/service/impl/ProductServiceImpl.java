@@ -70,29 +70,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public int save(ProductEntity product) {
-        int result = 0;
-        String goodsSpecificationIds = product.getGoodsSpecificationIds();
-        if (!StringUtils.isNullOrEmpty(goodsSpecificationIds)) {
-            String[] goodsSpecificationIdArr = goodsSpecificationIds.split("_");
-            for (int i = 0; i < goodsSpecificationIdArr.length - 1; i++) {
-                String[] oneId = goodsSpecificationIdArr[i].split(",");
-                String[] twoId = goodsSpecificationIdArr[i + 1].split(",");
-                for (int j = 0; j < oneId.length; j++) {
-                    for (int k = 0; k < twoId.length; k++) {
-                        String strGoodsSpecificationIds = null;
-                        if (StringUtils.isNullOrEmpty(oneId[j]) || StringUtils.isNullOrEmpty(twoId[k])){
-                            continue;
-                        }
-                        strGoodsSpecificationIds = oneId[j] + "_" + twoId[k];
-                        product.setGoodsSpecificationIds(strGoodsSpecificationIds);
-                        ProductEntity entity = new ProductEntity();
-                        BeanUtils.copyProperties(product, entity);
-                        result += productDao.save(entity);
-                    }
-                }
-            }
+        Integer goodsId = product.getGoodsId();
+        //校验商品id是否为空
+        if (null == goodsId) {
+            return 0;
         }
-        return result;
+        ProductEntity entity = new ProductEntity();
+        BeanUtils.copyProperties(product, entity);
+        return productDao.save(entity);
     }
 
     @Override

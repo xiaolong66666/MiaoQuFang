@@ -33,6 +33,7 @@ public class SpecificationServiceImpl implements SpecificationService {
 	
 	@Override
 	public void save(SpecificationEntity specification){
+		specification.setSortOrder(specification.getSortOrder()==null?0:specification.getSortOrder());
 		specificationDao.save(specification);
 	}
 	
