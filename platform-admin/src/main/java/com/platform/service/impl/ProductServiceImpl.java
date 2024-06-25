@@ -43,19 +43,11 @@ public class ProductServiceImpl implements ProductService {
         //翻译产品规格
         if (null != list && list.size() > 0) {
             for (ProductEntity item : list) {
-                String specificationIds = item.getGoodsSpecificationIds();
-                String specificationValue = "";
-                if (!StringUtils.isNullOrEmpty(specificationIds)) {
-                    String[] arr = specificationIds.split("_");
-
-                    for (String goodsSpecificationId : arr) {
-                        GoodsSpecificationEntity entity = goodsSpecificationDao.queryObject(goodsSpecificationId);
-                        if (null != entity) {
-                            specificationValue += entity.getValue() + "；";
-                        }
-                    }
+                Integer specificationIds = item.getGoodsSpecificationIds();
+                GoodsSpecificationEntity entity = goodsSpecificationDao.queryObject(specificationIds);
+                if (null != entity){
+                    item.setSpecificationValue(entity.getValue());
                 }
-                item.setSpecificationValue(item.getGoodsName() + " " + specificationValue);
                 result.add(item);
             }
         }
@@ -82,9 +74,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int update(ProductEntity product) {
-        if (StringUtils.isNullOrEmpty(product.getGoodsSpecificationIds())){
-            product.setGoodsSpecificationIds("");
-        }
         return productDao.update(product);
     }
 

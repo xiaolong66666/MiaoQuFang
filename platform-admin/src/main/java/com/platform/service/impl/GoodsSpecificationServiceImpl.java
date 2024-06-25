@@ -39,6 +39,7 @@ public class GoodsSpecificationServiceImpl implements GoodsSpecificationService 
 
     @Override
     public int save(GoodsSpecificationEntity goodsSpecification) {
+        goodsSpecification.setSpecificationId(1);
         return goodsSpecificationDao.save(goodsSpecification);
     }
 

@@ -73,14 +73,12 @@
     <insert id="save" parameterType="com.platform.entity.ProductEntity" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_product(
 			`goods_id`,
-			`goods_specification_ids`,
 			`goods_sn`,
 			`goods_number`,
 			`retail_price`,
 			`market_price`)
 		values(
 			#{goodsId},
-			#{goodsSpecificationIds},
 			#{goodsSn},
 			#{goodsNumber},
 			#{retailPrice},

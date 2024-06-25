@@ -26,7 +26,7 @@
         select
         nideshop_goods_specification.id,
         nideshop_goods_specification.goods_id,
-        nideshop_goods_specification.specification_id,
+--         nideshop_goods_specification.specification_id,
         nideshop_goods_specification.value,
         nideshop_goods_specification.pic_url,
         nideshop_goods.name goods_name,
@@ -41,9 +41,9 @@
         <if test="goodsId != null">
             AND nideshop_goods_specification.goods_id = #{goodsId}
         </if>
-        <if test="specificationId != null">
-            AND nideshop_goods_specification.specification_id = #{specificationId}
-        </if>
+<!--        <if test="specificationId != null">-->
+<!--            AND nideshop_goods_specification.specification_id = #{specificationId}-->
+<!--        </if>-->
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}

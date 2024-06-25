@@ -23,7 +23,7 @@ public class ProductEntity implements Serializable {
     //商品Id
     private Integer goodsId;
     //商品规格ids
-    private String goodsSpecificationIds;
+    private Integer goodsSpecificationIds;
     //商品序列号
     private String goodsSn;
     //商品库存

@@ -9,15 +9,7 @@ $(function () {
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '商品', name: 'goodsName', index: 'goods_id', width: 120},
-            {
-                label: '商品规格',
-                name: 'specificationValue',
-                index: 'goods_specification_ids',
-                width: 100,
-                formatter: function (value, options, row) {
-                    return value.replace(row.goodsName + " ", '');
-                }
-            },
+            {label: '商品规格', name: 'specificationValue', index: 'goods_specification_ids', width: 100},
             {label: '商品序列号', name: 'goodsSn', index: 'goods_sn', width: 80},
             {label: '商品库存', name: 'goodsNumber', index: 'goods_number', width: 80},
             {label: '零售价格(元)', name: 'retailPrice', index: 'retail_price', width: 80},
@@ -41,7 +33,6 @@ let vm = new Vue({
         },
         goodss: [],
         attribute: [],
-        color: [], guige: [], weight: [],
         colors: [],
         guiges: [],
         weights: [],
@@ -87,21 +78,7 @@ let vm = new Vue({
                         url: "../goodsspecification/queryAll?goodsId=" + goodsId + "&specificationId=1",
                         async: true,
                         successCallback: function (r) {
-                            vm.colors = r.list;
-                        }
-                    });
-                    Ajax.request({
-                        url: "../goodsspecification/queryAll?goodsId=" + goodsId + "&specificationId=2",
-                        async: true,
-                        successCallback: function (r) {
                             vm.guiges = r.list;
-                        }
-                    });
-                    Ajax.request({
-                        url: "../goodsspecification/queryAll?goodsId=" + goodsId + "&specificationId=4",
-                        async: true,
-                        successCallback: function (r) {
-                            vm.weights = r.list;
                         }
                     });
                 }
@@ -109,12 +86,6 @@ let vm = new Vue({
         },
         saveOrUpdate: function (event) {
             let url = vm.product.id == null ? "../product/save" : "../product/update";
-
-            if(vm.attribute.indexOf(1) == -1)vm.color = [];
-            if(vm.attribute.indexOf(2) == -1)vm.guige = [];
-            if(vm.attribute.indexOf(4) == -1)vm.weight = [];
-            vm.product.goodsSpecificationIds = vm.color + '_' + vm.guige + '_' + vm.weight;
-
             Ajax.request({
                 type: "POST",
                 url: url,
@@ -158,28 +129,6 @@ let vm = new Vue({
                 async: true,
                 successCallback: function (r) {
                     vm.product = r.product;
-                    let goodsSpecificationIds = vm.product.goodsSpecificationIds.split("_");
-                    goodsSpecificationIds.forEach((goodsSpecificationId, index) => {
-                        let specificationIds = goodsSpecificationId.split(",").filter(id => !!id).map(id => Number(id));
-
-                        if (index == 0) {
-                            vm.color = specificationIds;
-                            if (specificationIds.length > 0) {
-                                vm.attribute.push(1);
-                            }
-                        } else if (index == 1) {
-                            vm.guige = specificationIds;
-                            if (specificationIds.length > 0) {
-                                vm.attribute.push(2);
-                            }
-                        } else if (index == 2) {
-                            vm.weight = specificationIds;
-                            if (specificationIds.length > 0) {
-                                vm.attribute.push(4);
-                            }
-                        }
-                    });
-
                     vm.getGoodss();
                 }
             });

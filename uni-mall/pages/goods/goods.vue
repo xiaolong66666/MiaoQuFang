@@ -243,6 +243,7 @@
 									_specificationList[i].valueList[j].checked = true;
 								}
 							} else {
+                console.log("该规格未上架")
 								_specificationList[i].valueList[j].checked = false;
 							}
 						}

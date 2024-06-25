@@ -38,13 +38,13 @@
                     <i-option v-for="goods in goodss" :value="goods.id" :key="goods.id">{{goods.name}}</i-option>
                 </i-select>
             </Form-item>
-            <Form-item label="规格" prop="specificationId" style="width: 368px;">
-                <i-select v-model="goodsSpecification.specificationId" filterable label-in-value>
-                    <i-option v-for="specification in specifications" :value="specification.id"
-                              :key="specification.id">{{specification.name}}
-                    </i-option>
-                </i-select>
-            </Form-item>
+<!--            <Form-item label="规格" prop="specificationId" style="width: 368px;">-->
+<!--                <i-select v-model="goodsSpecification.specificationId" filterable label-in-value>-->
+<!--                    <i-option v-for="specification in specifications" :value="specification.id"-->
+<!--                              :key="specification.id">{{specification.name}}-->
+<!--                    </i-option>-->
+<!--                </i-select>-->
+<!--            </Form-item>-->
             <Form-item label="规格说明" prop="value">
                 <i-input type="textarea" v-model="goodsSpecification.value" placeholder="规格说明"/>
             </Form-item>
