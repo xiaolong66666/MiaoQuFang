@@ -9,6 +9,7 @@ import com.platform.entity.CouponGoodsEntity;
 import com.platform.entity.UserCouponEntity;
 import com.platform.entity.UserEntity;
 import com.platform.service.CouponService;
+import com.platform.util.ThreadPoolUtils;
 import com.platform.utils.R;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
@@ -108,8 +109,15 @@ public class CouponServiceImpl implements CouponService {
                     // todo 发送邮箱
                     SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
                     try {
-                        seedMailService.seedMessage(userEntity.getUsername(),"您的账号："+userEntity.getUsername()+"已收到优惠券，请尽快使用");
-                    } catch (MessagingException e) {
+                        seedMailService.setTitle("【妙趣坊】优惠券通知！");
+                        ThreadPoolUtils.execute(() -> {
+                            try {
+                                seedMailService.seedMessage(userEntity.getUsername(),"您的账号："+userEntity.getUsername()+"已收到优惠券，请尽快使用");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    } catch (Exception e) {
                         return R.error("邮箱服务异常！请联系小龙...");
                     }
                 }
