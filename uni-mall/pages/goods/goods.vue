@@ -105,7 +105,7 @@
 
 			<view v-if="openAttr" class="attr-pop">
 				<view class="img-info">
-					<image class="img" :src="goods.listPicUrl"></image>
+					<image class="img" :src="picUrl === ''?goods.listPicUrl:picUrl" @tap = "previewImg()"></image>
 					<view class="info">
 						<view class="c">
 							<view class="p">价格：￥{{selectedProduct.retailPrice}}</view>
@@ -164,6 +164,7 @@
         selectedProduct: {
           retailPrice: 0
         },
+        picUrl: "",
 				winHeight: "",
 				id: 0,
 				goods: {},
@@ -186,6 +187,13 @@
 			}
 		},
 		methods: {
+      // 预览图片
+      previewImg() {
+        uni.previewImage({
+          current: this.picUrl === '' ? this.goods.listPicUrl : this.picUrl,
+          urls: [this.picUrl === '' ? this.goods.listPicUrl : this.picUrl]
+        });
+      },
 			getGoodsInfo: function() {
 				let that = this;
 				util.request(api.GoodsDetail, {
@@ -241,6 +249,8 @@
 									_specificationList[i].valueList[j].checked = false;
 								} else {
 									_specificationList[i].valueList[j].checked = true;
+                  //更换规格图片
+                  this.picUrl = _specificationList[i].valueList[j].picUrl
 								}
 							} else {
                 console.log("该规格未上架")

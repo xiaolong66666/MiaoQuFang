@@ -6,7 +6,13 @@
         <view style="display: flex; justify-content: center; align-items: center;">
           <image src="/static/images/pay.png" mode="aspectFit" @tap = 'previewImg()' style="width: 400rpx;height: 400rpx;"/>
         </view>
-				<view class="msg">等待工作人员核实......</view>
+				<view class="msg">
+          您的订单
+          <span style="text-decoration: underline;color: red">
+          {{orderId?orderId:0}}
+          </span>需支付{{pay?pay:0}}元
+          <p>如已支付请联系客服......</p>
+        </view>
 				<view class="btns">
 					<navigator class="btn" url="/pages/ucenter/order/order" open-type="redirect">查看订单</navigator>
           <a href="https://work.weixin.qq.com/kfid/kfce9524b2cf9333141" class="btn">联系客服</a>
@@ -44,7 +50,8 @@
 		data() {
 			return {
 				status: false,
-				orderId: 0
+				orderId: 0,
+        pay: 0,
 			}
 		},
 		methods: {
@@ -61,6 +68,11 @@
 				}).then(function(res) {})
 			},
 			payOrder() {
+        //校验订单id
+        if (!this.orderId) {
+          util.toast('订单id不能为空');
+          return;
+        }
 				util.payOrder(parseInt(this.orderId)).then(res => {
 					that.status = true
 				}).catch(res => {
@@ -70,8 +82,8 @@
 		},
 		onLoad: function(options) {
 			// 页面初始化 options为页面跳转所带来的参数
-			this.orderId = options.orderId || 24
-			// this.status = options.status
+			this.orderId = options.orderId
+			this.pay = options.pay
 		},
     onPullDownRefresh() {
       // 增加下拉刷新数据的功能

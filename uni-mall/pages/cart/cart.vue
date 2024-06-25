@@ -22,7 +22,7 @@
 						<view :class="'item ' + (isEditCart ? 'edit' : '')" v-for="(item, index) in cartGoods" :key="item.id">
 							<view :class="'checkbox ' + (item.checked ? 'checked' : '')" @tap="checkedItem" :data-item-index="index"></view>
 							<view class="cart-goods">
-								<image class="img" :src="item.listPicUrl"></image>
+								<image class="img" :src="item.listPicUrl" @tap="toGoodsDetail(item.goodsId)"></image>
 								<view class="info">
 									<view class="t">
 										<text class="name">{{item.goodsName}}</text>
@@ -73,6 +73,12 @@
 			}
 		},
 		methods: {
+      //跳转至商品详情
+      toGoodsDetail: function(id) {
+        uni.navigateTo({
+          url: '/pages/goods/goods?id=' + id
+        });
+      },
 			getCartList: function() {
 				let that = this;
 				util.request(api.CartList).then(function(res) {
