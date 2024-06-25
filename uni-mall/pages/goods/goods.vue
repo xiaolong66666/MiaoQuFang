@@ -108,7 +108,7 @@
 					<image class="img" :src="goods.listPicUrl"></image>
 					<view class="info">
 						<view class="c">
-							<view class="p">价格：￥{{goods.retailPrice}}</view>
+							<view class="p">价格：￥{{selectedProduct.retailPrice}}</view>
 							<view class="a" v-if="productList.length>0">已选择：{{checkedSpecText}}</view>
 						</view>
 					</view>
@@ -161,6 +161,9 @@
 		},
 		data() {
 			return {
+        selectedProduct: {
+          retailPrice: 0
+        },
 				winHeight: "",
 				id: 0,
 				goods: {},
@@ -295,7 +298,29 @@
 			},
 			changeSpecInfo: function() {
 				let checkedNameValue = this.getCheckedSpecValue();
-
+        let selectedKey = this.getCheckedSpecKey();
+        //判断productList是否包含selectedKey
+        let selectedProduct = this.productList.filter(function(v) {
+          //将key使用"_"分割成数组
+          let keyArr = selectedKey.split("_");
+          //将goodsSpecificationIds使用"_"分割成数组
+          let goodsSpecArr = v.goodsSpecificationIds.split("_").filter(function(v) {
+            return v != '';
+          });
+          //判断两个长度是否相等
+          if (keyArr.length != goodsSpecArr.length) {
+            return false;
+          }
+          //遍历比较goodsSpecArr对应的索引值是否包含keyArr对应的值
+          for (let i = 0; i < keyArr.length; i++) {
+            //判断goodsSpecArr是否包含keyArr
+            if (goodsSpecArr[i].indexOf(keyArr[i]) == -1){
+              return false;
+            }
+          }
+          return true;
+        });
+        this.selectedProduct.retailPrice = selectedProduct[0].retailPrice ? selectedProduct[0].retailPrice : 0;
 				//设置选择的信息
 				let checkedValue = checkedNameValue.filter(function(v) {
 					if (v.valueId != 0) {
