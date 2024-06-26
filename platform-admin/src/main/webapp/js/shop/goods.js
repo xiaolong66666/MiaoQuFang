@@ -87,11 +87,29 @@ var vm = new Vue({
             isAppExclusive: 0,
             isLimited: 0,
             isHot: 0,
-            categoryName: ''
+            categoryName: '',
+            retailPrice: 0,
+            goodsNumber: 0,
+            marketPrice: 0,
         },
         ruleValidate: {
             name: [
-                {required: true, message: '名称不能为空', trigger: 'blur'}
+                {required: true, message: '名称不能为空', trigger: 'blur'},
+            ],
+            categoryId: [
+                {required: true}
+            ],
+            retailPrice: [
+                {required: true, message: '价格不能为空', trigger: 'blur'}
+            ],
+            goodsNumber: [
+                {required: true, message: '库存不能为空', trigger: 'blur'}
+            ],
+            marketPrice: [
+                {required: true, message: '市场价不能为空', trigger: 'blur'}
+            ],
+            listPicUrl: [
+                {required: true, message: '商品列表图不能为空', trigger: 'blur'}
             ]
         },
         q: {
@@ -188,9 +206,39 @@ var vm = new Vue({
             });
         },
         saveOrUpdate: function (event) {
+            //校验参数不为空
+            if (vm.goods.name == null || vm.goods.name == '') {
+                alert("名称不能为空");
+                return;
+            }
+            if (vm.goods.categoryId == null || vm.goods.categoryId == '') {
+                alert("类型不能为空");
+                return;
+            }
+            if (vm.goods.retailPrice == null || vm.goods.retailPrice == '') {
+                alert("价格不能为空");
+                return;
+            }
+            if (vm.goods.goodsNumber == null || vm.goods.goodsNumber == '') {
+                alert("库存不能为空");
+                return;
+            }
+            if (vm.goods.marketPrice == null || vm.goods.marketPrice == '') {
+                alert("市场价不能为空");
+                return;
+            }
+            if (vm.goods.listPicUrl == null || vm.goods.listPicUrl == '') {
+                alert("商品列表图不能为空");
+                return;
+            }
             var url = vm.goods.id == null ? "../goods/save" : "../goods/update";
             vm.goods.goodsDesc = $('#goodsDesc').editable('getHTML');
             vm.goods.goodsImgList = vm.uploadList;
+            //校验商品轮播图
+            if (vm.goods.goodsImgList == null || vm.goods.goodsImgList.length == 0) {
+                alert("商品轮播图不能为空");
+                return;
+            }
 
             Ajax.request({
                 type: "POST",
