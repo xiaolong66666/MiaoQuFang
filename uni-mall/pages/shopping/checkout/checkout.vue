@@ -52,12 +52,21 @@
 					<text class="txt">￥{{freightPrice||0}}</text>
 				</view>
 			</view>
-			<view class="order-item no-border">
+      <view class="order-item">
 				<view class="l">
 					<text class="name">优惠券</text>
 				</view>
 				<view class="r">
 					<text class="txt">-￥{{couponPrice|| 0}}</text>
+				</view>
+			</view>
+
+			<view class="order-item no-border">
+				<view class="l">
+					<text class="name">使用积分</text>
+				</view>
+				<view class="r">
+					<text class="txt">-￥{{pointsPay|| 0}}</text>
 				</view>
 			</view>
 		</view>
@@ -101,6 +110,7 @@
 				couponPrice: 0.00, //优惠券的价格
 				orderTotalPrice: 0.00, //订单总价
 				actualPrice: 0.00, //实际需要支付的总价
+        pointsPay: 0.00, //积分抵扣
 				addressId: 0,
 				couponId: 0,
 				isBuy: false,
@@ -129,6 +139,7 @@
 						that.freightPrice = res.data.freightPrice
 						that.goodsTotalPrice = res.data.goodsTotalPrice
 						that.orderTotalPrice = res.data.orderTotalPrice
+            that.pointsPay = res.data.pointsPay
 						//设置默认收获地址
 						if (that.checkedAddress.id) {
 							let addressId = that.checkedAddress.id;

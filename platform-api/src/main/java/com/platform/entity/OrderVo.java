@@ -78,6 +78,8 @@ public class OrderVo implements Serializable {
     private BigDecimal orderPrice;
     //商品总价
     private BigDecimal goodsPrice;
+    //用户积分
+    private BigDecimal pointsPay;
     //新增时间
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;

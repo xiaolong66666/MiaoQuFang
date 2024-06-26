@@ -166,6 +166,9 @@ public class ApiOrderService {
         orderInfo.setFreightPrice(freightPrice);
         //留言
         orderInfo.setPostscript(postscript);
+        //使用积分
+
+
         //使用的优惠券
         orderInfo.setCouponId(couponId);
         orderInfo.setCouponPrice(couponPrice);

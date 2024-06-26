@@ -41,6 +41,8 @@ public class ApiCartController extends ApiBaseAction {
     private ApiCouponService apiCouponService;
     @Autowired
     private ApiCouponMapper apiCouponMapper;
+    @Autowired
+    private ApiUserService userService;
 
     /**
      * 获取购物车中的数据
@@ -434,7 +436,6 @@ public class ApiCartController extends ApiBaseAction {
             checkedGoodsList.add(cartVo);
         }
 
-
         //获取可用的优惠券信息
         BigDecimal couponPrice = new BigDecimal("0.00");
         if (couponId != null && couponId != 0) {
@@ -444,17 +445,24 @@ public class ApiCartController extends ApiBaseAction {
             }
         }
 
+        //获取用户余额
+        UserVo userVo = userService.queryObject(loginUser.getUserId());
+        BigDecimal points = userVo.getPoints();
+
         //商品价格满88则免邮费，否则需要邮费2.5元
         BigDecimal freightPrice = new BigDecimal(goodsTotalPrice.compareTo(new BigDecimal(88)) > 0 ? 0.00 : 2.5);
 
         //订单的总价
         BigDecimal orderTotalPrice = goodsTotalPrice.add(freightPrice);
 
-        //
-        BigDecimal actualPrice = orderTotalPrice.subtract(couponPrice);  //减去其它支付的金额后，要实际支付的金额
+        //判断实际支付价格是否大于用户余额，如果大于则将实际支付价格设置为0，否则减去用户余额
+        BigDecimal value = points.compareTo(orderTotalPrice) > 0 ? orderTotalPrice : points;
+        BigDecimal actualPrice = orderTotalPrice
+                .subtract(couponPrice)
+                .subtract(value);
 
         resultObj.put("freightPrice", freightPrice);
-
+        resultObj.put("pointsPay", value);
         resultObj.put("couponPrice", couponPrice);
         resultObj.put("checkedGoodsList", checkedGoodsList);
         resultObj.put("goodsTotalPrice", goodsTotalPrice);
