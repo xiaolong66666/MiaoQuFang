@@ -97,7 +97,7 @@ var vm = new Vue({
                 {required: true, message: '名称不能为空', trigger: 'blur'},
             ],
             categoryId: [
-                {required: true}
+                {required: true, message: '类型不能为空'}
             ],
             retailPrice: [
                 {required: true, message: '价格不能为空', trigger: 'blur'}
@@ -110,6 +110,9 @@ var vm = new Vue({
             ],
             listPicUrl: [
                 {required: true, message: '商品列表图不能为空', trigger: 'blur'}
+            ],
+            brandId: [
+                {required: true, message: '品牌不能为空', trigger: 'blur'}
             ]
         },
         q: {
@@ -215,16 +218,20 @@ var vm = new Vue({
                 alert("类型不能为空");
                 return;
             }
-            if (vm.goods.retailPrice == null || vm.goods.retailPrice == '') {
-                alert("价格不能为空");
+            if (vm.goods.brandId == null || vm.goods.brandId == '') {
+                alert("品牌不能为空");
                 return;
             }
             if (vm.goods.goodsNumber == null || vm.goods.goodsNumber == '') {
-                alert("库存不能为空");
+                alert("请填写库存");
+                return;
+            }
+            if (vm.goods.retailPrice == null || vm.goods.retailPrice == '') {
+                alert("请填写实际价格");
                 return;
             }
             if (vm.goods.marketPrice == null || vm.goods.marketPrice == '') {
-                alert("市场价不能为空");
+                alert("请填写市场价");
                 return;
             }
             if (vm.goods.listPicUrl == null || vm.goods.listPicUrl == '') {
