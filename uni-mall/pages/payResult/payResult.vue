@@ -10,8 +10,11 @@
           您的订单
           <span style="text-decoration: underline;color: red">
           {{orderId?orderId:0}}
-          </span>需支付{{pay?pay:0}}元
-          <p>如已支付请联系客服......</p>
+          </span>需支付
+          <span style="text-decoration: underline;color: red">
+          {{pay?pay:0}}
+          </span>元
+          <p>请将付款截屏、订单号发送给客服......</p>
         </view>
 				<view class="btns">
 					<navigator class="btn" url="/pages/ucenter/order/order" open-type="redirect">查看订单</navigator>

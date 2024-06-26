@@ -49,7 +49,7 @@
 					<text class="name">运费</text>
 				</view>
 				<view class="r">
-					<text class="txt">￥{{freightPrice||''}}</text>
+					<text class="txt">￥{{freightPrice||0}}</text>
 				</view>
 			</view>
 			<view class="order-item no-border">
@@ -57,7 +57,7 @@
 					<text class="name">优惠券</text>
 				</view>
 				<view class="r">
-					<text class="txt">-￥{{couponPrice||''}}</text>
+					<text class="txt">-￥{{couponPrice|| 0}}</text>
 				</view>
 			</view>
 		</view>
@@ -163,7 +163,8 @@
 				let that = this
 				if (app.globalData.userCoupon == 'USE_COUPON') {
 					that.couponDesc = app.globalData.courseCouponCode.name
-					that.couponId = app.globalData.courseCouponCode.user_coupon_id
+          console.log(app.globalData.courseCouponCode.userCouponId)
+					that.couponId = app.globalData.courseCouponCode.userCouponId
 				} else if (app.globalData.userCoupon == 'NO_USE_COUPON') {
 					that.couponDesc = "不使用优惠券"
 					that.couponId = ''
@@ -192,17 +193,8 @@
 					if (res.errno === 0) {
 						const orderId = res.data.orderInfo.id;
             uni.redirectTo({
-              url: '/pages/payResult/payResult?orderId=' + orderId
+              url: '/pages/payResult/payResult?orderId=' + orderId+'&pay='+that.actualPrice
             });
-						// util.payOrder(parseInt(orderId)).then(res => {
-						// 	uni.redirectTo({
-						// 		url: '/pages/payResult/payResult?status=1&orderId=' + orderId
-						// 	});
-						// }).catch(res => {
-						// 	uni.redirectTo({
-						// 		url: '/pages/payResult/payResult?status=0&orderId=' + orderId
-						// 	});
-						// });
 					} else {
 						util.toast('下单失败');
 					}

@@ -39,7 +39,7 @@
     <Card v-show="!showList">
         <p slot="title">{{title}}</p>
         <i-form ref="formValidate" :model="user" :rules="ruleValidate" :label-width="80">
-            <Form-item label="会员名称" prop="username">
+            <Form-item label="会员邮箱" prop="username">
                 <i-input v-model="user.username" placeholder="会员名称"/>
             </Form-item>
             <Form-item label="性别" prop="gender">

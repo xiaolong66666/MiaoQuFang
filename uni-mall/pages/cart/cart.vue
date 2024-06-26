@@ -204,6 +204,14 @@
 					number: number,
 					id: id
 				}).then(function(res) {
+          if (res.errno !== 0) {
+            //提示错误信息
+            uni.showToast({
+              title: res.errmsg,
+              icon: 'none',
+              duration: 2000
+            });
+          }
 					that.checkedAllStatus = that.isCheckedAll()
 				});
 

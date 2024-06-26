@@ -60,7 +60,12 @@
 				if (item.enabled == 0) {
 					return
 				}
-				uni.navigateBack()
+        // 获取全局的App实例
+        let app = getApp()
+        // 在全局的App实例上存储优惠券信息
+        app.globalData.userCoupon = 'USE_COUPON'
+        app.globalData.courseCouponCode = item
+        uni.navigateBack()
 			}
 		},
 		onLoad: function(options) {

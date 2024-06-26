@@ -393,11 +393,10 @@ public class ApiCartController extends ApiBaseAction {
      */
     @ApiOperation(value = "订单提交前的检验和填写相关订单信息")
     @PostMapping("checkout")
-    public Object checkout(@LoginUser UserVo loginUser, Integer couponId, @RequestParam(defaultValue = "cart") String type) {
+    public Object checkout(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonParam) {
+        Integer couponId = jsonParam.getInteger("couponId");
+        String type = jsonParam.getString("type");
         Map<String, Object> resultObj = new HashMap<>();
-        //根据收货地址计算运费
-
-        BigDecimal freightPrice = new BigDecimal("0.00");
         //默认收货地址
         Map<String, Object> param = new HashMap<>();
         param.put("userId", loginUser.getUserId());
@@ -444,6 +443,9 @@ public class ApiCartController extends ApiBaseAction {
                 couponPrice = couponVo.getTypeMoney();
             }
         }
+
+        //商品价格满88则免邮费，否则需要邮费2.5元
+        BigDecimal freightPrice = new BigDecimal(goodsTotalPrice.compareTo(new BigDecimal(88)) > 0 ? 0.00 : 2.5);
 
         //订单的总价
         BigDecimal orderTotalPrice = goodsTotalPrice.add(freightPrice);
