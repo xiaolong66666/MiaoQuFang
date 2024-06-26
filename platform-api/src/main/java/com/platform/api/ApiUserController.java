@@ -126,7 +126,8 @@ public class ApiUserController extends ApiBaseAction {
     @PostMapping("points")
     public Object getUserPoints(@LoginUser UserVo loginUser) {
         //如果用户不存在，返回数据0
-        if (null == loginUser) {
+        Long userId = getUserId();
+        if (null == userId) {
             return this.toResponseSuccess(0);
         }
         UserVo userVo = userService.queryObject(loginUser.getUserId());

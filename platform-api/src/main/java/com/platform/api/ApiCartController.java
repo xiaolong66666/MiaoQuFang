@@ -456,13 +456,12 @@ public class ApiCartController extends ApiBaseAction {
         BigDecimal orderTotalPrice = goodsTotalPrice.add(freightPrice);
 
         //判断实际支付价格是否大于用户余额，如果大于则将实际支付价格设置为0，否则减去用户余额
-        BigDecimal value = points.compareTo(orderTotalPrice) > 0 ? orderTotalPrice : points;
         BigDecimal actualPrice = orderTotalPrice
                 .subtract(couponPrice)
-                .subtract(value);
+                .subtract(points.compareTo(orderTotalPrice) > 0 ? orderTotalPrice : points);
 
         resultObj.put("freightPrice", freightPrice);
-        resultObj.put("pointsPay", value);
+        resultObj.put("pointsPay", points.compareTo(orderTotalPrice) > 0 ? orderTotalPrice : points);
         resultObj.put("couponPrice", couponPrice);
         resultObj.put("checkedGoodsList", checkedGoodsList);
         resultObj.put("goodsTotalPrice", goodsTotalPrice);
