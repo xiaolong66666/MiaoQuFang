@@ -130,7 +130,7 @@ public class ApiUserController extends ApiBaseAction {
         if (null == userId) {
             return this.toResponseSuccess(0);
         }
-        UserVo userVo = userService.queryObject(loginUser.getUserId());
+        UserVo userVo = userService.queryObject(userId);
         return this.toResponseSuccess(userVo.getPoints());
     }
 
