@@ -208,7 +208,7 @@ public class ApiIndexController extends ApiBaseAction {
         //
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("isNew", 1);
-        param.put("sidx", "new_sort_order ");
+        param.put("sidx", "new_sort_order");
         param.put("order", "asc ");
         param.put("offset", 0);
         param.put("limit", 4);

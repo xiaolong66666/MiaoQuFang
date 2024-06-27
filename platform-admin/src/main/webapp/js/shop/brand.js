@@ -5,38 +5,46 @@ $(function () {
             label: 'id', name: 'id', index: 'id', key: true, hidden: true
         }, {
             label: '品牌名称', name: 'name', index: 'name', width: 80
-        }, {
-            label: '图片', name: 'listPicUrl', index: 'list_pic_url', width: 80, formatter: function (value) {
-                return transImg(value);
-            }
-        }, {
+        },
+        //     {
+        //     label: '图片', name: 'listPicUrl', index: 'list_pic_url', width: 80, formatter: function (value) {
+        //         return transImg(value);
+        //     }
+        // },
+            {
             label: '描述', name: 'simpleDesc', index: 'simple_desc', width: 80
-        }, {
-            label: '图片', name: 'picUrl', index: 'pic_url', width: 80, formatter: function (value) {
-                return transImg(value);
-            }
-        }, {
-            label: '排序', name: 'sortOrder', index: 'sort_order', width: 80
-        }, {
-            label: '显示', name: 'isShow', index: 'is_show', width: 80, formatter: function (value) {
-                return transIsNot(value)
-            }
-        }, {
+        },
+        //     {
+        //     label: '图片', name: 'picUrl', index: 'pic_url', width: 80, formatter: function (value) {
+        //         return transImg(value);
+        //     }
+        // },
+        //     {
+        //     label: '排序', name: 'sortOrder', index: 'sort_order', width: 80
+        // },
+        //     {
+        //     label: '显示', name: 'isShow', index: 'is_show', width: 80, formatter: function (value) {
+        //         return transIsNot(value)
+        //     }
+        // },
+            {
             label: '展示价格', name: 'floorPrice', index: 'floor_Price', width: 80
         }, {
-            label: 'app显示图片', name: 'appListPicUrl', index: 'app_list_pic_url', width: 80, formatter: function (value) {
+            label: '展示图', name: 'appListPicUrl', index: 'app_list_pic_url', width: 80, formatter: function (value) {
+                return transImg(value);
+            }
+        },
+        //     {
+        //     label: '新品牌', name: 'isNew', index: 'is_new', width: 80, formatter: function (value) {
+        //         return transIsNot(value)
+        //     }
+        // },
+            {
+            label: '主页图片', name: 'newPicUrl', index: 'new_pic_url', width: 80, formatter: function (value) {
                 return transImg(value);
             }
         }, {
-            label: '新品牌', name: 'isNew', index: 'is_new', width: 80, formatter: function (value) {
-                return transIsNot(value)
-            }
-        }, {
-            label: '新品牌图片', name: 'newPicUrl', index: 'new_pic_url', width: 80, formatter: function (value) {
-                return transImg(value);
-            }
-        }, {
-            label: '新品牌排序', name: 'newSortOrder', index: 'new_sort_order', width: 80
+            label: '排序', name: 'newSortOrder', index: 'new_sort_order', width: 80
         }]
     });
 });
@@ -46,7 +54,7 @@ var vm = new Vue({
     data: {
         showList: true,
         title: null,
-        brand: {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 0,newSortOrder:0,simpleDesc:''},
+        brand: {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 1,newSortOrder:0,simpleDesc:''},
         ruleValidate: {
             name: [
                 {required: true, message: '品牌名称不能为空', trigger: 'blur'}
@@ -64,7 +72,7 @@ var vm = new Vue({
         add: function () {
             vm.showList = false;
             vm.title = "新增";
-            vm.brand = {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 0,newSortOrder:0,simpleDesc:''};
+            vm.brand = {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 1,newSortOrder:0,simpleDesc:''};
         },
         update: function (event) {
             var id = getSelectedRow("#jqGrid");

@@ -32,6 +32,7 @@
             *
         </if>
         from nideshop_brand
+        where is_show = 1
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}

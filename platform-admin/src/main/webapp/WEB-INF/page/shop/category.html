@@ -57,7 +57,7 @@
                     </i-option>
                 </i-select>
             </Form-item>
-            <Form-item label="排序" prop="sortOrder">
+            <Form-item label="分类排序" prop="sortOrder">
                 <Input-number :min="0" :step="1" v-model="category.sortOrder" placeholder="排序" style="width: 188px;"/>
             </Form-item>
             <Form-item label="首页展示排序" prop="showIndex">
@@ -97,9 +97,9 @@
                     </Form-item>
                 </i-col>
             </Row>
-            <Form-item label="frontName" prop="frontName">
-                <i-input type="textarea" v-model="category.frontName" placeholder="frontName"/>
-            </Form-item>
+<!--            <Form-item label="frontName" prop="frontName">-->
+<!--                <i-input type="textarea" v-model="category.frontName" placeholder="frontName"/>-->
+<!--            </Form-item>-->
             <Form-item>
                 <i-button type="primary" @click="handleSubmit('formValidate')">提交</i-button>
                 <i-button type="warning" @click="reload" style="margin-left: 8px"/>

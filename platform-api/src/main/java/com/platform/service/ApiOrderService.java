@@ -150,9 +150,8 @@ public class ApiOrderService extends ApiBaseAction {
         UserVo userVo = userService.queryObject(getUserId());
         BigDecimal points = userVo.getPoints();
         //判断实际支付价格是否大于用户余额，如果大于则将实际支付价格设置为0，否则减去用户余额
-        BigDecimal actualPrice = orderTotalPrice
-                .subtract(couponPrice)
-                .subtract(points.compareTo(orderTotalPrice) > 0 ? orderTotalPrice : points);
+        BigDecimal temp = orderTotalPrice.subtract(couponPrice);
+        BigDecimal actualPrice = temp.subtract(points.compareTo(temp) > 0 ? temp : points);
         //
         OrderVo orderInfo = new OrderVo();
         orderInfo.setOrderSn(CommonUtil.generateOrderNumber());
