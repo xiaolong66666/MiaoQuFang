@@ -461,7 +461,7 @@ public class ApiCartController extends ApiBaseAction {
                 .subtract(points.compareTo(orderTotalPrice) > 0 ? orderTotalPrice : points);
 
         resultObj.put("freightPrice", freightPrice);
-        resultObj.put("pointsPay", points.compareTo(orderTotalPrice) > 0 ? orderTotalPrice : points);
+        resultObj.put("pointsPay", points.compareTo(orderTotalPrice.subtract(couponPrice)) > 0 ? orderTotalPrice : points);
         resultObj.put("couponPrice", couponPrice);
         resultObj.put("checkedGoodsList", checkedGoodsList);
         resultObj.put("goodsTotalPrice", goodsTotalPrice);

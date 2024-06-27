@@ -7,10 +7,7 @@ import com.platform.annotation.LoginUser;
 import com.platform.entity.OrderGoodsVo;
 import com.platform.entity.OrderVo;
 import com.platform.entity.UserVo;
-import com.platform.service.ApiKdniaoService;
-import com.platform.service.ApiOrderGoodsService;
-import com.platform.service.ApiOrderService;
-import com.platform.service.WeixinPayService;
+import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
 import com.platform.util.ApiPageUtils;
 import com.platform.utils.Query;
@@ -19,8 +16,10 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +39,7 @@ public class ApiOrderController extends ApiBaseAction {
     @Autowired
     private ApiKdniaoService apiKdniaoService;
     @Autowired
-    private WeixinPayService weixinPayService;
+    private ApiUserService userService;
 
     /**
      *
@@ -188,6 +187,7 @@ public class ApiOrderController extends ApiBaseAction {
      */
     @ApiOperation(value = "取消订单")
     @PostMapping("cancelOrder")
+    @Transactional
     public Object cancelOrder(@RequestBody JSONObject jsonPrams , @LoginUser UserVo loginUser) {
         Integer orderId = jsonPrams.getInteger("orderId");
         OrderVo orderVo = orderService.queryObject(orderId);
@@ -204,20 +204,13 @@ public class ApiOrderController extends ApiBaseAction {
         }
         // 需要退款
         if (orderVo.getPayStatus() == 2) {
-            WxPayRefundResult result = weixinPayService.refund(orderVo.getOrderSn(),
-                    0.01, 0.01);
-            if ("SUCCESS".equals(result.getResultCode())) {
-                if (orderVo.getOrderStatus() == 201) {
-                    orderVo.setOrderStatus(401);
-                } else if (orderVo.getOrderStatus() == 300) {
-                    orderVo.setOrderStatus(402);
-                }
-                orderVo.setPayStatus(4);
-                orderService.update(orderVo);
-                return toResponseSuccess("取消成功");
-            } else {
-                return toResponsObject(400, "取消成失败", "");
+            // 退积分
+            if (orderVo.getPointsPay().compareTo(new BigDecimal(0)) > 0) {
+                UserVo userVo = userService.queryObject(loginUser.getUserId());
+                userVo.setPoints(userVo.getPoints().add(orderVo.getPointsPay()));
+                userService.update(userVo);
             }
+            return this.toResponseSuccess("取消成功");
         } else {
             orderVo.setOrderStatus(101);
             orderService.update(orderVo);

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.platform.util.ApiBaseAction;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ import com.platform.util.CommonUtil;
 
 
 @Service
-public class ApiOrderService {
+public class ApiOrderService extends ApiBaseAction {
     @Autowired
     private ApiOrderMapper orderDao;
     @Autowired
@@ -46,6 +47,8 @@ public class ApiOrderService {
     private ApiOrderGoodsMapper apiOrderGoodsMapper;
     @Autowired
     private ApiProductService productService;
+    @Autowired
+    private ApiUserService userService;
 
     public OrderVo queryObjectByOrderSn(String orderSn) {
         return orderDao.queryObjectByOrderSn(orderSn);
@@ -95,10 +98,6 @@ public class ApiOrderService {
         String postscript = jsonParam.getString("postscript");
 //        AddressVo addressVo = jsonParam.getObject("checkedAddress",AddressVo.class);
         AddressVo addressVo = apiAddressMapper.queryObject(jsonParam.getInteger("addressId"));
-
-
-        Integer freightPrice = 0;
-
         // * 获取要购买的商品
         List<CartVo> checkedGoodsList = new ArrayList<>();
         BigDecimal goodsTotalPrice;
@@ -131,8 +130,8 @@ public class ApiOrderService {
             cartVo.setProductId(goodsVo.getProductId());
             checkedGoodsList.add(cartVo);
         }
-
-
+        //商品价格满88则免邮费，否则需要邮费2.5元
+        BigDecimal freightPrice = new BigDecimal(goodsTotalPrice.compareTo(new BigDecimal(88)) > 0 ? 0.00 : 2.5);
         //获取订单使用的优惠券
         BigDecimal couponPrice = new BigDecimal("0.00");
         CouponVo couponVo = null;
@@ -144,12 +143,14 @@ public class ApiOrderService {
         }
 
         //订单价格计算
-        BigDecimal orderTotalPrice = goodsTotalPrice.add(new BigDecimal(freightPrice)); //订单的总价
-
-        BigDecimal actualPrice = orderTotalPrice.subtract(couponPrice);  //减去其它支付的金额后，要实际支付的金额
-
-        Long currentTime = System.currentTimeMillis() / 1000;
-
+        BigDecimal orderTotalPrice = goodsTotalPrice.add(freightPrice); //订单的总价
+        //获取用户积分
+        UserVo userVo = userService.queryObject(getUserId());
+        BigDecimal points = userVo.getPoints();
+        //判断实际支付价格是否大于用户余额，如果大于则将实际支付价格设置为0，否则减去用户余额
+        BigDecimal actualPrice = orderTotalPrice
+                .subtract(couponPrice)
+                .subtract(points.compareTo(orderTotalPrice) > 0 ? orderTotalPrice : points);
         //
         OrderVo orderInfo = new OrderVo();
         orderInfo.setOrderSn(CommonUtil.generateOrderNumber());
@@ -163,12 +164,15 @@ public class ApiOrderService {
         orderInfo.setDistrict(addressVo.getCountyName());
         orderInfo.setAddress(addressVo.getDetailInfo());
         //
-        orderInfo.setFreightPrice(freightPrice);
+        orderInfo.setFreightPrice(freightPrice.intValue());
         //留言
         orderInfo.setPostscript(postscript);
         //使用积分
-
-
+        BigDecimal usedPoints = points.compareTo(orderTotalPrice.subtract(couponPrice)) > 0 ? orderTotalPrice : points;
+        //减少用户积分
+        userVo.setPoints(userVo.getPoints().subtract(usedPoints));
+        userService.update(userVo);
+        orderInfo.setPointsPay(usedPoints);
         //使用的优惠券
         orderInfo.setCouponId(couponId);
         orderInfo.setCouponPrice(couponPrice);

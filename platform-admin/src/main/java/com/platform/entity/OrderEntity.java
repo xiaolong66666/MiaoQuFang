@@ -71,6 +71,8 @@ public class OrderEntity implements Serializable {
     private BigDecimal orderPrice;
     //商品总价
     private BigDecimal goodsPrice;
+    //积分抵扣金额
+    private BigDecimal pointsPay;
     //新增时间
     private Date addTime;
     //确认时间

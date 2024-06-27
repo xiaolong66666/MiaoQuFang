@@ -213,6 +213,8 @@
 					}
 				});
 			}
+      //刷新积分
+      this.getPoints();
 			that.userInfo = app.globalData.userInfo
 		},
 		onLoad: function() {
