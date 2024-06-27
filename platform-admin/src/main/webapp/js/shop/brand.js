@@ -22,11 +22,11 @@ $(function () {
         //     {
         //     label: '排序', name: 'sortOrder', index: 'sort_order', width: 80
         // },
-        //     {
-        //     label: '显示', name: 'isShow', index: 'is_show', width: 80, formatter: function (value) {
-        //         return transIsNot(value)
-        //     }
-        // },
+            {
+            label: '显示', name: 'isShow', index: 'is_show', width: 80, formatter: function (value) {
+                return transIsNot(value)
+            }
+        },
             {
             label: '展示价格', name: 'floorPrice', index: 'floor_Price', width: 80
         }, {
