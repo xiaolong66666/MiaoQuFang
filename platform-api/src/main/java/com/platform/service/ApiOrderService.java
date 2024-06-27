@@ -1,6 +1,7 @@
 package com.platform.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.platform.util.ApiBaseAction;
+import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -232,6 +234,8 @@ public class ApiOrderService extends ApiBaseAction {
         // 优惠券标记已用
         if (couponVo != null && couponVo.getCouponStatus() == 1) {
             couponVo.setCouponStatus(2);
+            couponVo.setUsedTime(LocalDateTime.now());
+            couponVo.setOrderId(orderInfo.getId());
             apiCouponMapper.updateUserCoupon(couponVo);
         }
 

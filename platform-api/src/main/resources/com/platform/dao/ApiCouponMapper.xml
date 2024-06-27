@@ -22,6 +22,8 @@
         <result property="minTransmitNum" column="min_transmit_num"/>
         <result property="userCouponId" column="user_coupon_id"/>
         <result property="couponStatus" column="coupon_status"/>
+        <result property="usedTime" column="used_time"/>
+        <result property="orderId" column="order_id"/>
     </resultMap>
 
     <select id="queryObject" resultMap="couponMap">
@@ -102,6 +104,8 @@
         update nideshop_user_coupon
         <set>
             <if test="couponStatus != null">`coupon_status` = #{couponStatus}</if>
+            <if test="usedTime != null">`used_time` = #{usedTime}</if>
+            <if test="orderId != null">`order_id` = #{orderId}</if>
         </set>
         where id = #{userCouponId}
     </update>

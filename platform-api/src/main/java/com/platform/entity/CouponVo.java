@@ -2,9 +2,11 @@ package com.platform.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.joda.time.DateTime;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -57,4 +59,8 @@ public class CouponVo implements Serializable {
     private Integer minTransmitNum;
     //优惠券状态 1 可用 2 已用 3 过期
     private Integer couponStatus = 1;
+    //使用时间
+    private LocalDateTime usedTime;
+    //订单id
+    private Integer orderId;
 }
