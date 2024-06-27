@@ -143,7 +143,6 @@ public class ApiOrderService extends ApiBaseAction {
                 couponPrice = couponVo.getTypeMoney();
             }
         }
-
         //订单价格计算
         BigDecimal orderTotalPrice = goodsTotalPrice.add(freightPrice); //订单的总价
         //获取用户积分
@@ -151,7 +150,8 @@ public class ApiOrderService extends ApiBaseAction {
         BigDecimal points = userVo.getPoints();
         //判断实际支付价格是否大于用户余额，如果大于则将实际支付价格设置为0，否则减去用户余额
         BigDecimal temp = orderTotalPrice.subtract(couponPrice);
-        BigDecimal actualPrice = temp.subtract(points.compareTo(temp) > 0 ? temp : points);
+        BigDecimal subtrahend = points.compareTo(temp) > 0 ? temp : points;
+        BigDecimal actualPrice = temp.subtract(subtrahend);
         //
         OrderVo orderInfo = new OrderVo();
         orderInfo.setOrderSn(CommonUtil.generateOrderNumber());
@@ -168,12 +168,10 @@ public class ApiOrderService extends ApiBaseAction {
         orderInfo.setFreightPrice(freightPrice.intValue());
         //留言
         orderInfo.setPostscript(postscript);
-        //使用积分
-        BigDecimal usedPoints = points.compareTo(orderTotalPrice.subtract(couponPrice)) > 0 ? orderTotalPrice : points;
         //减少用户积分
-        userVo.setPoints(userVo.getPoints().subtract(usedPoints));
+        userVo.setPoints(userVo.getPoints().subtract(subtrahend));
         userService.update(userVo);
-        orderInfo.setPointsPay(usedPoints);
+        orderInfo.setPointsPay(subtrahend);
         //使用的优惠券
         orderInfo.setCouponId(couponId);
         orderInfo.setCouponPrice(couponPrice);

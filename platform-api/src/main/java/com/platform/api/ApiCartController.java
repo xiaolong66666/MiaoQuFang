@@ -457,10 +457,10 @@ public class ApiCartController extends ApiBaseAction {
 
         //判断实际支付价格是否大于用户余额，如果大于则将实际支付价格设置为0，否则减去用户余额
         BigDecimal temp = orderTotalPrice.subtract(couponPrice);
-        BigDecimal actualPrice = temp.subtract(points.compareTo(temp) > 0 ? temp : points);
-
+        BigDecimal subtrahend = points.compareTo(temp) > 0 ? temp : points;
+        BigDecimal actualPrice = temp.subtract(subtrahend);
         resultObj.put("freightPrice", freightPrice);
-        resultObj.put("pointsPay", points.compareTo(orderTotalPrice.subtract(couponPrice)) > 0 ? orderTotalPrice : points);
+        resultObj.put("pointsPay", subtrahend);
         resultObj.put("couponPrice", couponPrice);
         resultObj.put("checkedGoodsList", checkedGoodsList);
         resultObj.put("goodsTotalPrice", goodsTotalPrice);
