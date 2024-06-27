@@ -111,18 +111,18 @@ public class OrderServiceImpl implements OrderService {
             orderEntity.setOrderStatus(201);
             //扣减用户积分
             //判断用户积分是否足够
-            if (userVo.getPoints().compareTo(orderEntity.getPointsPay()) < 0) {
-                throw new RRException("用户余额不足！");
-            }
-            userVo.setPoints(userVo.getPoints().subtract(orderEntity.getPointsPay()));
+//            if (userVo.getPoints().compareTo(orderEntity.getPointsPay()) < 0) {
+//                throw new RRException("用户余额不足！");
+//            }
+//            userVo.setPoints(userVo.getPoints().subtract(orderEntity.getPointsPay()));
             return orderDao.update(orderEntity);
         }
         //取消付款
         if (0 == status && 2 == payStatus) {
             orderEntity.setPayStatus(0);
             orderEntity.setOrderStatus(0);
-            //退还用户积分
-            userVo.setPoints(userVo.getPoints().add(orderEntity.getPointsPay()));
+//            //退还用户积分
+//            userVo.setPoints(userVo.getPoints().add(orderEntity.getPointsPay()));
             return orderDao.update(orderEntity);
         }
         return 0;

@@ -206,7 +206,7 @@ public class ApiOrderController extends ApiBaseAction {
         if (orderVo.getPayStatus() == 2) {
             // 退积分
             if (orderVo.getPointsPay().compareTo(new BigDecimal(0)) > 0) {
-                UserVo userVo = userService.queryObject(loginUser.getUserId());
+                UserVo userVo = userService.queryObject(getUserId());
                 userVo.setPoints(userVo.getPoints().add(orderVo.getPointsPay()));
                 userService.update(userVo);
             }

@@ -231,7 +231,7 @@ public class ApiOrderService extends ApiBaseAction {
         // 优惠券标记已用
         if (couponVo != null && couponVo.getCouponStatus() == 1) {
             couponVo.setCouponStatus(2);
-            couponVo.setUsedTime(LocalDateTime.now());
+            couponVo.setUsedTime(new Date());
             couponVo.setOrderId(orderInfo.getId());
             apiCouponMapper.updateUserCoupon(couponVo);
         }
