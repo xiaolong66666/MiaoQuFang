@@ -174,7 +174,6 @@
 				let that = this
 				if (app.globalData.userCoupon == 'USE_COUPON') {
 					that.couponDesc = app.globalData.courseCouponCode.name
-          console.log(app.globalData.courseCouponCode.userCouponId)
 					that.couponId = app.globalData.courseCouponCode.userCouponId
 				} else if (app.globalData.userCoupon == 'NO_USE_COUPON') {
 					that.couponDesc = "不使用优惠券"

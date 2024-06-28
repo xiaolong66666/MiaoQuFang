@@ -109,6 +109,11 @@
         </set>
         where id = #{userCouponId}
     </update>
+    <update id="returnCoupon">
+        update nideshop_user_coupon
+        set coupon_status = 1, used_time = null, order_id = null
+        where id = #{userCouponId}
+    </update>
 
     <delete id="delete">
 		delete from nideshop_coupon where id = #{value}

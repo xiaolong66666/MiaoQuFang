@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.binarywang.wxpay.bean.result.WxPayRefundResult;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
+import com.platform.dao.ApiCouponMapper;
+import com.platform.entity.CouponVo;
 import com.platform.entity.OrderGoodsVo;
 import com.platform.entity.OrderVo;
 import com.platform.entity.UserVo;
@@ -40,7 +42,8 @@ public class ApiOrderController extends ApiBaseAction {
     private ApiKdniaoService apiKdniaoService;
     @Autowired
     private ApiUserService userService;
-
+    @Autowired
+    private ApiCouponMapper apiCouponMapper;
     /**
      *
      */
@@ -203,21 +206,19 @@ public class ApiOrderController extends ApiBaseAction {
             return toResponseFail("已收货，不能取消");
         }
         // 需要退款
-        if (orderVo.getPayStatus() == 2) {
-            // 退积分
-            if (orderVo.getPointsPay().compareTo(new BigDecimal(0)) > 0) {
-                UserVo userVo = userService.queryObject(getUserId());
-                userVo.setPoints(userVo.getPoints().add(orderVo.getPointsPay()));
-                userService.update(userVo);
-            }
-            return this.toResponseSuccess("取消成功");
+        // 退积分
+        if (orderVo.getPointsPay().compareTo(new BigDecimal(0)) > 0) {
+            UserVo userVo = userService.queryObject(getUserId());
+            userVo.setPoints(userVo.getPoints().add(orderVo.getPointsPay()));
+            userService.update(userVo);
         }
+
         orderVo.setOrderStatus(101);
         orderService.update(orderVo);
         //退回优惠券
         if (orderVo.getCouponId() != null) {
             //TODO 退回优惠券
-
+            apiCouponMapper.returnCoupon(orderVo.getCouponId());
         }
         return this.toResponseSuccess("取消成功");
     }
