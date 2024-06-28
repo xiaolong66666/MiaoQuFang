@@ -115,7 +115,8 @@
 			`coupon_price`,
 			`callback_status`,
 			`full_cut_price`,
-			`order_type`
+			`order_type`,
+		    `points_pay`
 		)
 		values
 		(
@@ -151,7 +152,8 @@
 			#{couponPrice},
 			#{callbackStatus},
 			#{fullCutPrice},
-			#{orderType}
+			#{orderType},
+		    #{pointsPay}
 		)
 	</insert>
 
