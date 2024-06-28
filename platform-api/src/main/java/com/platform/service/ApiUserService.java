@@ -93,7 +93,7 @@ public class ApiUserService extends ApiBaseAction {
             userVo.setRegisterIp(this.getClientIp());
             userVo.setLastLoginIp(this.getClientIp());
             userVo.setLastLoginTime(new Date());
-            userVo.setAvatar("http://112.74.53.128:8080/h5/static/images/logo.png");
+            userVo.setAvatar("http://miaoqufang.cn/images/logo.png");
             userVo.setNickname(name);
             save(userVo);
         }else {
