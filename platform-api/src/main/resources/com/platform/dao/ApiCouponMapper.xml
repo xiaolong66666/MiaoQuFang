@@ -103,8 +103,8 @@
     <update id="updateUserCoupon" parameterType="com.platform.entity.CouponVo">
         update nideshop_user_coupon
         <set>
-            <if test="couponStatus != null">`coupon_status` = #{couponStatus}</if>
-            <if test="usedTime != null">`used_time` = #{usedTime}</if>
+            <if test="couponStatus != null">`coupon_status` = #{couponStatus},</if>
+            <if test="usedTime != null">`used_time` = #{usedTime},</if>
             <if test="orderId != null">`order_id` = #{orderId}</if>
         </set>
         where id = #{userCouponId}

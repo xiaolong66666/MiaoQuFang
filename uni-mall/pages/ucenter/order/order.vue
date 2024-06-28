@@ -17,7 +17,7 @@
 					<view class="status"></view>
 				</view>
 				<view class="b">
-					<view class="l">实付：￥{{item.actualPrice||''}}</view>
+					<view class="l">实付：￥{{item.actualPrice|| 0 }}</view>
 					<view class="r">
 						<button class="btn" :data-order-index="index" @click.stop.prevent="payOrder" v-if="item.handleOption.pay">立即支付</button>
 					</view>
@@ -60,7 +60,7 @@
 				let orderIndex = event.currentTarget.dataset.orderIndex;
 				let order = that.orderList[orderIndex];
         uni.redirectTo({
-          url: '/pages/payResult/payResult?orderId=' + order.id
+          url: '/pages/payResult/payResult?orderSn=' + order.orderSn + '&pay=' + order.actualPrice
         });
 				// util.payOrder(parseInt(order.id)).then(res => {
 				// 	that.getOrderList();
@@ -82,6 +82,7 @@
       this.page = 1;
       this.orderList = [];
       this.getOrderList();
+      uni.stopPullDownRefresh();
     }
 	}
 </script>

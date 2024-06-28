@@ -211,11 +211,15 @@ public class ApiOrderController extends ApiBaseAction {
                 userService.update(userVo);
             }
             return this.toResponseSuccess("取消成功");
-        } else {
-            orderVo.setOrderStatus(101);
-            orderService.update(orderVo);
-            return this.toResponseSuccess("取消成功");
         }
+        orderVo.setOrderStatus(101);
+        orderService.update(orderVo);
+        //退回优惠券
+        if (orderVo.getCouponId() != null) {
+            //TODO 退回优惠券
+
+        }
+        return this.toResponseSuccess("取消成功");
     }
 
     /**

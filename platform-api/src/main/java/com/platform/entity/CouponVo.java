@@ -60,6 +60,7 @@ public class CouponVo implements Serializable {
     //优惠券状态 1 可用 2 已用 3 过期
     private Integer couponStatus = 1;
     //使用时间
+    @JsonFormat(pattern = "yyyy.MM.dd")
     private Date usedTime;
     //订单id
     private Integer orderId;

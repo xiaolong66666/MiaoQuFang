@@ -40,6 +40,7 @@
         <result property="couponPrice" column="coupon_price"/>
         <result property="callbackStatus" column="callback_status"/>
         <result property="fullCutPrice" column="full_cut_price"/>
+        <result property="pointsPay" column="points_pay"/>
     </resultMap>
 
     <select id="queryObject" resultMap="orderMap">
@@ -189,6 +190,7 @@
             <if test="couponPrice != null">`coupon_price` = #{couponPrice},</if>
             <if test="callbackStatus != null">`callback_status` = #{callbackStatus}</if>
             <if test="fullCutPrice != null">`full_cut_price` = #{fullCutPrice},</if>
+            <if test="pointsPay">`points_pay` = #{pointsPay},</if>
         </set>
         where id = #{id}
     </update>

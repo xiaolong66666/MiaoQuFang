@@ -107,6 +107,7 @@
             <if test="registerIp != null">`register_ip` = #{registerIp},</if>
             <if test="avatar != null">`avatar` = #{avatar},</if>
             <if test="weixinOpenid != null">`weixin_openid` = #{weixinOpenid}</if>
+            <if test="points != null">`points` = #{points}, </if>
         </set>
         where id = #{userId}
     </update>

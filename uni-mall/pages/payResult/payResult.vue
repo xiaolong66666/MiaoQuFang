@@ -9,11 +9,11 @@
 				<view class="msg">
           您的订单
           <span style="text-decoration: underline;color: red">
-          {{orderId?orderId:0}}
-          </span>需支付
-          <span style="text-decoration: underline;color: red">
-          {{pay?pay:0}}
-          </span>元
+          {{orderSn?orderSn:0}}
+          </span>
+          <p>
+            需支付<span style="text-decoration: underline;color: red">{{pay?pay:0}}</span>元
+          </p>
           <p>请将付款截屏、订单号发送给客服......</p>
         </view>
 				<view class="btns">
@@ -21,27 +21,6 @@
           <a href="https://work.weixin.qq.com/kfid/kfce9524b2cf9333141" class="btn">联系客服</a>
 				</view>
 			</view>
-<!--			<view class="success" v-if="status == true">-->
-<!--				<view class="msg">付款成功</view>-->
-<!--				<view class="btns">-->
-<!--					<navigator class="btn" url="/pages/ucenter/order/order" open-type="redirect">查看订单</navigator>-->
-<!--					<navigator class="btn" url="/pages/index/index" open-type="switchTab">继续逛</navigator>-->
-<!--				</view>-->
-<!--			</view>-->
-<!--			<view class="error" v-if="status != true">-->
-<!--				<view class="msg">付款失败</view>-->
-<!--				<view class="tips">-->
-<!--					<view class="p">请在-->
-<!--						<text class="time">1小时</text>-->
-<!--						内完成付款-->
-<!--					</view>-->
-<!--					<view class="p">否则订单将会被系统取消</view>-->
-<!--				</view>-->
-<!--				<view class="btns">-->
-<!--					<navigator class="btn" url="/pages/ucenter/order/order" open-type="redirect">查看订单</navigator>-->
-<!--					<view class="btn" @tap='payOrder'>重新付款</view>-->
-<!--				</view>-->
-<!--			</view>-->
 		</view>
 	</view>
 </template>
@@ -85,7 +64,7 @@
 		},
 		onLoad: function(options) {
 			// 页面初始化 options为页面跳转所带来的参数
-			this.orderId = options.orderId
+			this.orderSn = options.orderSn
 			this.pay = options.pay
 		},
     onPullDownRefresh() {

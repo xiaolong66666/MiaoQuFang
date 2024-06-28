@@ -202,9 +202,9 @@
 					type: that.buyType
 				}, 'POST', 'application/json').then(res => {
 					if (res.errno === 0) {
-						const orderId = res.data.orderInfo.id;
+						const orderSn = res.data.orderInfo.orderSn;
             uni.redirectTo({
-              url: '/pages/payResult/payResult?orderId=' + orderId+'&pay='+that.actualPrice
+              url: '/pages/payResult/payResult?orderSn=' + orderSn+'&pay='+that.actualPrice
             });
 					} else {
 						util.toast('下单失败');
