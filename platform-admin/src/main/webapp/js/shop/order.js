@@ -92,6 +92,7 @@ $(function () {
             },
             {label: '快递公司', name: 'shippingName', index: 'shipping_name', width: 80},
             {label: '快递单号', name: 'shippingNo', index: 'shipping_No', width: 80},
+            {label: '积分抵扣金额', name: 'pointsPay', index: 'points_pay', width: 80},
             {label: '实际支付金额', name: 'actualPrice', index: 'actual_price', width: 80},
             {label: '订单总价', name: 'orderPrice', index: 'order_price', width: 60},
             {label: '商品总价', name: 'goodsPrice', index: 'goods_price', width: 60},
