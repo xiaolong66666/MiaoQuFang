@@ -26,8 +26,11 @@ var vm = new Vue({
         title: null,
         goodsSpecification: {},
         ruleValidate: {
-            name: [
-                {required: true, message: '名称不能为空', trigger: 'blur'}
+            goodsId: [
+                {required: true, message: '商品不能为空', trigger: 'blur'}
+            ],
+            value: [
+                {required: true, message: '规格值不能为空', trigger: 'blur'}
             ]
         },
         q: {
@@ -76,6 +79,15 @@ var vm = new Vue({
             vm.getInfo(id)
         },
         saveOrUpdate: function (event) {
+            //校验必填参数是否为空
+            if (vm.goodsSpecification.goodsId == null) {
+                alert("商品不能为空");
+                return;
+            }
+            if (vm.goodsSpecification.value == null) {
+                alert("规格值不能为空");
+                return;
+            }
             var url = vm.goodsSpecification.id == null ? "../goodsspecification/save" : "../goodsspecification/update";
 
             Ajax.request({

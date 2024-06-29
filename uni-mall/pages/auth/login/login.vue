@@ -27,6 +27,12 @@
       </button>
       <button
           class="to-idx-btn"
+          @tap="guestLogin"
+      >
+        游客登录(无需邮箱)
+      </button>
+      <button
+          class="to-idx-btn"
           @tap="toIndex"
       >
         回到首页
@@ -68,6 +74,31 @@
           // this.formData.mail = '';
           return false;
         }
+      },
+      guestLogin: function() {
+        //登录远程服务器
+        util.request(api.Login,
+          {
+            mail: "6666666666@mqf.com",
+          }, 'POST', 'application/json').then(res => {
+          if (res.code === 0) {
+            //存储用户信息
+            uni.setStorageSync('userInfo', res.userInfo);
+            uni.setStorageSync('token', res.token);
+            uni.setStorageSync('userId', res.userId);
+            //跳转至首页
+            uni.switchTab({
+              url: '/pages/index/index'
+            });
+          } else {
+            // util.showErrorToast(res.errmsg)
+            uni.showModal({
+              title: '提示',
+              content: res.data.msg,
+              showCancel: false
+            });
+          }
+        });
       },
 			login: function() {
         if (!this.formData.mail) {

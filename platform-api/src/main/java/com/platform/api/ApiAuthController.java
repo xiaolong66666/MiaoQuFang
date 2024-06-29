@@ -12,6 +12,7 @@ import com.alipay.api.response.AlipaySystemOauthTokenResponse;
 import com.alipay.api.response.AlipayUserInfoShareResponse;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.FullUserInfo;
+import com.platform.entity.TokenEntity;
 import com.platform.entity.UserInfo;
 import com.platform.entity.UserVo;
 import com.platform.service.ApiUserService;
@@ -58,6 +59,25 @@ public class ApiAuthController extends ApiBaseAction {
     @ApiOperation(value = "登录接口")
     public R login(@RequestBody JSONObject jsonParam) {
         AbstractAssert.isBlank(jsonParam.getString("mail"), "邮箱不能为空");
+        //判断是否是游客账号
+        String mail = jsonParam.getString("mail");
+        if (mail.equals("6666666666@mqf.com")) {
+            UserVo userVo = userService.queryByUsername(mail);
+            if (userVo != null) {
+                TokenEntity tokenEntity = tokenService.queryByUserId(userVo.getUserId());
+                if (tokenEntity != null) {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("token", tokenEntity.getToken());
+                    map.put("userInfo", userVo);
+                    map.put("userId", userVo.getUserId());
+                    return R.ok(map);
+                }
+                Map<String, Object> map = tokenService.createToken(userVo.getUserId());
+                map.put("userInfo", userVo);
+                map.put("userId", userVo.getUserId());
+                return R.ok(map);
+            }
+        }
         AbstractAssert.isBlank(jsonParam.getString("checkCode"), "验证码不能为空");
         //用户登录
         UserVo userVo = userService.login((String) jsonParam.get("mail"), (String) jsonParam.get("checkCode"));

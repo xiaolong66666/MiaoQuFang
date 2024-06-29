@@ -8,7 +8,7 @@ $(function () {
         url: url,
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
-            {label: '会员', name: 'userName', index: 'user_id', width: 80},
+            {label: '会员', name: 'username', index: 'user_id', width: 80},
             {label: '优惠券', name: 'couponName', index: 'coupon_id', width: 80},
             {label: '优惠券序号', name: 'couponNumber', index: 'coupon_number', width: 80},
             {
@@ -21,7 +21,7 @@ $(function () {
                     return transDate(value);
                 }
             },
-            {label: '订单Id', name: 'orderId', index: 'order_id', width: 80}]
+            {label: '订单号', name: 'orderSn', index: 'order_sn', width: 80}]
     });
 });
 

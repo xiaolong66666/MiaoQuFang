@@ -31,5 +31,9 @@ public class UserCouponEntity implements Serializable {
     //领取时间
     private Date addTime;
     //订单Id
-    private Integer orderId;
+    private String orderSn;
+    //用户名
+    private String username;
+    //优惠券名
+    private String couponName;
 }

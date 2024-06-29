@@ -89,7 +89,7 @@ var vm = new Vue({
             isHot: 0,
             categoryName: '',
             retailPrice: 0,
-            goodsNumber: 0,
+            goodsNumber: 999999,
             marketPrice: 0,
         },
         ruleValidate: {
@@ -139,7 +139,8 @@ var vm = new Vue({
                 isAppExclusive: 0,
                 isLimited: 0,
                 isHot: 0,
-                categoryName: ''
+                categoryName: '',
+                goodsNumber: 999999
             };
             $('#goodsDesc').editable('setHTML', '');
             vm.getCategory();

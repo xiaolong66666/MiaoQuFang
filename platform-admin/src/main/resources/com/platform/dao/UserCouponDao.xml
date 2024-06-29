@@ -34,12 +34,13 @@
         nideshop_user_coupon.user_id,
         nideshop_user_coupon.used_time,
         nideshop_user_coupon.add_time,
-        nideshop_user_coupon.order_id,
-        nideshop_user.username user_name,
-        nideshop_coupon.name coupon_name
+        nideshop_order.order_sn orderSn,
+        nideshop_user.username username,
+        nideshop_coupon.name couponName
         from nideshop_user_coupon
         LEFT JOIN nideshop_user ON nideshop_user_coupon.user_id = nideshop_user.id
         LEFT JOIN nideshop_coupon ON nideshop_user_coupon.coupon_id = nideshop_coupon.id
+        LEFT JOIN nideshop_order ON nideshop_user_coupon.order_id = nideshop_order.id
         WHERE 1=1
         <if test="userName != null and userName.trim() != ''">
             AND nideshop_user.username LIKE concat('%',#{userName},'%')
