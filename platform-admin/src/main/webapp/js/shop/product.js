@@ -24,21 +24,21 @@ let vm = new Vue({
         title: null,
         product: {},
         ruleValidate: {
-            goodsId: [
-                {required: true, message: '商品不能为空', trigger: 'blur'}
-            ],
-            specificationValue: [
-                {required: true, message: '商品规格不能为空', trigger: 'blur'}
-            ],
-            goodsNumber: [
-                {required: true, message: '商品库存不能为空', trigger: 'blur'}
-            ],
-            retailPrice: [
-                {required: true, message: '零售价格不能为空', trigger: 'blur'}
-            ],
-            marketPrice: [
-                {required: true, message: '市场价格不能为空', trigger: 'blur'}
-            ]
+            // goodsId: [
+            //     {required: true, message: '商品不能为空', trigger: 'blur'}
+            // ],
+            // goodsSpecificationIds: [
+            //     {required: true, message: '商品规格不能为空', trigger: 'blur'}
+            // ],
+            // goodsNumber: [
+            //     {required: true, message: '商品库存不能为空', trigger: 'blur'}
+            // ],
+            // retailPrice: [
+            //     {required: true, message: '零售价格不能为空', trigger: 'blur'}
+            // ],
+            // marketPrice: [
+            //     {required: true, message: '市场价格不能为空', trigger: 'blur'}
+            // ]
         },
         q: {
             goodsName: ''
@@ -97,27 +97,6 @@ let vm = new Vue({
             });
         },
         saveOrUpdate: function (event) {
-            //校验必填参数是否为空
-            if (vm.product.goodsId == null) {
-                alert("商品不能为空");
-                return;
-            }
-            if (vm.product.specificationValue == null) {
-                alert("商品规格不能为空");
-                return;
-            }
-            if (vm.product.goodsNumber == null) {
-                alert("请填写库存");
-                return;
-            }
-            if (vm.product.retailPrice == null) {
-                alert("请填写零售价格");
-                return;
-            }
-            if (vm.product.marketPrice == null) {
-                alert("请填写市场价格");
-                return;
-            }
             let url = vm.product.id == null ? "../product/save" : "../product/update";
             Ajax.request({
                 type: "POST",
