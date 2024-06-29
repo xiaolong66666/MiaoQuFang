@@ -169,7 +169,7 @@
 								if (res.errno === 0) {
 									uni.showModal({
 										title: '提示',
-										content: res.data,
+										content: res.errmsg,
 										showCancel: false,
 										confirmText: '继续',
 										success: function(res) {
