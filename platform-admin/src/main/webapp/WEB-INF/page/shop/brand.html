@@ -29,65 +29,15 @@
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
     </div>
-
     <Card v-show="!showList">
         <p slot="title">{{title}}</p>
         <i-form ref="formValidate" :model="brand" :rules="ruleValidate" :label-width="100">
             <Form-item label="品牌名称" prop="name">
                 <i-input v-model="brand.name" placeholder="品牌名称"/>
             </Form-item>
-<!--            <Row>-->
-<!--                <i-col span="16">-->
-<!--                    <Form-item label="图片" prop="imageUrl">-->
-<!--                        <i-input v-model="brand.listPicUrl" placeholder="图片" readonly/>-->
-<!--                    </Form-item>-->
-<!--                </i-col>-->
-<!--                <i-col span="3">-->
-<!--                    <Form-item :label-width="1">-->
-<!--                        <Upload style="width: 300px;" action="../sys/oss/upload" :format="['jpg','jpeg','png']"-->
-<!--                                max-size="2048"-->
-<!--                                :on-success="handleSuccessListPicUrl" :on-format-error="handleFormatError"-->
-<!--                                :show-upload-list="false"-->
-<!--                                :on-exceeded-size="handleMaxSize">-->
-<!--                            <i-button icon="ios-cloud-upload-outline">上传图片</i-button>-->
-<!--                        </Upload>-->
-<!--                    </Form-item>-->
-<!--                </i-col>-->
-<!--                <i-col span="3">-->
-<!--                    <Form-item :label-width="1">-->
-<!--                        <i-button icon="eye" @click="eyeImageListPicUrl">预览图片</i-button>-->
-<!--                    </Form-item>-->
-<!--                </i-col>-->
-<!--            </Row>-->
             <Form-item label="描述" prop="simpleDesc">
                 <i-input type="textarea" v-model="brand.simpleDesc" placeholder="描述"/>
             </Form-item>
-<!--            <Row>-->
-<!--                <i-col span="16">-->
-<!--                    <Form-item label="图片" prop="picUrl">-->
-<!--                        <i-input v-model="brand.picUrl" placeholder="图片" readonly/>-->
-<!--                    </Form-item>-->
-<!--                </i-col>-->
-<!--                <i-col span="3">-->
-<!--                    <Form-item :label-width="1">-->
-<!--                        <Upload style="width: 300px;" action="../sys/oss/upload" :format="['jpg','jpeg','png']"-->
-<!--                                max-size="2048"-->
-<!--                                :on-success="handleSuccessPicUrl" :on-format-error="handleFormatError"-->
-<!--                                :show-upload-list="false"-->
-<!--                                :on-exceeded-size="handleMaxSize">-->
-<!--                            <i-button icon="ios-cloud-upload-outline">上传图片</i-button>-->
-<!--                        </Upload>-->
-<!--                    </Form-item>-->
-<!--                </i-col>-->
-<!--                <i-col span="3">-->
-<!--                    <Form-item :label-width="1">-->
-<!--                        <i-button icon="eye" @click="eyeImagePicUrl">预览图片</i-button>-->
-<!--                    </Form-item>-->
-<!--                </i-col>-->
-<!--            </Row>-->
-<!--            <Form-item label="排序" prop="sortOrder">-->
-<!--                <Input-number :min="0" :step="1" v-model="brand.sortOrder" placeholder="排序" style="width: 188px;"/>-->
-<!--            </Form-item>-->
             <Form-item label="显示" prop="isShow">
                 <Radio-group v-model="brand.isShow">
                     <Radio label="1">
@@ -104,7 +54,7 @@
             <Row>
                 <i-col span="16">
                     <Form-item label="展示图" prop="appListPicUrl">
-                        <i-input v-model="brand.appListPicUrl" placeholder="app显示图片" readonly/>
+                        <i-input v-model="brand.appListPicUrl" placeholder="展示图" readonly/>
                     </Form-item>
                 </i-col>
                 <i-col span="3">
@@ -124,20 +74,10 @@
                     </Form-item>
                 </i-col>
             </Row>
-<!--            <Form-item label="新品牌" prop="isNew">-->
-<!--                <Radio-group v-model="brand.isNew">-->
-<!--                    <Radio label="1">-->
-<!--                        <span>是</span>-->
-<!--                    </Radio>-->
-<!--                    <Radio label="0">-->
-<!--                        <span>否</span>-->
-<!--                    </Radio>-->
-<!--                </Radio-group>-->
-<!--            </Form-item>-->
             <Row>
                 <i-col span="16">
                     <Form-item label="主页图片" prop="newPicUrl">
-                        <i-input v-model="brand.newPicUrl" placeholder="新品牌图片" readonly/>
+                        <i-input v-model="brand.newPicUrl" placeholder="主页图片" readonly/>
                     </Form-item>
                 </i-col>
                 <i-col span="3">
