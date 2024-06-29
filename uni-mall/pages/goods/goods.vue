@@ -238,7 +238,6 @@
 				let specValueId = event.currentTarget.dataset.valueId;
 
 				//判断是否可以点击
-
 				let _specificationList = this.specificationList;
 				for (let i = 0; i < _specificationList.length; i++) {
 					if (_specificationList[i].specificationId == specNameId) {
@@ -249,11 +248,10 @@
 									_specificationList[i].valueList[j].checked = false;
 								} else {
 									_specificationList[i].valueList[j].checked = true;
-                  //更换规格图片
-                  this.picUrl = _specificationList[i].valueList[j].picUrl
+                    //更换规格图片
+                    this.picUrl = _specificationList[i].valueList[j].picUrl == null ? '' : _specificationList[i].valueList[j].picUrl
 								}
 							} else {
-                console.log("该规格未上架")
 								_specificationList[i].valueList[j].checked = false;
 							}
 						}
@@ -310,10 +308,12 @@
 			changeSpecInfo: function() {
 				let checkedNameValue = this.getCheckedSpecValue();
         let selectedKey = this.getCheckedSpecKey();
+        console.log("selectedKey", selectedKey)
         //判断productList是否包含selectedKey
         let selectedProduct = this.productList.filter(function(v) {
           return v.goodsSpecificationIds == selectedKey;
         });
+        console.log("selectedProduct", selectedProduct)
         this.selectedProduct.retailPrice = selectedProduct[0].retailPrice ? selectedProduct[0].retailPrice : 0;
 
 				//设置选择的信息
