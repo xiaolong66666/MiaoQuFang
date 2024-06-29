@@ -132,8 +132,8 @@ public class ApiOrderService extends ApiBaseAction {
             cartVo.setProductId(goodsVo.getProductId());
             checkedGoodsList.add(cartVo);
         }
-        //商品价格满88则免邮费，否则需要邮费2.5元
-        BigDecimal freightPrice = new BigDecimal(goodsTotalPrice.compareTo(new BigDecimal(88)) > 0 ? 0.00 : 2.5);
+        //商品价格满88则免邮费，否则需要邮费3元
+        BigDecimal freightPrice = new BigDecimal(goodsTotalPrice.compareTo(new BigDecimal(88)) > 0 ? 0.00 : 3);
         //获取订单使用的优惠券
         BigDecimal couponPrice = new BigDecimal("0.00");
         CouponVo couponVo = null;

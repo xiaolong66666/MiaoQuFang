@@ -449,8 +449,8 @@ public class ApiCartController extends ApiBaseAction {
         UserVo userVo = userService.queryObject(loginUser.getUserId());
         BigDecimal points = userVo.getPoints();
 
-        //商品价格满88则免邮费，否则需要邮费2.5元
-        BigDecimal freightPrice = new BigDecimal(goodsTotalPrice.compareTo(new BigDecimal(88)) > 0 ? 0.00 : 2.5);
+        //商品价格满88则免邮费，否则需要邮费3元
+        BigDecimal freightPrice = new BigDecimal(goodsTotalPrice.compareTo(new BigDecimal(88)) > 0 ? 0.00 : 3);
 
         //订单的总价
         BigDecimal orderTotalPrice = goodsTotalPrice.add(freightPrice);
