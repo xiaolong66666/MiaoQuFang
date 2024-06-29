@@ -26,8 +26,8 @@ var vm = new Vue({
         title: null,
         goodsSpecification: {},
         ruleValidate: {
-            goodsName: [
-                {required: true, message: '商品不能为空', trigger: 'blur'}
+            goodsId: [
+                {required: true, message: '商品不能为空'}
             ],
             value: [
                 {required: true, message: '规格值不能为空', trigger: 'blur'}
@@ -80,7 +80,7 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             //校验必填参数是否为空
-            if (vm.goodsSpecification.goodsNam == null) {
+            if (vm.goodsSpecification.goodsId == null) {
                 alert("商品不能为空");
                 return;
             }
