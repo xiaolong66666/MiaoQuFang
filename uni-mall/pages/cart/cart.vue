@@ -26,9 +26,11 @@
 								<view class="info">
 									<view class="t">
 										<text class="name">{{item.goodsName}}</text>
-										<text class="num">x{{item.number}}</text>
 									</view>
-									<view class="attr">{{ isEditCart ? '已选择:' : ''}}{{item.goodsSpecifitionNameValue||''}}</view>
+									<view class="attr">
+                    {{ isEditCart ? '已选择:' : ''}}{{item.goodsSpecifitionNameValue||''}}
+                    <text class="num">x{{item.number}}</text>
+                  </view>
 									<view class="b">
 										<text class="price">￥{{item.retailPrice}}</text>
 										<view class="selnum">
