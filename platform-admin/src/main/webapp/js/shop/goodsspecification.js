@@ -80,7 +80,7 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             //校验必填参数是否为空
-            if (vm.goodsSpecification.goodsId == null) {
+            if (vm.goodsSpecification.goodsNam == null) {
                 alert("商品不能为空");
                 return;
             }
