@@ -58,6 +58,18 @@ var vm = new Vue({
         ruleValidate: {
             name: [
                 {required: true, message: '品牌名称不能为空', trigger: 'blur'}
+            ],
+            isShow: [
+                {required: true, message: '显示不能为空', trigger: 'blur'}
+            ],
+            floorPrice: [
+                {required: true, message: '展示价格不能为空', trigger: 'blur'}
+            ],
+            appListPicUrl: [
+                {required: true, message: '展示图不能为空', trigger: 'blur'}
+            ],
+            newPicUrl: [
+                {required: true, message: '主页图片不能为空', trigger: 'blur'}
             ]
 
         },
@@ -85,6 +97,27 @@ var vm = new Vue({
             vm.getInfo(id)
         },
         saveOrUpdate: function (event) {
+            //校验必填字段非空
+            if (vm.brand.name == null || vm.brand.name == '') {
+                alert('品牌名称不能为空');
+                return;
+            }
+            if (vm.brand.isShow == null || vm.brand.isShow == '') {
+                alert('显示不能为空');
+                return;
+            }
+            if (vm.brand.floorPrice == null || vm.brand.floorPrice == '') {
+                alert('展示价格不能为空');
+                return;
+            }
+            if (vm.brand.appListPicUrl == null || vm.brand.appListPicUrl == '') {
+                alert('展示图不能为空');
+                return;
+            }
+            if (vm.brand.newPicUrl == null || vm.brand.newPicUrl == '') {
+                alert('主页图片不能为空');
+                return;
+            }
             var url = vm.brand.id == null ? "../brand/save" : "../brand/update";
 
             Ajax.request({
