@@ -35,6 +35,8 @@ public class AdEntity implements Serializable {
     private Date endTime;
     //状态
     private Integer enabled;
+    //排序
+    private Integer sort;
 
     /**
      * 翻译字段用

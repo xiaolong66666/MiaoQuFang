@@ -38,27 +38,27 @@
                     <i-option v-for="adPosition in adPositions" :value="adPosition.id" :key="adPosition.id">{{adPosition.name}}</i-option>
                 </i-select>
             </Form-item>
-            <Form-item label="形式" prop="mediaType">
-                <Radio-group v-model="ad.mediaType">
-                    <Radio label="0">
-                        <span>0</span>
-                    </Radio>
-                    <Radio label="1">
-                        <span>1</span>
-                    </Radio>
-                    <Radio label="2">
-                        <span>2</span>
-                    </Radio>
-                    <Radio label="3">
-                        <span>3</span>
-                    </Radio>
-                </Radio-group>
-            </Form-item>
+<!--            <Form-item label="形式" prop="mediaType">-->
+<!--                <Radio-group v-model="ad.mediaType">-->
+<!--                    <Radio label="0">-->
+<!--                        <span>0</span>-->
+<!--                    </Radio>-->
+<!--                    <Radio label="1">-->
+<!--                        <span>1</span>-->
+<!--                    </Radio>-->
+<!--                    <Radio label="2">-->
+<!--                        <span>2</span>-->
+<!--                    </Radio>-->
+<!--                    <Radio label="3">-->
+<!--                        <span>3</span>-->
+<!--                    </Radio>-->
+<!--                </Radio-group>-->
+<!--            </Form-item>-->
             <Form-item label="广告名称" prop="name">
                 <i-input v-model="ad.name" placeholder="广告名称"/>
             </Form-item>
-            <Form-item label="链接" prop="link">
-                <i-input v-model="ad.link" placeholder="链接"/>
+            <Form-item label="广告排序" prop="sort">
+                <Input-number :min="0" :step="1" v-model="ad.sort" placeholder="排序" style="width: 188px;"/>
             </Form-item>
             <Row>
                 <i-col span="16">
@@ -83,9 +83,9 @@
                     </Form-item>
                 </i-col>
             </Row>
-            <Form-item label="内容" prop="content">
-                <i-input type="textarea" v-model="ad.content" placeholder="内容"/>
-            </Form-item>
+<!--            <Form-item label="内容" prop="content">-->
+<!--                <i-input type="textarea" v-model="ad.content" placeholder="内容"/>-->
+<!--            </Form-item>-->
             <Form-item label="结束时间" prop="endTime">
                 <Date-picker v-model="ad.endTime" placeholder="结束时间"></Date-picker>
             </Form-item>

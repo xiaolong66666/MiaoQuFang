@@ -4,15 +4,15 @@ $(function () {
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '广告位置', name: 'adPositionName', index: 'ad_Position_id', width: 80},
-            {label: '形式', name: 'mediaType', index: 'media_type', width: 80},
+            // {label: '形式', name: 'mediaType', index: 'media_type', width: 80},
             {label: '广告名称', name: 'name', index: 'name', width: 80},
-            {label: '链接', name: 'link', index: 'link', width: 80},
+            {label: '广告排序', name: 'sort', index: 'sort', width: 80},
             {
                 label: '图片', name: 'imageUrl', index: 'image_url', width: 80, formatter: function (value) {
                     return transImg(value);
                 }
             },
-            {label: '内容', name: 'content', index: 'content', width: 80},
+            // {label: '内容', name: 'content', index: 'content', width: 80},
             {
                 label: '结束时间', name: 'endTime', index: 'end_time', width: 80, formatter: function (value) {
                     return transDate(value);
