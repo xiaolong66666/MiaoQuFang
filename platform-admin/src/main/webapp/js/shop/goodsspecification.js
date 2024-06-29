@@ -26,7 +26,7 @@ var vm = new Vue({
         title: null,
         goodsSpecification: {},
         ruleValidate: {
-            goodsId: [
+            goodsName: [
                 {required: true, message: '商品不能为空', trigger: 'blur'}
             ],
             value: [
