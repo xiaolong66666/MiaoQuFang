@@ -26,7 +26,7 @@
         登录
       </button>
       <button
-          class="to-idx-btn"
+          class="guest-btn"
           @tap="guestLogin"
       >
         游客登录(无需邮箱)
