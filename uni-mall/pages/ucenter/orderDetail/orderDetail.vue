@@ -34,9 +34,10 @@
 					<view class="info">
 						<view class="t">
 							<text class="name">{{item.goodsName}}</text>
-							<text class="number">x{{item.number}}</text>
 						</view>
-						<view class="attr">{{item.goodsSpecifitionNameValue||''}}</view>
+						<view class="attr">
+              {{item.goodsSpecifitionNameValue||''}} (x{{item.number}})
+            </view>
 						<view class="price">￥{{item.retailPrice}}</view>
 					</view>
 				</view>
@@ -423,9 +424,12 @@
 		line-height: 33rpx;
 		color: #333;
 		font-size: 30rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 	}
 
-	.order-goods .item .t .number {
+	.number {
 		display: block;
 		float: right;
 		height: 33rpx;
@@ -492,7 +496,7 @@
 	}
 
 	.order-bottom .total {
-		height: 106rpx;
+		height: 180rpx;
 		padding-top: 20rpx;
 		border-bottom: 1px solid #f4f4f4;
 	}
