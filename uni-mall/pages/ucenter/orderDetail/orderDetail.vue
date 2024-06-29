@@ -62,11 +62,11 @@
 					<text class="txt">￥{{orderInfo.freightPrice}}</text>
 				</view>
         <view class="t">
-          <text class="label">优惠券抵扣·：</text>
+          <text class="label">优惠券抵扣：</text>
           <text class="txt">-￥{{orderInfo.couponPrice}}</text>
         </view>
         <view class="t">
-          <text class="label">积分抵扣·：</text>
+          <text class="label">积分抵扣：</text>
           <text class="txt">-￥{{orderInfo.pointsPay}}</text>
         </view>
 			</view>
