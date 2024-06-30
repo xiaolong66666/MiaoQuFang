@@ -34,7 +34,7 @@ public class GoodsSpecificationServiceImpl implements GoodsSpecificationService 
         //获取当前产品规格id(更新产品时)
         Integer cur_id = null;
         try {
-            cur_id = Integer.parseInt(map.get("curSpecificationId").toString());
+            cur_id = Integer.parseInt(map.get("goodsSpecificationId").toString());
         }catch (Exception e) {
         }
         Integer finalCur_id = cur_id;
