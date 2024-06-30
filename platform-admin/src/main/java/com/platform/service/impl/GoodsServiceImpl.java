@@ -69,6 +69,8 @@ public class GoodsServiceImpl implements GoodsService {
         int i = goodsDao.queryMaxId() == null ? 0 : goodsDao.queryMaxId();
         Integer id =  i+ 1;
         goods.setId(id);
+        //设置goodsSn默认值
+        goods.setGoodsSn("N-" + id);
         //创建默认规格
         GoodsSpecificationEntity goodsSpecificationEntity = new GoodsSpecificationEntity();
         goodsSpecificationEntity.setGoodsId(id);
@@ -106,7 +108,6 @@ public class GoodsServiceImpl implements GoodsService {
                 goodsGalleryDao.save(galleryEntity);
             }
         }
-
         goods.setIsDelete(0);
         goods.setCreateUserDeptId(user.getDeptId());
         goods.setCreateUserId(user.getUserId());

@@ -89,9 +89,9 @@
                         <i-input v-model="goods.categoryName" @on-click="categoryTree" icon="eye" readonly="readonly"
                                  placeholder="商品类型"/>
                     </Form-item>
-                    <Form-item label="商品序列号" prop="goodsSn">
-                        <i-input v-model="goods.goodsSn" placeholder="商品序列号"/>
-                    </Form-item>
+<!--                    <Form-item label="商品序列号" prop="goodsSn">-->
+<!--                        <i-input v-model="goods.goodsSn" placeholder="商品序列号"/>-->
+<!--                    </Form-item>-->
                     <Form-item label="品牌" prop="brandId" style="width: 268px;">
                         <i-select v-model="goods.brandId" filterable>
                             <i-option v-for="brand in brands" :value="brand.id" :key="brand.id">{{brand.name}}
