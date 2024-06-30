@@ -39,6 +39,12 @@ public class KeywordsServiceImpl implements KeywordsService {
 
     @Override
     public int save(KeywordsEntity keywords) {
+        if (keywords.getSchemeUrl() == null || keywords.getSchemeUrl().equals("")) {
+            keywords.setSchemeUrl("/");
+        }
+        if (keywords.getType() == null) {
+            keywords.setType(0);
+        }
         return keywordsDao.save(keywords);
     }
 

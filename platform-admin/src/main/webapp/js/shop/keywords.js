@@ -8,8 +8,9 @@ $(function () {
             {label: '默认', name: 'isDefault', index: 'is_default', width: 80},
             {label: '显示', name: 'isShow', index: 'is_show', width: 80},
             {label: '排序', name: 'sortOrder', index: 'sort_order', width: 80},
-            {label: '跳转链接', name: 'schemeUrl', index: 'scheme_url', width: 80},
-            {label: '类型', name: 'type', index: 'type', width: 80}]
+            // {label: '跳转链接', name: 'schemeUrl', index: 'scheme_url', width: 80},
+            // {label: '类型', name: 'type', index: 'type', width: 80}
+        ]
     });
 });
 

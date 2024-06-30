@@ -69,19 +69,19 @@
             <Form-item label="排序" prop="sortOrder">
                 <i-input v-model="keywords.sortOrder" placeholder="排序"/>
             </Form-item>
-            <Form-item label="跳转链接" prop="schemeUrl">
-                <i-input v-model="keywords.schemeUrl" placeholder="关键词的跳转链接"/>
-            </Form-item>
-            <Form-item label="类型" prop="type">
-                <Radio-group v-model="keywords.type">
-                    <Radio label="0">
-                        <span>0</span>
-                    </Radio>
-                    <Radio label="1">
-                        <span>1</span>
-                    </Radio>
-                </Radio-group>
-            </Form-item>
+<!--            <Form-item label="跳转链接" prop="schemeUrl">-->
+<!--                <i-input v-model="keywords.schemeUrl" placeholder="关键词的跳转链接"/>-->
+<!--            </Form-item>-->
+<!--            <Form-item label="类型" prop="type">-->
+<!--                <Radio-group v-model="keywords.type">-->
+<!--                    <Radio label="0">-->
+<!--                        <span>0</span>-->
+<!--                    </Radio>-->
+<!--                    <Radio label="1">-->
+<!--                        <span>1</span>-->
+<!--                    </Radio>-->
+<!--                </Radio-group>-->
+<!--            </Form-item>-->
             <Form-item>
                 <i-button type="primary" @click="handleSubmit('formValidate')">提交</i-button>
                 <i-button type="warning" @click="reload" style="margin-left: 8px"/>

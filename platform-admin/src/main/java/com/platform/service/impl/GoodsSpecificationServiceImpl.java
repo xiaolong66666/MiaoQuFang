@@ -3,6 +3,7 @@ package com.platform.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -30,7 +31,15 @@ public class GoodsSpecificationServiceImpl implements GoodsSpecificationService 
 
     @Override
     public List<GoodsSpecificationEntity> queryList(Map<String, Object> map) {
-        List<Integer> ids = goodsSpecificationDao.querySpecificationIdByGoods(Integer.parseInt(map.get("goodsId").toString()));
+        List<Integer> ids = new ArrayList<>();
+        if (map.get("goodsId") != null) {
+            try {
+                Integer goodsId = Integer.parseInt(map.get("goodsId").toString());
+                ids = goodsSpecificationDao.querySpecificationIdByGoods(goodsId);
+            } catch (Exception e) {
+                return new ArrayList<>();
+            }
+        }
         //获取当前产品规格id(更新产品时)
         Integer cur_id = null;
         try {
@@ -38,11 +47,12 @@ public class GoodsSpecificationServiceImpl implements GoodsSpecificationService 
         }catch (Exception e) {
         }
         Integer finalCur_id = cur_id;
+        List<Integer> finalIds = ids;
         return goodsSpecificationDao
                 .queryList(map)
                 .stream()
                 .filter(goodsSpecificationEntity -> {
-                    if (ids.contains(goodsSpecificationEntity.getId())) {
+                    if (finalIds.contains(goodsSpecificationEntity.getId())) {
                         if (finalCur_id != null && finalCur_id == goodsSpecificationEntity.getId()) {
                             return true;
                         }

@@ -5,12 +5,9 @@ import com.platform.dao.GoodsAttributeDao;
 import com.platform.dao.GoodsDao;
 import com.platform.dao.GoodsGalleryDao;
 import com.platform.dao.ProductDao;
-import com.platform.entity.GoodsGalleryEntity;
-import com.platform.entity.GoodsAttributeEntity;
-import com.platform.entity.GoodsEntity;
-import com.platform.entity.ProductEntity;
-import com.platform.entity.SysUserEntity;
+import com.platform.entity.*;
 import com.platform.service.GoodsService;
+import com.platform.service.GoodsSpecificationService;
 import com.platform.utils.RRException;
 import com.platform.utils.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +36,8 @@ public class GoodsServiceImpl implements GoodsService {
     private ProductDao productDao;
     @Autowired
     private GoodsGalleryDao goodsGalleryDao;
+    @Autowired
+    private GoodsSpecificationService goodsSpecificationService;
 
     @Override
     public GoodsEntity queryObject(Integer id) {
@@ -70,9 +69,16 @@ public class GoodsServiceImpl implements GoodsService {
         int i = goodsDao.queryMaxId() == null ? 0 : goodsDao.queryMaxId();
         Integer id =  i+ 1;
         goods.setId(id);
+        //创建默认规格
+        GoodsSpecificationEntity goodsSpecificationEntity = new GoodsSpecificationEntity();
+        goodsSpecificationEntity.setGoodsId(id);
+        goodsSpecificationEntity.setValue("默认规格");
+        goodsSpecificationService.save(goodsSpecificationEntity);
 
         //保存产品信息
         ProductEntity productEntity = new ProductEntity();
+        //默认规格
+        productEntity.setGoodsSpecificationIds(goodsSpecificationEntity.getId());
         productEntity.setGoodsId(id);
         productEntity.setGoodsSn(goods.getGoodsSn());
         productEntity.setGoodsNumber(goods.getGoodsNumber());
