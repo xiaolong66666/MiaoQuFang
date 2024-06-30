@@ -1,6 +1,6 @@
 <template>
 	<scroll-view class="container" style="height: 100%;">
-		<view class="search-header">
+		<view class="search-header" v-if="!searchStatus">
 			<view class="input-box">
 				<image class="icon" src="/static/images/search.png"></image>
 				<input name="input" class="keyword" :focus="true" v-model="keyword" confirm-type="search" @input="inputChange"
@@ -398,6 +398,7 @@
 		background: #fff;
 		width: 100%;
 		height: 78rpx;
+    z-index: 10;
 	}
 
 	.sort-box {
@@ -533,7 +534,9 @@
 	.cate-item .item .img {
 		width: 302rpx;
 		height: 302rpx;
-	}
+    position: relative; // 确保图片有定位属性
+    z-index: 1; // 设置一个较低的 z-index 值
+  }
 
 	.cate-item .item .name {
 		display: block;

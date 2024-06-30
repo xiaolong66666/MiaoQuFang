@@ -415,10 +415,10 @@ var vm = new Vue({
             vm.uploadList.add(file);
         },
         handleBeforeUpload() {
-            const check = this.uploadList.length < 5;
+            const check = this.uploadList.length < 50;
             if (!check) {
                 this.$Notice.warning({
-                    title: '最多只能上传 5 张图片。'
+                    title: '最多只能上传 50 张图片。'
                 });
             }
             return check;
@@ -437,7 +437,7 @@ var vm = new Vue({
         handleMaxSize: function (file) {
             this.$Notice.warning({
                 title: '超出文件大小限制',
-                desc: '文件 ' + file.name + ' 太大，不能超过 2M。'
+                desc: '文件 ' + file.name + ' 太大，不能超过 20M。'
             });
         },
         handleReset: function (name) {

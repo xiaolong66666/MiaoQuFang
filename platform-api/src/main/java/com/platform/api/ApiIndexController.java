@@ -250,7 +250,10 @@ public class ApiIndexController extends ApiBaseAction {
                 param.put("categoryIds", childCategoryIds);
                 param.put("fields", "id as id, name, list_pic_url, retail_price as retail_price");
                 param.put("isDelete", "0");
-                PageHelper.startPage(0, 7, false);
+                //分页参数
+                param.put("offset", 0);
+                param.put("limit", 7);
+//                PageHelper.startPage(0, 7, false);
                 categoryGoods = goodsService.queryList(param);
             }
             Map<String, Object> newCategory = new HashMap<String, Object>();
