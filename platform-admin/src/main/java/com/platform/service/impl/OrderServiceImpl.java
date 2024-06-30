@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -109,20 +110,14 @@ public class OrderServiceImpl implements OrderService {
         if (2 == status && 0 == payStatus) {
             orderEntity.setPayStatus(2);
             orderEntity.setOrderStatus(201);
-            //扣减用户积分
-            //判断用户积分是否足够
-//            if (userVo.getPoints().compareTo(orderEntity.getPointsPay()) < 0) {
-//                throw new RRException("用户余额不足！");
-//            }
-//            userVo.setPoints(userVo.getPoints().subtract(orderEntity.getPointsPay()));
+            orderEntity.setPayTime(new Date());
             return orderDao.update(orderEntity);
         }
         //取消付款
         if (0 == status && 2 == payStatus) {
             orderEntity.setPayStatus(0);
             orderEntity.setOrderStatus(0);
-//            //退还用户积分
-//            userVo.setPoints(userVo.getPoints().add(orderEntity.getPointsPay()));
+            orderEntity.setPayTime(null);
             return orderDao.update(orderEntity);
         }
         return 0;

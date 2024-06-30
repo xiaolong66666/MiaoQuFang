@@ -71,6 +71,9 @@
             AND nideshop_goods_specification.specification_id = #{specificationId}
         </if>
     </select>
+    <select id="querySpecificationIdByGoods" resultType="java.lang.Integer">
+        select t.goods_specification_ids from nideshop_product t where goods_id = #{goodsId} and t.goods_specification_ids is not null
+    </select>
 
     <insert id="save" parameterType="com.platform.entity.GoodsSpecificationEntity" useGeneratedKeys="true"
             keyProperty="id">

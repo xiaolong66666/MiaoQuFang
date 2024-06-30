@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.platform.dao.GoodsSpecificationDao;
 import com.platform.entity.GoodsSpecificationEntity;
@@ -29,7 +30,26 @@ public class GoodsSpecificationServiceImpl implements GoodsSpecificationService 
 
     @Override
     public List<GoodsSpecificationEntity> queryList(Map<String, Object> map) {
-        return goodsSpecificationDao.queryList(map);
+        List<Integer> ids = goodsSpecificationDao.querySpecificationIdByGoods(Integer.parseInt(map.get("goodsId").toString()));
+        //获取当前产品规格id(更新产品时)
+        Integer cur_id = null;
+        try {
+            cur_id = Integer.parseInt(map.get("curSpecificationId").toString());
+        }catch (Exception e) {
+        }
+        Integer finalCur_id = cur_id;
+        return goodsSpecificationDao
+                .queryList(map)
+                .stream()
+                .filter(goodsSpecificationEntity -> {
+                    if (ids.contains(goodsSpecificationEntity.getId())) {
+                        if (finalCur_id != null && finalCur_id == goodsSpecificationEntity.getId()) {
+                            return true;
+                        }
+                        return false;
+                    }
+                    return true;
+                }).collect(Collectors.toList());
     }
 
     @Override

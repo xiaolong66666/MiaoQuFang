@@ -87,7 +87,7 @@ let vm = new Vue({
                         vm.product.marketPrice = r.goods.marketPrice;
                     }
                     Ajax.request({
-                        url: "../goodsspecification/queryAll?goodsId=" + goodsId + "&specificationId=1",
+                        url: "../goodsspecification/queryAll?goodsId=" + goodsId + "&specificationId=1&goodsSpecificationId="+vm.product.goodsSpecificationIds,
                         async: true,
                         successCallback: function (r) {
                             vm.guiges = r.list;
@@ -97,6 +97,29 @@ let vm = new Vue({
             });
         },
         saveOrUpdate: function (event) {
+            //校验必填字段非空
+            if (vm.product.goodsId == null || vm.product.goodsId == '') {
+                alert('商品不能为空');
+                return;
+            }
+            if (vm.product.goodsSpecificationIds == null || vm.product.goodsSpecificationIds == '') {
+                alert('商品规格不能为空');
+                return;
+            }
+            if (vm.product.goodsNumber == null || vm.product.goodsNumber == '') {
+                alert('商品库存不能为空');
+                return;
+            }
+            if (vm.product.retailPrice == null || vm.product.retailPrice == '') {
+                alert('零售价格不能为空');
+                return;
+            }
+            if (vm.product.marketPrice == null || vm.product.marketPrice == '') {
+                alert('市场价格不能为空');
+                return;
+            }
+
+
             let url = vm.product.id == null ? "../product/save" : "../product/update";
             Ajax.request({
                 type: "POST",
