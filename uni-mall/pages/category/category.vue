@@ -54,7 +54,7 @@
 				loadmoreText: '正在加载更多数据',
 				nomoreText: '全部加载完成',
 				nomore: false,
-				totalPages: 1
+				// totalPages: 1
 			}
 		},
 		methods: {
@@ -90,19 +90,20 @@
 			getGoodsList: function() {
 				var that = this;
 
-				if (that.totalPages <= that.page - 1) {
-					that.nomore = true
-					return;
-				}
+				// if (that.totalPages <= that.page - 1) {
+				// 	that.nomore = true
+				// 	return;
+				// }
 
 				util.request(api.GoodsList, {
 					categoryId: that.id,
 					page: that.page,
 					size: that.size
 				}).then(function(res) {
-					that.goodsList = that.goodsList.concat(res.data.goodsList)
-					that.page = res.data.currentPage + 1
-					that.totalPages = res.data.totalPages
+          if (res.data.goodsList.length > 0) {
+            that.goodsList = that.goodsList.concat(res.data.goodsList)
+            that.page += 1
+          }
 				});
 			},
 			switchCate: function(event) {
@@ -129,6 +130,7 @@
 		 * 页面上拉触底事件的处理函数
 		 */
 		onReachBottom: function() {
+      console.log("触底了。。。")
 			this.getGoodsList()
 		},
 		onLoad: function(options) {
@@ -146,11 +148,10 @@
 		},
     // 增加下拉刷新数据的功能
     onPullDownRefresh() {
-      uni.getSystemInfo({
-        success: function(res) {
-          that.scrollHeight = res.windowHeight
-        }
-      });
+      //初始化分页参数
+      this.page = 1;
+      this.goodsList = [];
+
       this.getCategoryInfo();
       uni.stopPullDownRefresh();
     }
