@@ -496,6 +496,8 @@
 		margin-top: 175rpx;
 		height: auto;
 		overflow: hidden;
+    position: relative; // 确保图片有定位属性
+    z-index: 1; // 设置一个较低的 z-index 值
 	}
 
 	.cate-item .h {
@@ -554,8 +556,6 @@
 	.cate-item .item .img {
 		width: 302rpx;
 		height: 302rpx;
-    position: relative; // 确保图片有定位属性
-    z-index: 1; // 设置一个较低的 z-index 值
   }
 
 	.cate-item .item .name {
