@@ -130,7 +130,6 @@
 		 * 页面上拉触底事件的处理函数
 		 */
 		onReachBottom: function() {
-      console.log("触底了。。。")
 			this.getGoodsList()
 		},
 		onLoad: function(options) {

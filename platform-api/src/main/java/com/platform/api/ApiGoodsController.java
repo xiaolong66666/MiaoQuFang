@@ -317,6 +317,7 @@ public class ApiGoodsController extends ApiBaseAction {
         Integer size = jsonParam.getInteger("size");
         String sort = jsonParam.getString("sort");
         String order = jsonParam.getString("order");
+        Integer isKeywordSearch = jsonParam.getInteger("isKeywordSearch");
         //
         Map<String, Object> params = new HashMap<>();
         params.put("isDelete", 0);
@@ -338,7 +339,7 @@ public class ApiGoodsController extends ApiBaseAction {
             params.put("order", "desc");
         }
         //添加到搜索历史
-        if (!StringUtils.isNullOrEmpty(keyword)) {
+        if (!StringUtils.isNullOrEmpty(keyword) && isKeywordSearch != null && isKeywordSearch.equals(1)) {
             SearchHistoryVo searchHistoryVo = new SearchHistoryVo();
             searchHistoryVo.setAddTime(System.currentTimeMillis() / 1000);
             searchHistoryVo.setKeyword(keyword);

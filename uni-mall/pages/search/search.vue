@@ -91,7 +91,7 @@
 				defaultKeyword: {},
 				hotKeyword: [],
 				page: 1,
-				size: 20,
+				size: 10,
 				currentSortType: 'id',
 				currentSortOrder: 'desc',
 				categoryId: 0
@@ -143,7 +143,10 @@
 
 				util.request(api.SearchClearHistory)
 			},
-			getGoodsList: function() {
+			getGoodsList: function(isKeywordSearch) {
+        if (isKeywordSearch === 0 && this.page ===1){
+          this.page += 1
+        }
 				let that = this;
 				util.request(api.GoodsList, {
 					keyword: that.keyword,
@@ -151,15 +154,20 @@
 					size: that.size,
 					sort: that.currentSortType,
 					order: that.currentSortOrder,
-					categoryId: that.categoryId
+					categoryId: that.categoryId,
+          isKeywordSearch: isKeywordSearch
 				}).then(function(res) {
 					if (res.errno === 0) {
 						that.searchStatus = true
 						that.categoryFilter = false
-						that.goodsList = res.data.goodsList
 						that.filterCategory = res.data.filterCategory
-						that.page = res.data.currentPage
-						that.size = res.data.numsPerPage
+            if (res.data.goodsList.length > 0 && isKeywordSearch === 0) {
+              that.goodsList = that.goodsList.concat(res.data.goodsList)
+              that.page += 1
+            }
+            if (isKeywordSearch !== 0){
+              that.goodsList = res.data.goodsList
+            }
 					}
 					//重新获取关键词
 					that.getSearchKeyword();
@@ -175,12 +183,14 @@
 				this.page = 1
 				this.categoryId = 0
 				this.goodsList = []
-
-				this.getGoodsList();
+        //标记关键词
+        let isKeywordSearch = 1
+				this.getGoodsList(isKeywordSearch);
 			},
 			openSortFilter: function(event) {
 				let that = this;
 				let currentId = event.currentTarget.id;
+        that.page = 1
 				switch (currentId) {
 					case 'categoryFilter':
 						that.categoryFilter = !that.categoryFilter
@@ -229,10 +239,20 @@
 				this.getSearchResult(event.detail.value);
 			}
 		},
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function() {
+      this.getGoodsList(0)
+    },
 		onLoad: function() {
 			this.getSearchKeyword();
 		},
     onPullDownRefresh() {
+      //初始化分页参数，并查询数据
+      this.page = 1;
+      this.goodsList = [];
+      this.getGoodsList();
       // 增加下拉刷新数据的功能
       this.getSearchKeyword();
       uni.stopPullDownRefresh();
