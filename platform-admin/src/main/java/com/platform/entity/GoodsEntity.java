@@ -86,6 +86,8 @@ public class GoodsEntity implements Serializable {
     private String manufacturer;
     //商品链接
     private String goodsUrl;
+    //默认规格产品成本价
+    private BigDecimal costPrice;
     /**
      * 用户ID
      */

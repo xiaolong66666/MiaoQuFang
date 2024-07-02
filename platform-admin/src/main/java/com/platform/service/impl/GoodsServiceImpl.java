@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -82,6 +83,7 @@ public class GoodsServiceImpl implements GoodsService {
         //默认规格
         productEntity.setGoodsSpecificationIds(goodsSpecificationEntity.getId());
         productEntity.setGoodsId(id);
+        productEntity.setCostPrice(goods.getCostPrice()==null?new BigDecimal(0):goods.getCostPrice());
         productEntity.setGoodsSn(goods.getGoodsSn());
         productEntity.setGoodsNumber(goods.getGoodsNumber());
         productEntity.setRetailPrice(goods.getRetailPrice());

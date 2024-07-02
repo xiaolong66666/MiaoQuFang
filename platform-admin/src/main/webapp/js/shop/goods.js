@@ -17,11 +17,11 @@ $(function () {
                     return transDate(value, 'yyyy-MM-dd');
                 }
             },
-            {label: '属性类别', name: 'attributeCategoryName', index: 'attribute_category', width: 80},
+            // {label: '属性类别', name: 'attributeCategoryName', index: 'attribute_category', width: 80},
             {label: '零售价格', name: 'retailPrice', index: 'retail_price', width: 80},
             {label: '商品库存', name: 'goodsNumber', index: 'goods_number', width: 80},
             {label: '销售量', name: 'sellVolume', index: 'sell_volume', width: 80},
-            {label: '市场价', name: 'marketPrice', index: 'market_price', width: 80},
+            // {label: '市场价', name: 'marketPrice', index: 'market_price', width: 80},
             {
                 label: '热销', name: 'isHot', index: 'is_hot', width: 80, formatter: function (value) {
                     return transIsNot(value);
@@ -91,6 +91,7 @@ var vm = new Vue({
             retailPrice: 0,
             goodsNumber: 999999,
             marketPrice: 0,
+            costPrice: 0,
         },
         ruleValidate: {
             name: [
@@ -105,9 +106,9 @@ var vm = new Vue({
             goodsNumber: [
                 {required: true, message: '库存不能为空', trigger: 'blur'}
             ],
-            marketPrice: [
-                {required: true, message: '市场价不能为空', trigger: 'blur'}
-            ],
+            // marketPrice: [
+            //     {required: true, message: '市场价不能为空', trigger: 'blur'}
+            // ],
             listPicUrl: [
                 {required: true, message: '商品列表图不能为空', trigger: 'blur'}
             ],
@@ -228,13 +229,13 @@ var vm = new Vue({
                 return;
             }
             if (vm.goods.retailPrice == null || vm.goods.retailPrice == '') {
-                alert("请填写实际价格");
+                alert("请填写零售价格");
                 return;
             }
-            if (vm.goods.marketPrice == null || vm.goods.marketPrice == '') {
-                alert("请填写市场价");
-                return;
-            }
+            // if (vm.goods.marketPrice == null || vm.goods.marketPrice == '') {
+            //     alert("请填写市场价");
+            //     return;
+            // }
             if (vm.goods.listPicUrl == null || vm.goods.listPicUrl == '') {
                 alert("商品列表图不能为空");
                 return;

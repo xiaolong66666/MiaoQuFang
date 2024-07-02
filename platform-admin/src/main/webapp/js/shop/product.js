@@ -13,7 +13,8 @@ $(function () {
             {label: '商品序列号', name: 'goodsSn', index: 'goods_sn', width: 80},
             {label: '商品库存', name: 'goodsNumber', index: 'goods_number', width: 80},
             {label: '零售价格(元)', name: 'retailPrice', index: 'retail_price', width: 80},
-            {label: '市场价格(元)', name: 'marketPrice', index: 'market_price', width: 80}]
+            {label: '成本价格(元)', name: 'costPrice', index: 'cost_price', width: 80}
+        ]
     });
 });
 
@@ -99,8 +100,8 @@ let vm = new Vue({
                 alert('零售价格不能为空');
                 return;
             }
-            if (vm.product.marketPrice == null || vm.product.marketPrice == '') {
-                alert('市场价格不能为空');
+            if (vm.product.costPrice == null || vm.product.costPrice == '') {
+                alert('成本价格不能为空');
                 return;
             }
 

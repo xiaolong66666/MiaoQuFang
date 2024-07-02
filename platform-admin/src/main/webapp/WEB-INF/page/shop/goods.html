@@ -106,8 +106,8 @@
                         <Input-number :min="0" :step="1" v-model="goods.retailPrice" placeholder="零售价格"
                                       style="width: 188px;"/>
                     </Form-item>
-                    <Form-item label="市场价" prop="marketPrice">
-                        <Input-number :min="0" :step="1" v-model="goods.marketPrice" placeholder="市场价"
+                    <Form-item v-if="title == '新增'" label="默认成本" prop="costPrice">
+                        <Input-number :min="0" :step="1" v-model="goods.costPrice" placeholder="默认成本"
                                       style="width: 188px;"/>
                     </Form-item>
                     <Form-item label="厂家名称" prop="manufacturer">

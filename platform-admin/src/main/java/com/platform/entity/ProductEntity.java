@@ -32,6 +32,8 @@ public class ProductEntity implements Serializable {
     private BigDecimal retailPrice;
     //市场价格
     private BigDecimal marketPrice;
+    //成本价
+    private BigDecimal costPrice;
 
     /**
      * 翻译用字段
