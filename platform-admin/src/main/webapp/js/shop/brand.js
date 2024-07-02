@@ -54,16 +54,10 @@ var vm = new Vue({
     data: {
         showList: true,
         title: null,
-        brand: {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 1,newSortOrder:0,simpleDesc:''},
+        brand: {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 0, isNew: 1,newSortOrder:0,simpleDesc:'',floorPrice:0},
         ruleValidate: {
             name: [
                 {required: true, message: '品牌名称不能为空', trigger: 'blur'}
-            ],
-            isShow: [
-                {required: true, message: '显示不能为空', trigger: 'blur'}
-            ],
-            floorPrice: [
-                {required: true, message: '展示价格不能为空', trigger: 'blur'}
             ],
             appListPicUrl: [
                 {required: true, message: '展示图不能为空', trigger: 'blur'}
@@ -84,7 +78,7 @@ var vm = new Vue({
         add: function () {
             vm.showList = false;
             vm.title = "新增";
-            vm.brand = {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 1,newSortOrder:0,simpleDesc:''};
+            vm.brand = {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isNew: 1,newSortOrder:0,simpleDesc:'',floorPrice:0,isShow:0};
         },
         update: function (event) {
             var id = getSelectedRow("#jqGrid");
@@ -103,12 +97,10 @@ var vm = new Vue({
                 return;
             }
             if (vm.brand.isShow == null || vm.brand.isShow == '') {
-                alert('显示不能为空');
-                return;
+                vm.brand.isShow = 0;
             }
             if (vm.brand.floorPrice == null || vm.brand.floorPrice == '') {
-                alert('展示价格不能为空');
-                return;
+                vm.brand.floorPrice = 0.01;
             }
             if (vm.brand.appListPicUrl == null || vm.brand.appListPicUrl == '') {
                 alert('展示图不能为空');

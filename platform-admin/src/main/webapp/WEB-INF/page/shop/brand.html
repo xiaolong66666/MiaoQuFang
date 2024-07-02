@@ -49,7 +49,8 @@
                 </Radio-group>
             </Form-item>
             <Form-item label="展示价格" prop="floorPrice">
-                <Input-number :min="0" v-model="brand.floorPrice" placeholder="展示价格" style="width: 188px;"/>
+                <Input-number :min="0" :step="1" v-model="brand.floorPrice" placeholder="展示价格"
+                              style="width: 188px;"/>
             </Form-item>
             <Row>
                 <i-col span="16">
