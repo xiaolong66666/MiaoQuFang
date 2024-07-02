@@ -5,27 +5,15 @@ $(function () {
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '活动主题', name: 'title', index: 'title', width: 80},
             {label: '活动内容', name: 'content', index: 'content', width: 80, hidden: true},
-            {
-                label: '图像', name: 'avatar', index: 'avatar', width: 80, formatter: function (value) {
-                    return transImg(value);
-                }
-            },
-            {
-                label: '活动条例图片', name: 'itemPicUrl', index: 'item_pic_url', width: 80, formatter: function (value) {
-                    return transImg(value);
-                }
-            },
             {label: '子标题', name: 'subtitle', index: 'subtitle', width: 80},
             {label: '活动类别', name: 'topicCategoryId', index: 'topic_category_id', width: 80},
             {label: '活动价格', name: 'priceInfo', index: 'price_info', width: 80},
-            {label: 'readCount', name: 'readCount', index: 'read_count', width: 80},
             {
                 label: '场景图片', name: 'scenePicUrl', index: 'scene_pic_url', width: 80, formatter: function (value) {
                     return transImg(value);
                 }
-            },
-            {label: '活动模板Id', name: 'topicTemplateId', index: 'topic_template_id', width: 80},
-            {label: '活动标签Id', name: 'topicTagId', index: 'topic_tag_id', width: 80}]
+            }
+        ]
     });
     $('#content').editable({
         inlineMode: false,
@@ -58,7 +46,8 @@ var vm = new Vue({
         },
         q: {
             title: ''
-        }
+        },
+        topicCategories: []
     },
     methods: {
         query: function () {
@@ -68,6 +57,7 @@ var vm = new Vue({
             vm.showList = false;
             vm.title = "新增";
             vm.topic = {avatar: '', itemPicUrl: '', scenePicUrl: ''};
+            vm.getCategory();
             $('#content').editable('setHTML', '');
         },
         update: function (event) {
@@ -77,10 +67,32 @@ var vm = new Vue({
             }
             vm.showList = false;
             vm.title = "修改";
-
+            vm.getCategory();
             vm.getInfo(id)
         },
         saveOrUpdate: function (event) {
+            //必填字段非空校验
+            if (this.topic.title == null || this.topic.title === '') {
+                alert("活动主题不能为空");
+                return;
+            }
+            if (this.topic.subtitle == null || this.topic.subtitle === '') {
+                alert("子标题不能为空");
+                return;
+            }
+            if (this.topic.topicCategoryId == null || this.topic.topicCategoryId === '') {
+                alert("请选择活动类别");
+                return;
+            }
+            if (this.topic.priceInfo == null || this.topic.priceInfo === '') {
+                alert("请填写活动价格");
+                return;
+            }
+            if (this.topic.scenePicUrl == null || this.topic.scenePicUrl === '') {
+                alert("请上传场景图片");
+                return;
+            }
+
             var url = vm.topic.id == null ? "../topic/save" : "../topic/update";
 
             //编辑器内容
@@ -178,6 +190,15 @@ var vm = new Vue({
         },
         handleReset: function (name) {
             handleResetForm(this, name);
+        },
+        getCategory: function () {
+            Ajax.request({
+                url: "../topiccategory/queryAll",
+                async: true,
+                successCallback: function (r) {
+                    vm.topicCategories = r.list;
+                }
+            });
         }
     }
 });

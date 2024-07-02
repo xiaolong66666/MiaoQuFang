@@ -24,21 +24,6 @@ let vm = new Vue({
         title: null,
         product: {},
         ruleValidate: {
-            // goodsId: [
-            //     {required: true, message: '商品不能为空', trigger: 'blur'}
-            // ],
-            // goodsSpecificationIds: [
-            //     {required: true, message: '商品规格不能为空', trigger: 'blur'}
-            // ],
-            // goodsNumber: [
-            //     {required: true, message: '商品库存不能为空', trigger: 'blur'}
-            // ],
-            // retailPrice: [
-            //     {required: true, message: '零售价格不能为空', trigger: 'blur'}
-            // ],
-            // marketPrice: [
-            //     {required: true, message: '市场价格不能为空', trigger: 'blur'}
-            // ]
         },
         q: {
             goodsName: ''

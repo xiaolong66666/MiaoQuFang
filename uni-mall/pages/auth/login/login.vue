@@ -52,7 +52,7 @@
 		data() {
 			return {
         formData: {
-          mail: '2636822826@qq.com',
+          mail: '',
           checkCode: '',
         },
         timer: 60,

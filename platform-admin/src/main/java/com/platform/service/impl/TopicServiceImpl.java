@@ -38,6 +38,10 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public int save(TopicEntity topic) {
+        topic.setReadCount("0");
+        topic.setTopicTemplateId(0);
+        topic.setTopicTagId(0);
+
         return topicDao.save(topic);
     }
 
