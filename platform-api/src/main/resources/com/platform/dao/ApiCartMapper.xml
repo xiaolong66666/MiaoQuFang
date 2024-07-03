@@ -31,7 +31,7 @@
         b.list_pic_url,
         c.retail_price as retail_product_price
         from nideshop_cart a
-        left join nideshop_goods b on a.goods_id = b.id
+        left join nideshop_goods b on a.goods_id = b.id and b.is_delete = 0 and b.is_on_sale = 1
         left join nideshop_product c on c.goods_id = a.goods_id and c.id = a.product_id
         where 1 = 1
         <if test="userId != null">

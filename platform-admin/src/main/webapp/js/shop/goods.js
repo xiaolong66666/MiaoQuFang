@@ -21,9 +21,12 @@ $(function () {
             {label: '零售价格', name: 'retailPrice', index: 'retail_price', width: 80},
             {label: '商品库存', name: 'goodsNumber', index: 'goods_number', width: 80},
             {label: '销售量', name: 'sellVolume', index: 'sell_volume', width: 80},
-            // {label: '市场价', name: 'marketPrice', index: 'market_price', width: 80},
+            {label: '新品显示', name: 'isNew', index: 'is_new', width: 80, formatter: function (value) {
+                    return transIsNot(value);
+                }
+            },
             {
-                label: '热销', name: 'isHot', index: 'is_hot', width: 80, formatter: function (value) {
+                label: '人气推荐', name: 'isHot', index: 'is_hot', width: 80, formatter: function (value) {
                     return transIsNot(value);
                 }
             },

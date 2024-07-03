@@ -89,9 +89,6 @@
                         <i-input v-model="goods.categoryName" @on-click="categoryTree" icon="eye" readonly="readonly"
                                  placeholder="商品类型"/>
                     </Form-item>
-<!--                    <Form-item label="商品序列号" prop="goodsSn">-->
-<!--                        <i-input v-model="goods.goodsSn" placeholder="商品序列号"/>-->
-<!--                    </Form-item>-->
                     <Form-item label="品牌" prop="brandId" style="width: 268px;">
                         <i-select v-model="goods.brandId" filterable>
                             <i-option v-for="brand in brands" :value="brand.id" :key="brand.id">{{brand.name}}
@@ -109,6 +106,26 @@
                     <Form-item v-if="title == '新增'" label="默认成本" prop="costPrice">
                         <Input-number :min="0" :step="1" v-model="goods.costPrice" placeholder="默认成本"
                                       style="width: 188px;"/>
+                    </Form-item>
+                    <Form-item label="新品显示" prop="isNew">
+                        <Radio-group v-model="goods.isNew">
+                            <Radio label="1">
+                                <span>是</span>
+                            </Radio>
+                            <Radio label="0">
+                                <span>否</span>
+                            </Radio>
+                        </Radio-group>
+                    </Form-item>
+                    <Form-item label="人气推荐" prop="isHot">
+                        <Radio-group v-model="goods.isHot">
+                            <Radio label="1">
+                                <span>是</span>
+                            </Radio>
+                            <Radio label="0">
+                                <span>否</span>
+                            </Radio>
+                        </Radio-group>
                     </Form-item>
                     <Form-item label="厂家名称" prop="manufacturer">
                         <i-input v-model="goods.manufacturer" placeholder="进货厂家名称"/>

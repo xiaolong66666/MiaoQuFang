@@ -7,6 +7,7 @@ import com.platform.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +67,10 @@ public class ProductServiceImpl implements ProductService {
         //校验商品id是否为空
         if (null == goodsId) {
             return 0;
+        }
+        BigDecimal marketPrice = product.getMarketPrice();
+        if (null == marketPrice) {
+            product.setMarketPrice(new BigDecimal(99999));
         }
         ProductEntity entity = new ProductEntity();
         BeanUtils.copyProperties(product, entity);
