@@ -110,6 +110,10 @@ public class GoodsServiceImpl implements GoodsService {
                 goodsGalleryDao.save(galleryEntity);
             }
         }
+        //将商品详情图信息中的width="300"字符串去掉
+        if (null != goods.getGoodsDesc()) {
+            goods.setGoodsDesc(goods.getGoodsDesc().replaceAll("width=\"300\"", ""));
+        }
         goods.setIsDelete(0);
         goods.setCreateUserDeptId(user.getDeptId());
         goods.setCreateUserId(user.getUserId());
@@ -145,6 +149,10 @@ public class GoodsServiceImpl implements GoodsService {
                 galleryEntity.setGoodsId(goods.getId());
                 goodsGalleryDao.save(galleryEntity);
             }
+        }
+        //将商品详情图信息中的width="300"字符串去掉
+        if (null != goods.getGoodsDesc()) {
+            goods.setGoodsDesc(goods.getGoodsDesc().replaceAll("width=\"300\"", ""));
         }
         return goodsDao.update(goods);
     }
