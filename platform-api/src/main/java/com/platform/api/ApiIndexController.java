@@ -158,6 +158,9 @@ public class ApiIndexController extends ApiBaseAction {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("isNew", 1);
         param.put("isDelete", 0);
+        //分页参数
+        param.put("offset", 0);
+        param.put("limit", 4);
         param.put("fields", "id, name, list_pic_url, retail_price");
         PageHelper.startPage(0, 4, false);
         List<GoodsVo> newGoods = goodsService.queryList(param);
@@ -176,6 +179,9 @@ public class ApiIndexController extends ApiBaseAction {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("isHot", "1");
         param.put("isDelete", 0);
+        //分页参数
+        param.put("offset", 0);
+        param.put("limit", 3);
         PageHelper.startPage(0, 3, false);
         List<GoodsVo> hotGoods = goodsService.queryHotGoodsList(param);
         resultObj.put("hotGoodsList", hotGoods);
@@ -252,7 +258,7 @@ public class ApiIndexController extends ApiBaseAction {
                 param.put("isDelete", "0");
                 //分页参数
                 param.put("offset", 0);
-                param.put("limit", 7);
+                param.put("limit", 5);
 //                PageHelper.startPage(0, 7, false);
                 categoryGoods = goodsService.queryList(param);
             }
