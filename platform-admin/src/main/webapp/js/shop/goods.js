@@ -109,9 +109,9 @@ var vm = new Vue({
             // marketPrice: [
             //     {required: true, message: '市场价不能为空', trigger: 'blur'}
             // ],
-            listPicUrl: [
-                {required: true, message: '商品列表图不能为空', trigger: 'blur'}
-            ],
+            // listPicUrl: [
+            //     {required: true, message: '商品列表图不能为空', trigger: 'blur'}
+            // ],
             brandId: [
                 {required: true, message: '品牌不能为空', trigger: 'blur'}
             ]
@@ -236,18 +236,18 @@ var vm = new Vue({
             //     alert("请填写市场价");
             //     return;
             // }
-            if (vm.goods.listPicUrl == null || vm.goods.listPicUrl == '') {
-                alert("商品列表图不能为空");
-                return;
-            }
+            // if (vm.goods.listPicUrl == null || vm.goods.listPicUrl == '') {
+            //     alert("商品列表图不能为空");
+            //     return;
+            // }
             var url = vm.goods.id == null ? "../goods/save" : "../goods/update";
             vm.goods.goodsDesc = $('#goodsDesc').editable('getHTML');
             vm.goods.goodsImgList = vm.uploadList;
             //校验商品轮播图
-            if (vm.goods.goodsImgList == null || vm.goods.goodsImgList.length == 0) {
-                alert("商品轮播图不能为空");
-                return;
-            }
+            // if (vm.goods.goodsImgList == null || vm.goods.goodsImgList.length == 0) {
+            //     alert("商品轮播图不能为空");
+            //     return;
+            // }
 
             Ajax.request({
                 type: "POST",
