@@ -293,7 +293,7 @@ var vm = new Vue({
             openWindow({
                 type: 2,
                 title: '商品规格',
-                content: '../shop/goodsspecification.html?goodsId=' + id
+                content: '../shop/goodsspecification.html?goodsId=' + id+'&isShowAll=1'
             })
         },
         openPro: function () {

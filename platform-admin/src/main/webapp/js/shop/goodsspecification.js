@@ -1,8 +1,9 @@
 $(function () {
     let goodsId = getQueryString("goodsId");
+    let isShowAll = getQueryString("isShowAll");
     let url = '../goodsspecification/list';
     if (goodsId) {
-        url += '?goodsId=' + goodsId;
+        url += '?goodsId=' + goodsId + '&isShowAll=' + isShowAll;
     }
     $("#jqGrid").Grid({
         url: url,

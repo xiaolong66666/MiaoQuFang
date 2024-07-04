@@ -48,13 +48,17 @@ public class GoodsSpecificationServiceImpl implements GoodsSpecificationService 
         }
         Integer finalCur_id = cur_id;
         List<Integer> finalIds = ids;
-        Integer finalCur_id1 = cur_id;
+        //获取查询参数
+        Integer isShowAll = map.get("isShowAll") == null ? 0 : Integer.parseInt(map.get("isShowAll").toString());
         return goodsSpecificationDao
                 .queryList(map)
                 .stream()
                 .filter(goodsSpecificationEntity -> {
-                    if (finalCur_id1 != null && finalIds.contains(goodsSpecificationEntity.getId())) {
-                        if (finalCur_id == goodsSpecificationEntity.getId()) {
+                    if (finalIds.contains(goodsSpecificationEntity.getId())) {
+                        if (isShowAll.equals(1)) {
+                            return true;
+                        }
+                        if (finalCur_id != null && finalCur_id == goodsSpecificationEntity.getId()) {
                             return true;
                         }
                         return false;
