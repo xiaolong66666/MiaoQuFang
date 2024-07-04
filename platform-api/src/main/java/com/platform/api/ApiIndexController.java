@@ -216,8 +216,8 @@ public class ApiIndexController extends ApiBaseAction {
         param.put("isNew", 1);
         param.put("sidx", "new_sort_order");
         param.put("order", "asc ");
-        param.put("offset", 0);
-        param.put("limit", 4);
+//        param.put("offset", 0);
+//        param.put("limit", 4);
         List<BrandVo> brandList = brandService.queryList(param);
         resultObj.put("brandList", brandList);
         //
