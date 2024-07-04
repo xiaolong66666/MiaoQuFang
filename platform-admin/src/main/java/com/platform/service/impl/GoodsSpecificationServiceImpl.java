@@ -48,12 +48,13 @@ public class GoodsSpecificationServiceImpl implements GoodsSpecificationService 
         }
         Integer finalCur_id = cur_id;
         List<Integer> finalIds = ids;
+        Integer finalCur_id1 = cur_id;
         return goodsSpecificationDao
                 .queryList(map)
                 .stream()
                 .filter(goodsSpecificationEntity -> {
-                    if (finalIds.contains(goodsSpecificationEntity.getId())) {
-                        if (finalCur_id != null && finalCur_id == goodsSpecificationEntity.getId()) {
+                    if (finalCur_id1 != null && finalIds.contains(goodsSpecificationEntity.getId())) {
+                        if (finalCur_id == goodsSpecificationEntity.getId()) {
                             return true;
                         }
                         return false;

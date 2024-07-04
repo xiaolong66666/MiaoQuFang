@@ -54,6 +54,9 @@
                 <i-col span="4">
                     <i-input v-model="q.name" @on-enter="query" placeholder="名称"/>
                 </i-col>
+                <i-col span="4">
+                    <i-input v-model="q.categoryName" @on-enter="query" placeholder="分类名称"/>
+                </i-col>
                 <i-button @click="query">查询</i-button>
             </div>
             <div class="buttons-group">

@@ -120,7 +120,8 @@ var vm = new Vue({
             ]
         },
         q: {
-            name: ''
+            name: '',
+            categoryName: '',
         },
         brands: [],//品牌
         macros: [],//商品单位
@@ -363,7 +364,10 @@ var vm = new Vue({
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'name': vm.q.name},
+                postData: {
+                    'name': vm.q.name,
+                    'categoryName': vm.q.categoryName
+                },
                 page: page
             }).trigger("reloadGrid");
             vm.handleReset('formValidate');

@@ -32,6 +32,18 @@ public class ProductController {
     @RequestMapping("/list")
     @RequiresPermissions("product:list")
     public R list(@RequestParam Map<String, Object> params) {
+        //处理查询参数乱码，goodsName
+        if (params.get("goodsName") != null) {
+            String goodsName = params.get("goodsName").toString();
+            if (goodsName != null && goodsName != "") {
+                try {
+                    goodsName = new String(goodsName.getBytes("ISO-8859-1"), "UTF-8");
+                    params.put("goodsName", goodsName);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         //查询列表数据
         Query query = new Query(params);
 
