@@ -462,7 +462,7 @@
 
 	.cart-view .item .t {
 		margin: 8rpx 0;
-		height: 30rpx;
+		height: 28rpx;
 		font-size: 25rpx;
 		color: #333;
 		overflow: hidden;
