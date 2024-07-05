@@ -305,7 +305,7 @@
 			"navigationBarBackgroundColor": "#fff",
 			"navigationBarTextStyle": "black",
 			"app-plus": {
-				"titleNView": false,
+				"titleNView": true,
 				"bounce": "vertical"
 			}
 		}
