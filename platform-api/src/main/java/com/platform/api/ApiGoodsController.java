@@ -109,6 +109,7 @@ public class ApiGoodsController extends ApiBaseAction {
     /**
      * 商品详情页数据
      */
+    @IgnoreAuth
     @ApiOperation(value = " 商品详情页数据")
     @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "商品id", paramType = "path", required = true),
             @ApiImplicitParam(name = "referrer", value = "商品referrer", paramType = "path", required = false)})
@@ -199,77 +200,78 @@ public class ApiGoodsController extends ApiBaseAction {
         Map<String, Object> comment = new HashMap<>();
         comment.put("count", commentCount);
         comment.put("data", commentInfo);
-        //当前用户是否收藏
-        Map<String, Object> collectParam = new HashMap<>();
-        collectParam.put("userId", getUserId());
-        collectParam.put("valueId", id);
-        collectParam.put("typeId", 0);
-        Integer userHasCollect = collectService.queryTotal(collectParam);
-        if (userHasCollect > 0) {
-            userHasCollect = 1;
-        }
-        //记录用户的足迹
-        FootprintVo footprintEntity = new FootprintVo();
-        footprintEntity.setAddTime(System.currentTimeMillis() / 1000);
-        footprintEntity.setGoodsBrief(info.getGoodsBrief());
-        footprintEntity.setListPicUrl(info.getListPicUrl());
-        footprintEntity.setGoodsId(info.getId());
-        footprintEntity.setName(info.getName());
-        footprintEntity.setRetailPrice(info.getRetailPrice());
-        footprintEntity.setUserId(userId);
-        if (null != referrer) {
-            footprintEntity.setReferrer(referrer);
-        } else {
-            footprintEntity.setReferrer(0L);
-        }
-        footprintService.save(footprintEntity);
-        //
         resultObj.put("info", info);
         resultObj.put("gallery", gallery);
         resultObj.put("attribute", attribute);
-        resultObj.put("userHasCollect", userHasCollect);
         resultObj.put("issue", issue);
         resultObj.put("comment", comment);
         resultObj.put("brand", brand);
         resultObj.put("specificationList", specificationList);
         resultObj.put("productList", productEntityList);
-        // 记录推荐人是否可以领取红包，用户登录时校验
-        try {
-            // 是否已经有可用的转发红包
-            Map<String, Object> params = new HashMap<>();
-            params.put("userId", userId);
-            params.put("sendType", 2);
-            params.put("unUsed", true);
-            List<CouponVo> enabledCouponVos = apiCouponService.queryUserCoupons(params);
-            if ((null == enabledCouponVos || enabledCouponVos.size() == 0)
-                    && null != referrer && null != userId) {
-                // 获取优惠信息提示
-                Map<String, Object> couponParam = new HashMap<>();
-                couponParam.put("enabled", true);
-                Integer[] sendTypes = new Integer[]{2};
-                couponParam.put("sendTypes", sendTypes);
-                List<CouponVo> couponVos = apiCouponService.queryList(couponParam);
-                if (null != couponVos && couponVos.size() > 0) {
-                    CouponVo couponVo = couponVos.get(0);
-                    Map<String, Object> footprintParam = new HashMap<>();
-                    footprintParam.put("goodsId", id);
-                    footprintParam.put("referrer", referrer);
-                    Integer footprintNum = footprintService.queryTotal(footprintParam);
-                    if (null != footprintNum && null != couponVo.getMinTransmitNum()
-                            && footprintNum > couponVo.getMinTransmitNum()) {
-                        UserCouponVo userCouponVo = new UserCouponVo();
-                        userCouponVo.setAddTime(new Date());
-                        userCouponVo.setCouponId(couponVo.getId());
-                        userCouponVo.setCouponNumber(CharUtil.getRandomString(12));
-                        userCouponVo.setUserId(getUserId());
-                        apiUserCouponService.save(userCouponVo);
+        if (null != userId){
+            //当前用户是否收藏
+            Map<String, Object> collectParam = new HashMap<>();
+            collectParam.put("userId", getUserId());
+            collectParam.put("valueId", id);
+            collectParam.put("typeId", 0);
+            Integer userHasCollect = collectService.queryTotal(collectParam);
+            if (userHasCollect > 0) {
+                userHasCollect = 1;
+            }
+            //记录用户的足迹
+            FootprintVo footprintEntity = new FootprintVo();
+            footprintEntity.setAddTime(System.currentTimeMillis() / 1000);
+            footprintEntity.setGoodsBrief(info.getGoodsBrief());
+            footprintEntity.setListPicUrl(info.getListPicUrl());
+            footprintEntity.setGoodsId(info.getId());
+            footprintEntity.setName(info.getName());
+            footprintEntity.setRetailPrice(info.getRetailPrice());
+            footprintEntity.setUserId(userId);
+            if (null != referrer) {
+                footprintEntity.setReferrer(referrer);
+            } else {
+                footprintEntity.setReferrer(0L);
+            }
+            footprintService.save(footprintEntity);
+            //
+            resultObj.put("userHasCollect", userHasCollect);
+            // 记录推荐人是否可以领取红包，用户登录时校验
+            try {
+                // 是否已经有可用的转发红包
+                Map<String, Object> params = new HashMap<>();
+                params.put("userId", userId);
+                params.put("sendType", 2);
+                params.put("unUsed", true);
+                List<CouponVo> enabledCouponVos = apiCouponService.queryUserCoupons(params);
+                if ((null == enabledCouponVos || enabledCouponVos.size() == 0)
+                        && null != referrer && null != userId) {
+                    // 获取优惠信息提示
+                    Map<String, Object> couponParam = new HashMap<>();
+                    couponParam.put("enabled", true);
+                    Integer[] sendTypes = new Integer[]{2};
+                    couponParam.put("sendTypes", sendTypes);
+                    List<CouponVo> couponVos = apiCouponService.queryList(couponParam);
+                    if (null != couponVos && couponVos.size() > 0) {
+                        CouponVo couponVo = couponVos.get(0);
+                        Map<String, Object> footprintParam = new HashMap<>();
+                        footprintParam.put("goodsId", id);
+                        footprintParam.put("referrer", referrer);
+                        Integer footprintNum = footprintService.queryTotal(footprintParam);
+                        if (null != footprintNum && null != couponVo.getMinTransmitNum()
+                                && footprintNum > couponVo.getMinTransmitNum()) {
+                            UserCouponVo userCouponVo = new UserCouponVo();
+                            userCouponVo.setAddTime(new Date());
+                            userCouponVo.setCouponId(couponVo.getId());
+                            userCouponVo.setCouponNumber(CharUtil.getRandomString(12));
+                            userCouponVo.setUserId(getUserId());
+                            apiUserCouponService.save(userCouponVo);
+                        }
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
         return toResponseSuccess(resultObj);
     }
 

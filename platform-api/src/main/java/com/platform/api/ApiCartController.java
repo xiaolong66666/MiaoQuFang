@@ -1,6 +1,7 @@
 package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
+import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
 import com.platform.cache.J2CacheUtils;
 import com.platform.dao.ApiCouponMapper;
@@ -365,11 +366,12 @@ public class ApiCartController extends ApiBaseAction {
     }
 
     //  获取购物车商品的总件件数
+    @IgnoreAuth
     @ApiOperation(value = "获取购物车商品的总件件数")
     @PostMapping("goodscount")
     public Object goodscount(@LoginUser UserVo loginUser) {
         if (null == loginUser || null == loginUser.getUserId()) {
-            return toResponseFail("未登录");
+            return toResponseSuccess(0);
         }
         Map<String, Object> resultObj = new HashMap<>();
         //查询列表数据
