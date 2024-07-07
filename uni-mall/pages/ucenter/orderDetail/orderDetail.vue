@@ -411,6 +411,7 @@
 		flex: 1;
 		height: 145.83rpx;
 		margin-left: 20rpx;
+    min-width: 0;
 	}
 
 	.order-goods .item .t {
@@ -430,7 +431,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 100%;
+    flex: 1; /* 允许.name元素根据可用空间伸缩 */
+    min-width: 0; /* 防止溢出 */
+    max-width: 100%;
 	}
 
 	.number {
