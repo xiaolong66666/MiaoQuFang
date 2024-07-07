@@ -156,10 +156,10 @@ let vm = new Vue({
                     type: "POST",
                     url: "../order/confirmPay",
                     contentType: "application/json",
-                    params: {
+                    params: JSON.stringify({
                         orderId: id,
-                        payStatus: payStatus
-                    },
+                        payStatus: payStatus})
+                        ,
                     successCallback: function (r) {
                         if (r.code == 0) {
                             alert('操作成功', function (index) {

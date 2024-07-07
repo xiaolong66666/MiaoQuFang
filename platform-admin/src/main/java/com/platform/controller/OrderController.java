@@ -130,7 +130,7 @@ public class OrderController {
     @RequestMapping("/confirmPay")
     @RequiresPermissions("order:pay")
     public R confirmPay(@RequestBody JSONObject jsonParam) {
-        Integer id = jsonParam.getInteger("id");
+        Integer id = jsonParam.getInteger("orderId");
         Integer payStatus = jsonParam.getInteger("payStatus");
         orderService.confirmPay(id,payStatus);
 

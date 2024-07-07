@@ -1,5 +1,7 @@
 package com.platform.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.platform.utils.JsonTimeSerializer;
 import lombok.Data;
 
 import java.io.Serializable;
