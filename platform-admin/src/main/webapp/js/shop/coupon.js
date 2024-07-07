@@ -254,7 +254,7 @@ var vm = new Vue({
                         userIds: vm.user.toString(),
                         sendSms: vm.sendSms,
                         title: "【妙趣坊】优惠券领取通知!",
-                        content: "您已收到优惠券\"满"+vm.selectData.minGoodsAmount+"减"+vm.selectData.typeMoney+"\"，请尽快使用!",
+                        content: "您已收到优惠券\"满"+vm.selectData.minGoodsAmount+"减"+vm.selectData.typeMoney+"\"，请尽快使用!\n妙趣坊商城:http://miaoqufang.cn/",
                     }),
                     successCallback: function (r) {
                         alert('操作成功', function (index) {
