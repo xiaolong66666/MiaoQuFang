@@ -3,6 +3,7 @@
 		<view class="order-info">
 			<view class="item-a">下单时间：{{orderInfo.addTime}}</view>
 			<view class="item-b">订单编号：{{orderInfo.orderSn}}</view>
+
 			<view class="item-c">
 				<view class="l">实付：<text class="cost">￥{{orderInfo.actualPrice}}</text></view>
 				<view class="r">
@@ -50,7 +51,9 @@
 					<text class="name">{{orderInfo.consignee}}</text>
 					<text class="mobile">{{orderInfo.mobile}}</text>
 				</view>
-				<view class="b">{{orderInfo.fullRegion + orderInfo.address}}</view>
+				<view class="b">地址：{{orderInfo.fullRegion + orderInfo.address}}</view>
+				<view class="b">快递公司：{{orderInfo.shippingName}}</view>
+				<view class="b">快递单号：{{orderInfo.shippingNo}}</view>
 			</view>
 			<view class="total">
 				<view class="t">
@@ -62,11 +65,11 @@
 					<text class="txt">￥{{orderInfo.freightPrice}}</text>
 				</view>
         <view class="t">
-          <text class="label">优惠券抵扣：</text>
+          <text class="label">优惠券：</text>
           <text class="txt">-￥{{orderInfo.couponPrice}}</text>
         </view>
         <view class="t">
-          <text class="label">积分抵扣：</text>
+          <text class="label">积分：</text>
           <text class="txt">-￥{{orderInfo.pointsPay}}</text>
         </view>
 			</view>
@@ -463,7 +466,7 @@
 	}
 
 	.order-bottom .address {
-		height: 128rpx;
+		height: 178rpx;
 		padding-top: 25rpx;
 		border-bottom: 1px solid #f4f4f4;
 	}
