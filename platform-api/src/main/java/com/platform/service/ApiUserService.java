@@ -93,6 +93,8 @@ public class ApiUserService extends ApiBaseAction {
             userVo.setRegisterIp(this.getClientIp());
             userVo.setLastLoginIp(this.getClientIp());
             userVo.setLastLoginTime(new Date());
+            //初始化创建用户为普通用户
+            userVo.setUserLevelId(1);
             userVo.setAvatar("http://miaoqufang.cn/images/logo.png");
             userVo.setNickname(name);
             save(userVo);

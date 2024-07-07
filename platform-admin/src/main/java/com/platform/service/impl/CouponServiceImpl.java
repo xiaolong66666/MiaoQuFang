@@ -81,11 +81,19 @@ public class CouponServiceImpl implements CouponService {
         // 发放方式 0：按订单发放 1：按用户发放 2:商品转发送券 3：按商品发放 4:新用户注册  5：线下发放 6评价好评红包（固定或随机红包）
         Integer sendType = MapUtils.getInteger(params, "sendType");
         Integer couponId = MapUtils.getInteger(params, "couponId");
+        String title = MapUtils.getString(params, "title");
+        String content = MapUtils.getString(params, "content");
         if (null == sendType) {
             return R.error("发放方式不能为空");
         }
         if (null == couponId) {
             return R.error("优惠券不能为空");
+        }
+        if (StringUtils.isEmpty(title)) {
+            return R.error("主题不能为空");
+        }
+        if (StringUtils.isEmpty(content)) {
+            return R.error("邮箱内容不能为空");
         }
         if (1 == sendType) {
             String userIds = MapUtils.getString(params, "userIds"); // 下发用户逗号分割
@@ -109,18 +117,7 @@ public class CouponServiceImpl implements CouponService {
                     UserEntity userEntity = userDao.queryObject(userId);
                     // todo 发送邮箱
                     SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
-                    try {
-                        seedMailService.setTitle("【妙趣坊】优惠券通知！");
-                        ThreadPoolUtils.execute(() -> {
-                            try {
-                                seedMailService.seedMessage(userEntity.getUsername(),"您的账号："+userEntity.getUsername()+"已收到优惠券，请尽快使用");
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        });
-                    } catch (Exception e) {
-                        return R.error("邮箱服务异常！请联系小龙...");
-                    }
+                    seedMailService.seedMessage(title,userEntity.getUsername(),content);
                 }
             }
         } else if (3 == sendType) {

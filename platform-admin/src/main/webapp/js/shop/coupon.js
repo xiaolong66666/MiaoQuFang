@@ -60,7 +60,7 @@ $(function () {
             {
                 label: '操作', width: 70, sortable: false, formatter: function (value, col, row) {
                     if (row.sendType == 1 || row.sendType == 3) {
-                        return '<button class="ivu-btn ivu-btn-primary ivu-btn-circle ivu-btn-small" onclick="vm.publish(' + row.id + ',' + row.sendType + ')"><i class="ivu-icon ivu-icon-android-send"></i>发放</button>';
+                        return '<button class="ivu-btn ivu-btn-primary ivu-btn-circle ivu-btn-small" onclick="vm.publish(' + row.id + ',' + row.sendType + ','+row.typeMoney+','+row.minGoodsAmount+' )"><i class="ivu-icon ivu-icon-android-send"></i>发放</button>';
                     }
                     return '';
                 }
@@ -207,13 +207,13 @@ var vm = new Vue({
         handleReset: function (name) {
             handleResetForm(this, name);
         },
-        publish: function (id, sendType) {
+        publish: function (id, sendType,typeMoney, minGoodsAmount){
             vm.showGoods = true;
             vm.goods = [];
             vm.user = [];
             vm.getGoodss();
             vm.getUsers();
-            vm.selectData = {id: id, sendType: sendType};
+            vm.selectData = {id: id, sendType: sendType,typeMoney:typeMoney,minGoodsAmount:minGoodsAmount};
             vm.sendSms = false;
             openWindow({
                 title: "发放",
@@ -252,7 +252,9 @@ var vm = new Vue({
                         couponId: vm.selectData.id,
                         goodsIds: vm.goods.toString(),
                         userIds: vm.user.toString(),
-                        sendSms: vm.sendSms
+                        sendSms: vm.sendSms,
+                        title: "【妙趣坊】优惠券领取通知!",
+                        content: "您已收到优惠券\"满"+vm.selectData.minGoodsAmount+"减"+vm.selectData.typeMoney+"\"，请尽快使用!",
                     }),
                     successCallback: function (r) {
                         alert('操作成功', function (index) {

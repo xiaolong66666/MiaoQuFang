@@ -1,6 +1,7 @@
 package com.platform.service.impl;
 import com.platform.service.SendMailService;
 import com.platform.util.CodeUtils;
+import com.platform.util.ThreadPoolUtils;
 import com.sun.mail.util.MailSSLSocketFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,32 +18,22 @@ import java.util.Properties;
 public class SeedMailServiceImpl implements SendMailService {
     //发送人
     private String from="2636822826@qq.com";
-    //标题
-    private String title;
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    //验证码
-    private String code;
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-    @Autowired
-    private CodeUtils codeUtils;
-    @Override
-    public void seedMessage(String to,String context) throws MessagingException {
-        Properties prop = new Properties();
+    private Properties prop = new Properties();
+    {
         prop.setProperty("mail.transport.protocol", "smtp");
         prop.setProperty("mail.smtp.host", "smtp.qq.com");
         prop.setProperty("mail.smtp.auth", "true");
         prop.setProperty("mail.smtp.port", "587");
+        prop.put("mail.smtp.ssl.trust", "*");
+    }
+
+    @Autowired
+    private CodeUtils codeUtils;
+    @Override
+    public void seedMessage(String title,String to,String context) {
         try {
             MailSSLSocketFactory sf = new MailSSLSocketFactory();
             sf.setTrustAllHosts(true);
-            prop.put("mail.smtp.ssl.trust", "*");
             prop.put("mail.smtp.ssl.socketFactory", sf);
             // 创建session，并验证用户名和密码
             Session session = Session.getDefaultInstance(prop, new Authenticator(){
@@ -51,13 +42,19 @@ public class SeedMailServiceImpl implements SendMailService {
                 }});
             // 开启Session的debug模式，这样就可以查看到程序发送Email的运行状态
             session.setDebug(true);
-            Message message = createSimpleMail(session,to,context);
-            Transport.send(message);
+            Message message = createSimpleMail(session,title,to,context);
+            ThreadPoolUtils.execute(() -> {
+                try {
+                    Transport.send(message);
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public MimeMessage createSimpleMail(Session session,String to,String context) throws Exception {
+    public MimeMessage createSimpleMail(Session session,String title,String to,String context) throws Exception {
         // 创建邮件对象
         MimeMessage message = new MimeMessage(session);
         // 指明邮件的发件人
@@ -76,7 +73,7 @@ public class SeedMailServiceImpl implements SendMailService {
 
     @Override
     public Boolean checkCode(String mail,String code) {
-        String code1 = codeUtils.getCode(mail);
-        return code.equals(code1);
+        String cacheCode = codeUtils.getCode(mail);
+        return code.equals(cacheCode);
     }
 }
