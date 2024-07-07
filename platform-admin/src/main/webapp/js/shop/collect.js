@@ -5,7 +5,11 @@ $(function () {
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '用户', name: 'userName', index: 'user_name', width: 80},
             {label: '商品', name: 'valueName', index: 'value_name', width: 80},
-            {label: '添加时间', name: 'addTime', index: 'add_time', width: 80}
+            {label: '添加时间', name: 'addTime', index: 'add_time', width: 80,
+                formatter: function (value) {
+                    return transDate(value, 'yyyy-MM-dd hh:mm:ss');
+                }
+            }
             // {label: '提醒', name: 'isAttention', index: 'is_attention', width: 80}
             // {label: '类型', name: 'typeId', index: 'type_id', width: 80}
         ]
