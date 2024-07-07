@@ -57,6 +57,7 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public int save(CouponEntity coupon) {
+        coupon.setSendType(1);
         return couponDao.save(coupon);
     }
 

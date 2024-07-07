@@ -25,8 +25,9 @@ $(function () {
                     return '-';
                 }
             },
-            {label: '最小金额', name: 'minAmount', index: 'min_amount', width: 80},
-            {label: '最大金额', name: 'maxAmount', index: 'max_amount', width: 80},
+            // {label: '最小金额', name: 'minAmount', index: 'min_amount', width: 80},
+            // {label: '最大金额', name: 'maxAmount', index: 'max_amount', width: 80},
+
             {
                 label: '发放开始时间',
                 name: 'sendStartDate',
@@ -76,9 +77,9 @@ var vm = new Vue({
         title: null,
         coupon: {sendType: 0},
         ruleValidate: {
-            name: [
-                {required: true, message: '优惠券名称不能为空', trigger: 'blur'}
-            ]
+            // name: [
+            //     {required: true, message: '优惠券名称不能为空', trigger: 'blur'}
+            // ]
         },
         q: {
             name: ''
@@ -114,6 +115,36 @@ var vm = new Vue({
             vm.getInfo(id)
         },
         saveOrUpdate: function (event) {
+            //必填参数非空校验
+            if (vm.coupon.name == null || vm.coupon.name == '') {
+                vm.$Message.error('优惠券名称不能为空');
+                return;
+            }
+            if (vm.coupon.typeMoney == null || vm.coupon.typeMoney == '') {
+                vm.$Message.error('金额不能为空');
+                return;
+            }
+            if (vm.coupon.sendStartDate == null || vm.coupon.sendStartDate == '') {
+                vm.$Message.error('发放开始时间不能为空');
+                return;
+            }
+            if (vm.coupon.sendEndDate == null || vm.coupon.sendEndDate == '') {
+                vm.$Message.error('发放结束时间不能为空');
+                return;
+            }
+            if (vm.coupon.useStartDate == null || vm.coupon.useStartDate == '') {
+                vm.$Message.error('使用开始时间不能为空');
+                return;
+            }
+            if (vm.coupon.useEndDate == null || vm.coupon.useEndDate == '') {
+                vm.$Message.error('使用结束时间不能为空');
+                return;
+            }
+            if (vm.coupon.minGoodsAmount == null || vm.coupon.minGoodsAmount == '') {
+                vm.$Message.error('最小商品金额不能为空');
+                return;
+            }
+
             var url = vm.coupon.id == null ? "../coupon/save" : "../coupon/update";
 
             Ajax.request({

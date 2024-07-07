@@ -4,7 +4,7 @@
 		<view v-if="couponList.length>0" class="coupon-list">
 			<block v-for="(item, index) in couponList" :key="item.id">
 				<view class="item" :style="'background: ' + (item.couponStatus==1?'linear-gradient(to right,#cfa568,#e3bf79)':'linear-gradient(to right,#999,#DDDDDD)')">
-					<view class="tag">新人专享</view>
+					<view class="tag">妙友专享</view>
 					<view class="content">
 						<view class="left">
 							<view class="name">{{item.name||''}}</view>
