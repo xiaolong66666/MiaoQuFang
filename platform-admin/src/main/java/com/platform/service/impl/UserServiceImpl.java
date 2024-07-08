@@ -67,8 +67,8 @@ public class UserServiceImpl implements UserService {
         List<String> ids = (List<String>) params.get("userIds");
         for (String id : ids) {
             UserEntity userEntity = userDao.queryObject(id);
-            String s = (String) params.get("points");
-            BigDecimal points = BigDecimal.valueOf(Double.parseDouble(s));
+            Integer s = (Integer) params.get("points");
+            BigDecimal points = BigDecimal.valueOf(Double.valueOf(s));
             BigDecimal totalPoints = userEntity.getPoints().add(points);
             String content = "您的积分发生变动，已获得积分：" + points+ "，剩余积分：" + totalPoints;
             seedMailService.seedMessage(title,userEntity.getUsername(),content);
