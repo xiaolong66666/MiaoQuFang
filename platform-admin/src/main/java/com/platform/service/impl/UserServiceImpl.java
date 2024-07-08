@@ -6,6 +6,7 @@ import com.platform.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -56,5 +57,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public int deleteBatch(Integer[] ids) {
         return userDao.deleteBatch(ids);
+    }
+
+    @Override
+    public void setUserPoints(Map<String,Object> params) {
+        // todo 发送邮箱
+        SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
+        String title = "【妙趣坊】积分变动通知";
+        List<String> ids = (List<String>) params.get("userIds");
+        for (String id : ids) {
+            UserEntity userEntity = userDao.queryObject(id);
+            String s = (String) params.get("points");
+            BigDecimal points = BigDecimal.valueOf(Double.parseDouble(s));
+            BigDecimal totalPoints = userEntity.getPoints().add(points);
+            String content = "您的积分发生变动，已获得积分：" + points+ "，剩余积分：" + totalPoints;
+            seedMailService.seedMessage(title,userEntity.getUsername(),content);
+        }
+        userDao.setUserPoints(params);
     }
 }

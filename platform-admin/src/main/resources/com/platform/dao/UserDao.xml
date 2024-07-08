@@ -139,6 +139,12 @@
         </set>
         where id = #{id}
     </update>
+    <update id="setUserPoints">
+        update nideshop_user set points = points + #{points} where id in
+        <foreach collection="userIds" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </update>
 
     <delete id="delete">
 		delete from nideshop_user where id = #{value}

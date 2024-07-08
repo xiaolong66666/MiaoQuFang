@@ -48,6 +48,9 @@ $(function () {
 var vm = new Vue({
     el: '#rrapp',
     data: {
+        //发送积分数量
+        sendPoints: 0,
+        showPoints: false,
         showList: true,
         title: null,
         user: {
@@ -64,6 +67,39 @@ var vm = new Vue({
         userLevels: []
     },
     methods: {
+        setPoints: function () {
+            var ids = getSelectedRows("#jqGrid");
+            if (ids == null) {
+                return;
+            }
+            this.showPoints = true;
+            this.sendPoints = 0;
+            //开启窗口
+            openWindow({
+                title: "发放积分",
+                area: ['400px', '200px'],
+                content: jQuery("#sendDiv")
+            })
+        },
+        submitPoints: function () {
+            var ids = getSelectedRows("#jqGrid");
+            Ajax.request({
+                type: "POST",
+                url: "../user/setPoints",
+                contentType: "application/json",
+                params: JSON.stringify({
+                    userIds: ids,
+                    points: vm.sendPoints
+
+                }),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.showPoints = false;
+                        vm.reload();
+                    });
+                }
+            });
+        },
         query: function () {
             vm.reload();
         },

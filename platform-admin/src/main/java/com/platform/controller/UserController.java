@@ -1,5 +1,6 @@
 package com.platform.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.platform.entity.UserEntity;
 import com.platform.service.UserService;
 import com.platform.utils.PageUtils;
@@ -11,10 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * Controller
@@ -140,6 +140,23 @@ public class UserController {
 
         ee.addSheetByMap("会员", list, header);
         ee.export(response);
+        return R.ok();
+    }
+
+    /**
+     * 批量分发积分
+     */
+    @RequestMapping("/setPoints")
+    @RequiresPermissions("user:points")
+    public R setUserPoints(@RequestBody JSONObject param) {
+        Integer[] ids = param.getObject("userIds", Integer[].class);
+        Integer paramInteger = param.getInteger("points");
+
+        //校验参数
+        if (null == ids || null == paramInteger || paramInteger <= 0) {
+            return R.ok();
+        }
+        userService.setUserPoints(param.getInnerMap());
         return R.ok();
     }
 }

@@ -2,6 +2,7 @@ package com.platform.service;
 
 import com.platform.entity.UserEntity;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -69,4 +70,6 @@ public interface UserService {
      * @return 删除条数
      */
     int deleteBatch(Integer[] ids);
+
+    void setUserPoints(Map<String,Object> params);
 }
