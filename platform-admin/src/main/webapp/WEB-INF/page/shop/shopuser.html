@@ -42,7 +42,8 @@
     <Card id="sendDiv" v-show="showPoints">
         <i-form :label-width="100">
             <Form-item label="发放积分">
-                <i-input v-model="sendPoints" placeholder="发放积分"/>
+                <Input-number :min="0" :step="1" v-model="sendPoints" placeholder="发放积分"
+                              style="width: 188px;"/>
             </Form-item>
             <Form-item>
                 <i-button type="primary" @click="submitPoints">提交</i-button>
