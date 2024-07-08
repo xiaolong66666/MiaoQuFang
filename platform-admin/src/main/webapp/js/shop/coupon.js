@@ -258,6 +258,8 @@ var vm = new Vue({
                     }),
                     successCallback: function (r) {
                         alert('操作成功', function (index) {
+                            //关闭窗口#sendDiv
+                            layer.closeAll();
                             vm.reload();
                             vm.showGoods = false;
                             vm.showList = true;
