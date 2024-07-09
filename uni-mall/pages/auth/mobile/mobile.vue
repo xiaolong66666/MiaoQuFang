@@ -48,8 +48,8 @@
           if (res.code === 0) {
             that.code = res.userCode.code;
             that.usedCode = res.userCode.usedCode;
-            console.log(that.code);
-            console.log(that.usedCode);
+            that.codeInfo.usedCode = res.userCode.usedCode;
+            that.codeInfo.code = res.userCode.code;
           }else {
             //提示错误信息
             uni.showModal({
