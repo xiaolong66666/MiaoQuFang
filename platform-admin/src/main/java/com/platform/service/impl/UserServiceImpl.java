@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
     public void setUserPoints(Map<String,Object> params) {
         // todo 发送邮箱
         SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
-        String title = "【妙趣坊】积分变动通知";
+        String title = "【妙趣坊】系统发放积分通知!";
         List<String> ids = (List<String>) params.get("userIds");
         for (String id : ids) {
             UserEntity userEntity = userDao.queryObject(id);
