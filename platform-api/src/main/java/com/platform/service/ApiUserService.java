@@ -129,4 +129,12 @@ public class ApiUserService extends ApiBaseAction {
     public UserInfo getUserByUserName(String username) {
         return userDao.queryByUserName(username);
     }
+
+    public UserVo getUserCode(Long userId) {
+        return userDao.getUserCode(userId);
+    }
+
+    public UserVo queryByUserCode(String userCode) {
+        return userDao.queryByUserCode(userCode);
+    }
 }

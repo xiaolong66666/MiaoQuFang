@@ -66,12 +66,12 @@
 					<text class="txt">意见反馈</text>
 				</navigator>
 			</view>
-<!--			<view class="item item-bottom" v-if="!hasMobile">-->
-<!--				<navigator url="/pages/auth/mobile/mobile" class="a">-->
-<!--					<text class="icon phone"></text>-->
-<!--					<text class="txt">修改邮箱</text>-->
-<!--				</navigator>-->
-<!--			</view>-->
+			<view class="item item-bottom" v-if="!hasMobile">
+				<navigator url="/pages/auth/mobile/mobile" class="a">
+					<text class="icon phone"></text>
+					<text class="txt">邀请码</text>
+				</navigator>
+			</view>
 		</view>
 		<view class="logout" v-if="userInfo.userName!='点击去登录'" @tap="exitLogin">退出登录</view>
 		<view class="logout" v-else @tap="goLogin">点击去登录</view>
@@ -392,7 +392,7 @@
 	}
 
 	.user-menu .icon.phone {
-		background: url(/h5/static/images/phone.png) no-repeat;
+		background: url(/h5/static/images/gift.png) no-repeat;
 		background-size: 52.803rpx;
 	}
 

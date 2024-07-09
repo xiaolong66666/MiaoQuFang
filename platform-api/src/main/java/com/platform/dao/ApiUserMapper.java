@@ -32,4 +32,8 @@ public interface ApiUserMapper extends BaseDao<UserVo> {
     int saveSmsCodeLog(SmsLogVo smsLogVo);
 
     UserInfo queryByUserName(String username);
+
+    UserVo getUserCode(@Param("userId")Long userId);
+
+    UserVo queryByUserCode(@Param("code") String userCode);
 }

@@ -20,6 +20,8 @@
         <result property="avatar" column="avatar"/>
         <result property="weixinOpenid" column="weixin_openid"/>
         <result property="points" column="points"/>
+        <result property="code" column="code"/>
+        <result property="usedCode" column="usedCode"/>
     </resultMap>
 
     <select id="queryObject" resultMap="userMap">
@@ -153,6 +155,12 @@
             nickname,
             birthday
             from nideshop_user where `username` = #{username}
+    </select>
+    <select id="getUserCode" resultType="com.platform.entity.UserVo">
+        select code,usedCode from nideshop_user where `id` = #{userId}
+    </select>
+    <select id="queryByUserCode" resultType="com.platform.entity.UserVo">
+        select id from nideshop_user where `code` = #{code}
     </select>
 
     <insert id="saveSmsCodeLog" parameterType="com.platform.entity.SmsLogVo">

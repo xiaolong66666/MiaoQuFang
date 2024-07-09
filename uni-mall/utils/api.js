@@ -14,6 +14,9 @@ module.exports = {
 	GoodsCount: 'goods/count', //统计商品总数
 	GoodsList: 'goods/list', //获得商品列表
 	Points: 'user/points', //积分商品列表
+	GetCodeMsg: 'user/getUserCode', //获取邀请码
+	SubmitCode:'user/setUserCode', //提交邀请码
+	GetCode: 'user/createCode', //生成邀请码
 	GoodsCategory: 'goods/category', //获得分类数据
 	GoodsDetail: 'goods/detail', //获得商品的详情
 	GoodsHot: 'goods/hot', //人气推荐

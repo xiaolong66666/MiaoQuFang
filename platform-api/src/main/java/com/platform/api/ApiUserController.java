@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.util.UUID;
+
 /**
  * 描述: ApiIndexController
  */
@@ -134,27 +137,55 @@ public class ApiUserController extends ApiBaseAction {
         return this.toResponseSuccess(userVo.getPoints());
     }
 
-    //更换邮箱账号
-//    @ApiOperation(value = "更换邮箱账号")
-//    @PostMapping("bindEmail")
-//    public Object bindEmail(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonObject) {
-//        Long userId = loginUser.getUserId();
-//        if (null == userId) {
-//            return toResponseFail("请先登录");
-//        }
-//        //
-//        String mail = jsonObject.getString("username");
-//        String checkCode = jsonObject.getString("checkCode");
-//        //校验验证码
-//        String code = (String) J2CacheUtils.getCode(mail);
-//        if (!checkCode.equals(code)) {
-//            throw new RRException("验证码错误");
-//        }
-//        //更新用户信息
-//        UserVo userVo = new UserVo();
-//        userVo.setUserId(userId);
-//        userVo.setUsername(mail);
-//        userService.update(userVo);
-//        return this.toResponseSuccess("更新成功！");
-//    }
+    /**
+     * 获取填写邀请码
+     */
+    @ApiOperation(value = "获取填写邀请码")
+    @PostMapping("getUserCode")
+    public Object getUserCode(@LoginUser UserVo loginUser) {
+        UserVo userVo = userService.getUserCode(loginUser.getUserId());
+        return this.toResponseSuccess(userVo);
+    }
+
+    /**
+     * 填写邀请码
+     */
+    @ApiOperation(value = "填写邀请码")
+    @PostMapping("setUserCode")
+    public Object setUserCode(@LoginUser UserVo loginUser) {
+        JSONObject jsonParams = getJsonRequest();
+        String userCode = jsonParams.getString("code");
+        if (StringUtils.isNullOrEmpty(userCode)) {
+            return this.toResponseFail("邀请码不能为空");
+        }
+        //校验邀请码是否存在
+        UserVo userCodeVo = userService.queryByUserCode(userCode);
+        if (StringUtils.isNullOrEmpty(userCodeVo)) {
+            return this.toResponseFail("邀请码不存在");
+        }
+        //邀请码存在，进行下一步操作
+        UserVo userVo = userService.queryObject(loginUser.getUserId());
+        userVo.setUsedCode(userCode);
+        //填写邀请码后，用户积分增加5
+        userVo.setPoints(userVo.getPoints().add(new BigDecimal(5)));
+        userService.update(userVo);
+        return this.toResponseSuccess("填写邀请码成功");
+    }
+
+    /**
+     * 生成邀请码
+     */
+    @ApiOperation(value = "生成邀请码")
+    @PostMapping("createCode")
+    public Object createCode(@LoginUser UserVo loginUser) {
+        UserVo userVo = userService.queryObject(loginUser.getUserId());
+        if (!StringUtils.isNullOrEmpty(userVo.getCode())) {
+            return this.toResponseFail("邀请码已生成");
+        }
+        String userCode = UUID.randomUUID().toString().replace("-", "");
+        userVo.setCode(userCode);
+        userService.update(userVo);
+        return this.toResponseSuccess(userCode);
+    }
+
 }

@@ -46,4 +46,8 @@ public class UserVo implements Serializable {
     private String weixinOpenid;
     //用户积分
     private BigDecimal points;
+    //邀请码
+    private String code;
+    //已使用邀请码
+    private String usedCode;
 }
