@@ -136,7 +136,7 @@ const utils = {
 					clearTimeout(utils.delayed)
 					utils.delayed = null;
 					if (res.statusCode === 200) {
-						if (res.data.errno === 0 || res.data.errno === 401) {
+						if (res.data.code === 0 ||res.data.errno === 0 || res.data.errno === 401) {
 							uni.hideLoading()
 						} else {
 							utils.toast(res.data.msg)

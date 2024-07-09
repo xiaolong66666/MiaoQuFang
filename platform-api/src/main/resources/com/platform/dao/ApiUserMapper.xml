@@ -110,6 +110,8 @@
             <if test="avatar != null">`avatar` = #{avatar},</if>
             <if test="weixinOpenid != null">`weixin_openid` = #{weixinOpenid},</if>
             <if test="points != null">`points` = #{points}, </if>
+            <if test="code != null">`code` = #{code}, </if>
+            <if test="usedCode != null">`used_code` = #{usedCode}, </if>
         </set>
         where id = #{userId}
     </update>
@@ -157,10 +159,10 @@
             from nideshop_user where `username` = #{username}
     </select>
     <select id="getUserCode" resultType="com.platform.entity.UserVo">
-        select code,usedCode from nideshop_user where `id` = #{userId}
+        select code,used_code as usedCode from nideshop_user where `id` = #{userId}
     </select>
     <select id="queryByUserCode" resultType="com.platform.entity.UserVo">
-        select id from nideshop_user where `code` = #{code}
+        select id as userId from nideshop_user where `code` = #{code}
     </select>
 
     <insert id="saveSmsCodeLog" parameterType="com.platform.entity.SmsLogVo">

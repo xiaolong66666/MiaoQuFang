@@ -11,6 +11,7 @@ import com.platform.entity.UserVo;
 import com.platform.service.ApiUserService;
 import com.platform.service.SysConfigService;
 import com.platform.util.ApiBaseAction;
+import com.platform.util.CommonUtil;
 import com.platform.utils.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -144,7 +145,7 @@ public class ApiUserController extends ApiBaseAction {
     @PostMapping("getUserCode")
     public Object getUserCode(@LoginUser UserVo loginUser) {
         UserVo userVo = userService.getUserCode(loginUser.getUserId());
-        return this.toResponseSuccess(userVo);
+        return R.ok().put("userCode", userVo);
     }
 
     /**
@@ -152,24 +153,28 @@ public class ApiUserController extends ApiBaseAction {
      */
     @ApiOperation(value = "填写邀请码")
     @PostMapping("setUserCode")
-    public Object setUserCode(@LoginUser UserVo loginUser) {
+    public R setUserCode(@LoginUser UserVo loginUser) {
         JSONObject jsonParams = getJsonRequest();
-        String userCode = jsonParams.getString("code");
+        String userCode = jsonParams.getString("usedCode");
         if (StringUtils.isNullOrEmpty(userCode)) {
-            return this.toResponseFail("邀请码不能为空");
+            return R.error("邀请码不能为空");
         }
         //校验邀请码是否存在
         UserVo userCodeVo = userService.queryByUserCode(userCode);
         if (StringUtils.isNullOrEmpty(userCodeVo)) {
-            return this.toResponseFail("邀请码不存在");
+            return R.error("邀请码不存在");
         }
         //邀请码存在，进行下一步操作
         UserVo userVo = userService.queryObject(loginUser.getUserId());
+        //判断用户是否已经填写过邀请码
+        if (!StringUtils.isNullOrEmpty(userVo.getUsedCode())) {
+            return R.error("邀请码已填写");
+        }
         userVo.setUsedCode(userCode);
         //填写邀请码后，用户积分增加5
         userVo.setPoints(userVo.getPoints().add(new BigDecimal(5)));
         userService.update(userVo);
-        return this.toResponseSuccess("填写邀请码成功");
+        return R.ok();
     }
 
     /**
@@ -182,7 +187,12 @@ public class ApiUserController extends ApiBaseAction {
         if (!StringUtils.isNullOrEmpty(userVo.getCode())) {
             return this.toResponseFail("邀请码已生成");
         }
-        String userCode = UUID.randomUUID().toString().replace("-", "");
+        //获取指定长度UUID
+        String userCode = UUID
+                .randomUUID()
+                .toString()
+                .replace("-", "")
+                .substring(0, 12);
         userVo.setCode(userCode);
         userService.update(userVo);
         return this.toResponseSuccess(userCode);

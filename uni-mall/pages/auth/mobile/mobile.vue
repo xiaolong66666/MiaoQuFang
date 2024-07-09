@@ -7,16 +7,17 @@
 		<view class="separate"></view>
 
     <view>
-      <view class="login-title">我的邀请码</view>
+      <view v-if="usedCode === ''" class="login-title">请填写邀请码</view>
+      <view v-if="usedCode !== ''" class="login-title">我的邀请码</view>
       <view class="login">
         <view v-if="usedCode === ''" class="second-line">
-          <input type="text" name="code" v-model="usedCode" placeholder="填写可获得5积分" />
-          <button @tap="" :disabled="false">提交邀请码</button>
+          <input type="text" name="code" v-model="codeInfo.usedCode" placeholder="填写可获得5积分" />
+          <button @tap="submitCode">提交邀请码</button>
         </view>
         <view v-if="usedCode !== ''" class="second-line">
-          <button v-if="code !== ''">我的邀请码</button>
-          <input type="text" name="code"  v-model="code" placeholder="我的邀请码" disabled/>
-          <button v-if="code === ''" @tap="getCode">获取邀请码</button>
+          <button v-if="code !== null && code !== ''">我的邀请码</button>
+          <input type="text" name="code"  v-model="codeInfo.code" placeholder="我的邀请码" disabled/>
+          <button v-if="code === null || code === ''" @tap="getCode">获取邀请码</button>
         </view>
       </view>
 		</view>
@@ -33,29 +34,38 @@
         userInfo: app.globalData.userInfo,
         code: "",
         usedCode: "",
+        codeInfo: {
+          code: "",
+          usedCode: ""
+        }
 			}
 		},
 		methods: {
       //获取填写邀请码
       getCodeMsg() {
         let that = this;
-        util.request(api.GetCodeMsg, {
-          userId: that.userInfo.id
-        },"POST", "application/json").then(function(res) {
-          if (res.errno === 0) {
-            that.code = res.data.code;
-            that.usedCode = res.data.usedCode;
+        util.request(api.GetCodeMsg,null,"POST", "application/json").then(function(res) {
+          if (res.code === 0) {
+            that.code = res.userCode.code;
+            that.usedCode = res.userCode.usedCode;
+            console.log(that.code);
+            console.log(that.usedCode);
+          }else {
+            //提示错误信息
+            uni.showModal({
+              title: '提示',
+              content: res.data.msg,
+              showCancel: false
+            });
           }
         });
       },
       //填写用户邀请码
       submitCode() {
         let that = this;
-        util.request(api.SubmitCode, {
-          userId: that.userInfo.id,
-          code: that.code
-        },"POST", "application/json").then(function(res) {
-          if (res.errno === 0) {
+        util.request(api.SubmitCode,that.codeInfo,"POST", "application/json")
+            .then(function(res) {
+          if (res.code === 0) {
             that.getCodeMsg();
           }
         });
@@ -67,7 +77,8 @@
           userId: that.userInfo.id
         },"POST", "application/json").then(function(res) {
           if (res.errno === 0) {
-            that.code = res.data.code;
+            that.code = res.errmsg;
+            that.codeInfo.code = res.errmsg;
           }
         });
       }
