@@ -30,7 +30,7 @@
 			</view>
 			<view class="item">
 				<navigator url="/pages/ucenter/collect/collect" class="a">
-					<text class="icon address"></text>
+					<text class="icon collect"></text>
 					<text class="txt">我的收藏</text>
 				</navigator>
 			</view>
@@ -55,9 +55,9 @@
 				</view>
 			</button>
 			<view class="item item-bottom">
-				<navigator url="/pages/ucenter/help/help" class="a">
+				<navigator url="/pages/ucenter/points/points" class="a">
 					<text class="icon help"></text>
-					<text class="txt">帮助中心</text>
+					<text class="txt">积分记录</text>
 				</navigator>
 			</view>
 			<view class="item item-bottom">
@@ -67,9 +67,9 @@
 				</navigator>
 			</view>
 			<view class="item item-bottom" v-if="!hasMobile">
-				<navigator url="/pages/auth/mobile/mobile" class="a">
+				<navigator url="/pages/auth/code/code" class="a">
 					<text class="icon phone"></text>
-					<text class="txt">邀请码</text>
+					<text class="txt">邀请有礼</text>
 				</navigator>
 			</view>
 		</view>
@@ -352,42 +352,46 @@
 	}
 
 	.user-menu .icon.order {
-		background: url(/h5/static/images/ucenter.png) 0 -437.5rpx no-repeat;
+		background: url(/h5/static/images/order.png) no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.coupon {
-		background: url(/h5/static/images/ucenter.png) 0 -62.4997rpx no-repeat;
+		background: url(/h5/static/images/coupon.png) no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.gift {
-		background: url(/h5/static/images/ucenter.png) 0 -187.5rpx no-repeat;
+		background: url(/h5/static/images/like.png) no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.address {
-		background: url(/h5/static/images/ucenter.png) 0 0 no-repeat;
+		background: url(/h5/static/images/address.png) 0 0 no-repeat;
+		background-size: 52.803rpx;
+	}
+  .user-menu .icon.collect {
+		background: url(/h5/static/images/collect.png) no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.security {
-		background: url(/h5/static/images/ucenter.png) 0 -500rpx no-repeat;
+		background: url(/h5/static/images/foot.png) no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.kefu {
-		background: url(/h5/static/images/ucenter.png) 0 -312.5rpx no-repeat;
+		background: url(/h5/static/images/kefu.png) no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.help {
-		background: url(/h5/static/images/ucenter.png) 0 -250rpx no-repeat;
+		background: url(/h5/static/images/points.png) no-repeat;
 		background-size: 52.803rpx;
 	}
 
 	.user-menu .icon.feedback {
-		background: url(/h5/static/images/ucenter.png) 0 -125rpx no-repeat;
+		background: url(/h5/static/images/feedback.png) no-repeat;
 		background-size: 52.803rpx;
 	}
 

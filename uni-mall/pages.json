@@ -88,6 +88,18 @@
 				"bounce": "vertical"
 			}
 		}
+	},{
+		"path": "pages/ucenter/points/points",
+		"style": {
+			"navigationBarTitleText": "我的积分",
+			"navigationBarBackgroundColor": "#fff",
+			"navigationBarTextStyle": "black",
+			"enablePullDownRefresh": true,
+			"onReachBottomDistance": 50,
+			"app-plus": {
+				"bounce": "vertical"
+			}
+		}
 	}, {
 		"path": "pages/ucenter/orderDetail/orderDetail",
 		"style": {
@@ -319,7 +331,7 @@
 			}
 		}
 	}, {
-		"path": "pages/auth/mobile/mobile",
+		"path": "pages/auth/code/code",
 		"style": {
 			"enablePullDownRefresh": true,
 			"app-plus": {

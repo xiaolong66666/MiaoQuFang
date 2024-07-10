@@ -1,0 +1,186 @@
+<template>
+	<view class="container">
+		<view class="orders" v-if="orderList.length>0">
+			<navigator :url="'../orderDetail/orderDetail?id='+item.id" class="order" v-for="(item, index) in orderList" :key="item.id">
+				<view class="h">
+					<view class="l">积分来源：系统</view>
+					<view class="r">+5</view>
+				</view>
+				<view class="b">
+					<view class="l">积分余额：￥{{item.actualPrice|| 0 }}</view>
+				</view>
+			</navigator>
+		</view>
+		<tui-show-empty v-else text="暂无记录"></tui-show-empty>
+	</view>
+</template>
+
+<script>
+	const util = require("@/utils/util.js");
+	const api = require('@/utils/api.js');
+	export default {
+		data() {
+			return {
+				orderList: [],
+				page: 1,
+				size: 10,
+				totalPages: 1
+			}
+		},
+		methods: {
+			getOrderList() {
+				let that = this;
+
+				util.request(api.OrderList, {
+					page: that.page,
+					size: that.size
+				}).then(function(res) {
+					if (res.errno === 0) {
+						that.orderList = that.orderList.concat(res.data.data)
+						that.page = res.data.currentPage + 1
+						that.totalPages = res.data.totalPages
+					}
+				});
+			},
+			payOrder(event) {
+				let that = this;
+				let orderIndex = event.currentTarget.dataset.orderIndex;
+				let order = that.orderList[orderIndex];
+        uni.redirectTo({
+          url: '/pages/payResult/payResult?orderSn=' + order.orderSn + '&pay=' + order.actualPrice
+        });
+			}
+		},
+		/**
+		 * 页面上拉触底事件的处理函数
+		 */
+		onReachBottom: function() {
+			this.getOrderList()
+		},
+		onShow: function(options) {
+			this.getOrderList();
+		},
+    onPullDownRefresh: function() {
+      this.page = 1;
+      this.orderList = [];
+      this.getOrderList();
+      uni.stopPullDownRefresh();
+    }
+	}
+</script>
+
+<style lang="scss">
+	page {
+		height: 100%;
+		width: 100%;
+		background: #f4f4f4;
+	}
+
+	.orders {
+		height: auto;
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.order {
+		margin-top: 20rpx;
+		background: #fff;
+	}
+
+	.order .h {
+		height: 83.3rpx;
+		line-height: 83.3rpx;
+		margin-left: 31.25rpx;
+		padding-right: 31.25rpx;
+		border-bottom: 1px solid #f4f4f4;
+		font-size: 30rpx;
+		color: #333;
+	}
+
+	.order .h .l {
+		float: left;
+	}
+
+	.order .h .r {
+		float: right;
+		color: #b4282d;
+		font-size: 24rpx;
+	}
+
+	.order .goods {
+		display: flex;
+		align-items: center;
+		height: 199rpx;
+		margin-left: 31.25rpx;
+	}
+
+	.order .goods .img {
+		height: 145.83rpx;
+		width: 145.83rpx;
+		background: #f4f4f4;
+	}
+
+	.order .goods .img image {
+		height: 145.83rpx;
+		width: 145.83rpx;
+	}
+
+	.order .goods .info {
+		height: 145.83rpx;
+		flex: 1;
+		padding-left: 20rpx;
+	}
+
+	.order .goods .name {
+		margin-top: 30rpx;
+		display: block;
+		height: 44rpx;
+		line-height: 44rpx;
+		color: #333;
+		font-size: 30rpx;
+	}
+
+	.order .goods .number {
+		display: block;
+		height: 37rpx;
+		line-height: 37rpx;
+		color: #666;
+		font-size: 25rpx;
+	}
+
+	.order .goods .status {
+		width: 105rpx;
+		color: #b4282d;
+		font-size: 25rpx;
+	}
+
+	.order .b {
+		height: 103rpx;
+		line-height: 103rpx;
+		margin-left: 31.25rpx;
+		padding-right: 31.25rpx;
+		border-top: 1px solid #f4f4f4;
+		font-size: 30rpx;
+		color: #333;
+	}
+
+	.order .b .l {
+		float: left;
+	}
+
+	.order .b .r {
+		float: right;
+	}
+
+	.order .b .btn {
+		margin-top: 19rpx;
+		height: 64.5rpx;
+		line-height: 64.5rpx;
+		text-align: center;
+		padding: 0 20rpx;
+		border-radius: 5rpx;
+		font-size: 26rpx;
+		color: #fff;
+		background: #b4282d;
+	}
+</style>
