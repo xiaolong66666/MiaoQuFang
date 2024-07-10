@@ -36,18 +36,6 @@ public class GoodsSpecificationController {
     @RequestMapping("/list")
     @RequiresPermissions("goodsspecification:list")
     public R list(@RequestParam Map<String, Object> params) {
-        //解决name参数乱码
-        if (params.get("name") != null) {
-            String name = params.get("name").toString();
-            if (name != null && name != "") {
-                try {
-                    name = new String(name.getBytes("ISO-8859-1"), "UTF-8");
-                    params.put("name", name);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
         //查询列表数据
         Query query = new Query(params);
 

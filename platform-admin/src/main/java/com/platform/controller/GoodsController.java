@@ -31,33 +31,8 @@ public class GoodsController {
     @RequestMapping("/list")
     @RequiresPermissions("goods:list")
     public R list(@RequestParam Map<String, Object> params) {
-        //处理查询name参数，解决乱码问题
-        if (params.get("name") != null) {
-            String name = params.get("name").toString();
-            if (name != null && name != "") {
-                try {
-                    name = new String(name.getBytes("ISO-8859-1"), "UTF-8");
-                    params.put("name", name);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        //处理查询categoryName参数，解决乱码问题
-        if (params.get("categoryName") != null) {
-            String categoryName = params.get("categoryName").toString();
-            if (categoryName != null && categoryName != "") {
-                try {
-                    categoryName = new String(categoryName.getBytes("ISO-8859-1"), "UTF-8");
-                    params.put("categoryName", categoryName);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
         //查询列表数据
         Query query = new Query(params);
-
         query.put("isDelete", 0);
         List<GoodsEntity> goodsList = goodsService.queryList(query);
         int total = goodsService.queryTotal(query);
@@ -132,18 +107,6 @@ public class GoodsController {
      */
     @RequestMapping("/historyList")
     public R historyList(@RequestParam Map<String, Object> params) {
-        //解决参数name中文乱码
-        if (params.get("name") != null) {
-            String name = params.get("name").toString();
-            if (name != null && name != "") {
-                try {
-                    name = new String(name.getBytes("ISO-8859-1"), "UTF-8");
-                    params.put("name", name);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
         //查询列表数据
         Query query = new Query(params);
 
