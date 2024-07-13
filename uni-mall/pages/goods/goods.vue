@@ -1188,7 +1188,12 @@
 		height: 177rpx;
 		display: flex;
 		align-items: center;
-	}
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100% - 208.25rpx);
+
+  }
 
 	.attr-pop .p {
 		font-size: 33rpx;
