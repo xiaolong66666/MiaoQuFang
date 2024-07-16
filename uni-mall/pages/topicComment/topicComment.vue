@@ -63,11 +63,20 @@
 						if (that.showType == 0) {
 							that.allCommentList = that.allCommentList.concat(res.data.data)
 							that.allPage = res.data.currentPage
-							that.comments = that.allCommentList.concat(res.data.data)
+							that.comments = that.allCommentList.concat(res.data.data
+                  .filter(item => {
+                item.addTime = that.formatDate(item.addTime);
+                return item;
+              }))
 						} else {
 							that.picCommentList = that.picCommentList.concat(res.data.data)
 							that.picPage = res.data.currentPage
-							that.comments = that.picCommentList.concat(res.data.data)
+							that.comments = that.picCommentList.concat(res.data.data).filter(item => {
+                item.addTime = that.formatDate(item.addTime);
+                // console.log(item)
+                console.log(that.formatDate(item.addTime))
+                return item;
+              });
 						}
 					}
 				});
