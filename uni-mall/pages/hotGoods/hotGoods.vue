@@ -50,7 +50,7 @@
 		data() {
 			return {
 				bannerInfo: {
-					'imgUrl': '',
+					'imgUrl': '/static/images/hot.png',
 					'name': ''
 				},
 				categoryFilter: false,
@@ -64,15 +64,15 @@
 			}
 		},
 		methods: {
-			getData: function() {
-				let that = this;
-				util.request(api.GoodsHot).then(function(res) {
-					if (res.errno === 0) {
-						that.bannerInfo = res.data.bannerInfo;
-						that.getGoodsList();
-					}
-				});
-			},
+			// getData: function() {
+			// 	let that = this;
+			// 	util.request(api.GoodsHot).then(function(res) {
+			// 		if (res.errno === 0) {
+			// 			that.bannerInfo = res.data.bannerInfo;
+			// 			that.getGoodsList();
+			// 		}
+			// 	});
+			// },
 			getGoodsList() {
 				var that = this;
 
@@ -108,14 +108,14 @@
 						that.currentSortOrder = tmpSortOrder
 						that.categoryFilter = false
 
-						that.getData();
+						that.getGoodsList();
 						break;
 					default:
 						//综合排序
 						that.currentSortType = 'default'
 						that.currentSortOrder = 'desc'
 						that.categoryFilter = false
-						that.getData();
+						that.getGoodsList();
 				}
 			},
 			selectCategory: function(event) {
@@ -123,16 +123,16 @@
 				let currentIndex = event.target.dataset.categoryIndex;
 				that.categoryFilter = false
 				that.categoryId = that.filterCategory[currentIndex].id
-				that.getData();
+				that.getGoodsList();
 
 			}
 		},
 		onLoad: function() {
-			this.getData();
+			this.getGoodsList();
 		},
     onPullDownRefresh() {
       // 增加下拉刷新数据的功能
-      this.getData();
+      this.getGoodsList();
       uni.stopPullDownRefresh();
     },
 	}
