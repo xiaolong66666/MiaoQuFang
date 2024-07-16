@@ -258,7 +258,7 @@ public class ApiIndexController extends ApiBaseAction {
                 param.put("isDelete", "0");
                 //分页参数
                 param.put("offset", 0);
-                param.put("limit", 5);
+                param.put("limit", 3);
 //                PageHelper.startPage(0, 7, false);
                 categoryGoods = goodsService.queryList(param);
             }
