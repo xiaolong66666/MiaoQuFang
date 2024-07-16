@@ -49,9 +49,13 @@
 					size: that.size
 				}).then(function(res) {
 					if (res.errno === 0) {
-						that.orderList = that.orderList.concat(res.data.data)
-						that.page = res.data.currentPage + 1
-						that.totalPages = res.data.totalPages
+            if (res.data.data.length === 0) {
+              that.totalPages = 0;
+            } else {
+              that.orderList = that.orderList.concat(res.data.data)
+              that.page += 1
+              that.totalPages = res.data.totalPages
+            }
 					}
 				});
 			},

@@ -522,6 +522,11 @@ public class ApiGoodsController extends ApiBaseAction {
     @PostMapping(value = "related")
     public Object related(@RequestBody JSONObject jsonParam) {
         Integer id = jsonParam.getInteger("id");
+        //校验参数
+        if (null == id) {
+            return toResponseFail("缺少参数：id");
+        }
+
         Map<String, Object> resultObj = new HashMap<>();
         Map<String, Object> param = new HashMap<>();
         param.put("goodsId", id);
@@ -547,6 +552,18 @@ public class ApiGoodsController extends ApiBaseAction {
             paramRelated.put("goodsIds", relatedGoodsIds);
             paramRelated.put("fields", "id, name, list_pic_url, retail_price");
             relatedGoods = goodsService.queryList(paramRelated);
+        }
+        //随机选择八个relatedGood返回
+        if (null != relatedGoods && relatedGoods.size() > 8) {
+            List<GoodsVo> randomGoods = new ArrayList<>();
+            Random random = new Random();
+            int num = 0;
+            while (num < 8) {
+                int randomIndex = random.nextInt(relatedGoods.size());
+                randomGoods.add(relatedGoods.get(randomIndex));
+                num++;
+            }
+            relatedGoods = randomGoods;
         }
         resultObj.put("goodsList", relatedGoods);
         return toResponseSuccess(resultObj);
