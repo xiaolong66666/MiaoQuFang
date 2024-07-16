@@ -60,7 +60,7 @@
 				currentSortType: 'default',
 				currentSortOrder: 'desc',
 				page: 1,
-				size: 1000
+				size: 8
 			}
 		},
 		methods: {
@@ -85,8 +85,11 @@
 					categoryId: that.categoryId
 				}).then(function(res) {
 					if (res.errno === 0) {
-						that.goodsList = res.data.goodsList
-						that.filterCategory = res.data.filterCategory
+            if (res.data.goodsList.length > 0) {
+              that.goodsList = that.goodsList.concat(res.data.goodsList)
+              that.filterCategory = res.data.filterCategory
+              that.page += 1
+            }
 					}
 				});
 			},
@@ -134,6 +137,12 @@
       // 增加下拉刷新数据的功能
       this.getData();
       uni.stopPullDownRefresh();
+    },
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function() {
+      this.getGoodsList()
     },
 	}
 </script>
