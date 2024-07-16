@@ -68,7 +68,7 @@ public class ApiSearchController extends ApiBaseAction {
         param.put("page", 1);
         param.put("limit", 10);
         param.put("sidx", "id");
-        param.put("order", "asc");
+        param.put("order", "desc");
         List<SearchHistoryVo> historyVoList = searchHistoryService.queryList(param);
         String[] historyKeywordList = new String[historyVoList.size()];
         if (null != historyVoList) {
