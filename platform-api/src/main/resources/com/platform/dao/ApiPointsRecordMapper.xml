@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.ApiPointsRecordMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.platform.entity.PointsRecordVo" id="pointsRecordMap">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="points" property="points" jdbcType="DECIMAL" />
+        <result column="source" property="source" jdbcType="INTEGER" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="desc" property="desc" jdbcType="VARCHAR" />
+        <result column="total_points" property="totalPoints" jdbcType="DECIMAL" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <insert id="save" parameterType="com.platform.entity.PointsRecordVo">
+        insert into nideshop_points_record(user_id, points, source, type, `desc`, total_points, create_time)
+        values (#{userId}, #{points}, #{source}, #{type}, #{desc}, #{totalPoints}, #{createTime})
+    </insert>
+
+    <select id="queryList" resultMap="pointsRecordMap">
+        select a.* ,b.username as userName
+        from nideshop_points_record a
+        left join nideshop_user b on a.user_id = b.id
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by a.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+        <if test="userName != null and userName != ''">
+            and b.username like concat('%',#{userName},'%')
+        </if>
+    </select>
+    <select id="queryTotal" resultType="int">
+        select count(*) from nideshop_points_record
+    </select>
+
+
+
+</mapper>

@@ -27,7 +27,9 @@ $(function () {
                     return '<span class="label label-success">减少</span>';
                 }},
             {label: '剩余积分', name: 'totalPoints', index: 'total_points', width: 80},
-            {label: '记录时间', name: 'createTime', index: 'create_time', width: 80},
+            {label: '记录时间', name: 'createTime', index: 'create_time', width: 80, formatter: function (value) {
+                    return transDate(value);}
+            },
             {label: '备注', name: 'desc', index: 'desc', width: 80}
         ]
     });
