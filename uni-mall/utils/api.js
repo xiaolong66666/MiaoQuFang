@@ -61,6 +61,7 @@ module.exports = {
 	RegionList: 'region/list', //获取区域列表
 
 	OrderList: 'order/list', //订单列表
+	PointsRecordList: 'pointsRecord/list', //积分记录
 	OrderDetail: 'order/detail', //订单详情
 	OrderCancel: 'order/cancelOrder', //取消订单
 	OrderConfirm: 'order/confirmOrder', //确认收货

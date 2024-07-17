@@ -1,13 +1,13 @@
 <template>
 	<view class="container">
-		<view class="orders" v-if="orderList.length>0">
-			<navigator :url="'../orderDetail/orderDetail?id='+item.id" class="order" v-for="(item, index) in orderList" :key="item.id">
+		<view class="orders" v-if="pointsRecordList.length>0">
+			<navigator class="order" v-for="(item, index) in pointsRecordList" :key="item.id">
 				<view class="h">
-					<view class="l">积分来源：系统</view>
-					<view class="r">+5</view>
+					<view class="l">积分来源：{{sourceMap[item.source]}}</view>
+					<view class="r">{{typeMap[item.type]}}{{item.points}}</view>
 				</view>
 				<view class="b">
-					<view class="l">积分余额：￥{{item.actualPrice|| 0 }}</view>
+					<view class="l">积分余额：{{item.totalPoints}}</view>
 				</view>
 			</navigator>
 		</view>
@@ -21,49 +21,49 @@
 	export default {
 		data() {
 			return {
-				orderList: [],
+        pointsRecordList: [],
 				page: 1,
-				size: 10,
-				totalPages: 1
+        size: 10,
+        sourceMap: {
+          1: '系统',
+          2: '邀请',
+          3: '购物'
+        },
+        typeMap:{
+          1: '+',
+          2: '-'
+        }
 			}
 		},
 		methods: {
-			getOrderList() {
+			getPointsRecordList() {
 				let that = this;
-
-				util.request(api.OrderList, {
+				util.request(api.PointsRecordList, {
 					page: that.page,
-					size: that.size
+          size: that.size
 				}).then(function(res) {
 					if (res.errno === 0) {
-						that.orderList = that.orderList.concat(res.data.data)
-						that.page = res.data.currentPage + 1
-						that.totalPages = res.data.totalPages
+            if (res.data.data.length > 0) {
+              that.pointsRecordList = that.pointsRecordList.concat(res.data.data)
+              that.page += 1
+            }
 					}
 				});
-			},
-			payOrder(event) {
-				let that = this;
-				let orderIndex = event.currentTarget.dataset.orderIndex;
-				let order = that.orderList[orderIndex];
-        uni.redirectTo({
-          url: '/pages/payResult/payResult?orderSn=' + order.orderSn + '&pay=' + order.actualPrice
-        });
 			}
 		},
 		/**
 		 * 页面上拉触底事件的处理函数
 		 */
 		onReachBottom: function() {
-			this.getOrderList()
+			this.getPointsRecordList()
 		},
 		onShow: function(options) {
-			this.getOrderList();
+			this.getPointsRecordList();
 		},
     onPullDownRefresh: function() {
       this.page = 1;
-      this.orderList = [];
-      this.getOrderList();
+      this.pointsRecordList = [];
+      this.getPointsRecordList();
       uni.stopPullDownRefresh();
     }
 	}

@@ -22,19 +22,21 @@
     <select id="queryList" resultMap="pointsRecordMap">
         select *
         from nideshop_points_record
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+        </where>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
             <otherwise>
-                order by a.id desc
+                order by id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
-        </if>
-        <if test="userId != null">
-            and user_id = #{userId}
         </if>
     </select>
     <select id="queryTotal" resultType="int">

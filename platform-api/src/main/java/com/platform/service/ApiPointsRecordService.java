@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ApiPointsRecordService {
@@ -37,8 +38,8 @@ public class ApiPointsRecordService {
         return pointsRecordDao.save(pointsRecordEntity);
     }
 
-    public List<PointsRecordVo> queryList(Query query) {
-        return pointsRecordDao.queryList(query);
+    public List<PointsRecordVo> queryList(Map<String, Object> params) {
+        return pointsRecordDao.queryList(params);
     }
 
     public int queryTotal(Query query) {
