@@ -82,8 +82,8 @@
                     </i-option>
                 </i-select>
             </Form-item>
-            <Form-item label="会员积分" prop="points">
-                <i-input v-model="user.points" placeholder="会员积分"/>
+            <Form-item v-if="title == '修改'" label="会员积分" prop="points">
+                <i-input v-model="user.points" placeholder="会员积分" disabled="true"/>
             </Form-item>
             <Form-item label="手机号码" prop="mobile">
                 <i-input v-model="user.mobile" placeholder="手机号码"/>

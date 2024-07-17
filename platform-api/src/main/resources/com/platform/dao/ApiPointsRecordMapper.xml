@@ -39,10 +39,4 @@
             limit #{offset}, #{limit}
         </if>
     </select>
-    <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_points_record
-    </select>
-
-
-
 </mapper>

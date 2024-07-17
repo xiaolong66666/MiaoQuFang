@@ -42,7 +42,4 @@ public class ApiPointsRecordService {
         return pointsRecordDao.queryList(params);
     }
 
-    public int queryTotal(Query query) {
-        return pointsRecordDao.queryTotal(query);
-    }
 }

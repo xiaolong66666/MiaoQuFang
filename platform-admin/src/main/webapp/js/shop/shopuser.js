@@ -54,7 +54,8 @@ var vm = new Vue({
         showList: true,
         title: null,
         user: {
-            gender: 1
+            gender: 1,
+            points: 0
         },
         ruleValidate: {
             username: [

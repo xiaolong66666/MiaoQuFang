@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int save(UserEntity user) {
         user.setRegisterTime(new Date());
+        user.setPoints(BigDecimal.ZERO);
         return userDao.save(user);
     }
 
