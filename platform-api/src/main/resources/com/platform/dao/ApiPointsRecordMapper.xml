@@ -20,9 +20,8 @@
     </insert>
 
     <select id="queryList" resultMap="pointsRecordMap">
-        select a.* ,b.username as userName
-        from nideshop_points_record a
-        left join nideshop_user b on a.user_id = b.id
+        select *
+        from nideshop_points_record
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -34,8 +33,8 @@
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
         </if>
-        <if test="userName != null and userName != ''">
-            and b.username like concat('%',#{userName},'%')
+        <if test="userId != null">
+            and user_id = #{userId}
         </if>
     </select>
     <select id="queryTotal" resultType="int">
