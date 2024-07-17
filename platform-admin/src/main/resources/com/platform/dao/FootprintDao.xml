@@ -33,6 +33,9 @@
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
         </if>
+        <if test="userName != null and userName != ''">
+            and b.username like concat('%',#{userName},'%')
+        </if>
     </select>
 
     <select id="queryTotal" resultType="int">
