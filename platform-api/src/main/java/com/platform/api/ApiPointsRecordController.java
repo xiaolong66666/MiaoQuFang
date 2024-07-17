@@ -4,6 +4,7 @@ import com.platform.service.ApiPointsRecordService;
 import com.platform.utils.PageUtils;
 import com.platform.utils.Query;
 import com.platform.utils.R;
+import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
+@Api(tags = "用户积分记录-ApiPointsRecordController")
 @RestController
-@RequestMapping("pointsRecord")
+@RequestMapping("/api/pointsRecord")
 public class ApiPointsRecordController {
     @Autowired
     private ApiPointsRecordService pointsRecordService;
