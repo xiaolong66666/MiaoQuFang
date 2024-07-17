@@ -17,7 +17,7 @@ public class PointsRecordVo {
     //    total_points decimal(10, 2) not null comment '总积分',
     //    create_time  datetime       null comment '创建时间'
     private Integer id;
-    private Integer userId;
+    private Long userId;
     private BigDecimal points;
     private Integer source;
     private Integer type;

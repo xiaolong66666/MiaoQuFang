@@ -44,6 +44,8 @@ public class ApiOrderController extends ApiBaseAction {
     private ApiUserService userService;
     @Autowired
     private ApiCouponMapper apiCouponMapper;
+    @Autowired
+    private ApiPointsRecordService pointsRecordService;
     /**
      *
      */
@@ -211,6 +213,8 @@ public class ApiOrderController extends ApiBaseAction {
             UserVo userVo = userService.queryObject(getUserId());
             userVo.setPoints(userVo.getPoints().add(orderVo.getPointsPay()));
             userService.update(userVo);
+            //积分记录
+            pointsRecordService.addPintsRecord(loginUser.getUserId(),3,1,orderVo.getPointsPay());
         }
 
         orderVo.setOrderStatus(101);
@@ -228,6 +232,7 @@ public class ApiOrderController extends ApiBaseAction {
      */
     @ApiOperation(value = "确认收货")
     @PostMapping("confirmOrder")
+    @Transactional
     public Object confirmOrder(@RequestBody JSONObject jsonParams, @LoginUser UserVo loginUser) {
         try {
             Integer orderId = jsonParams.getInteger("orderId");

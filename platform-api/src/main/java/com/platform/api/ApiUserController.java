@@ -8,6 +8,7 @@ import com.platform.cache.J2CacheUtils;
 import com.platform.entity.SmsConfig;
 import com.platform.entity.SmsLogVo;
 import com.platform.entity.UserVo;
+import com.platform.service.ApiPointsRecordService;
 import com.platform.service.ApiUserService;
 import com.platform.service.SysConfigService;
 import com.platform.util.ApiBaseAction;
@@ -16,6 +17,7 @@ import com.platform.utils.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,8 @@ public class ApiUserController extends ApiBaseAction {
     private ApiUserService userService;
     @Autowired
     private SysConfigService sysConfigService;
+    @Autowired
+    private ApiPointsRecordService pointsRecordService;
 
     /**
      * 发送短信
@@ -153,6 +157,7 @@ public class ApiUserController extends ApiBaseAction {
      */
     @ApiOperation(value = "填写邀请码")
     @PostMapping("setUserCode")
+    @Transactional
     public R setUserCode(@LoginUser UserVo loginUser) {
         JSONObject jsonParams = getJsonRequest();
         String userCode = jsonParams.getString("usedCode");
@@ -174,6 +179,8 @@ public class ApiUserController extends ApiBaseAction {
         //填写邀请码后，用户积分增加5
         userVo.setPoints(userVo.getPoints().add(new BigDecimal(5)));
         userService.update(userVo);
+        //增加积分记录
+        pointsRecordService.addPintsRecord(loginUser.getUserId(),2,1,new BigDecimal(5));
         return R.ok();
     }
 

@@ -51,6 +51,9 @@ public class ApiOrderService extends ApiBaseAction {
     private ApiProductService productService;
     @Autowired
     private ApiUserService userService;
+    @Autowired
+    private ApiPointsRecordService pointsRecordService;
+
 
     public OrderVo queryObjectByOrderSn(String orderSn) {
         return orderDao.queryObjectByOrderSn(orderSn);
@@ -171,6 +174,8 @@ public class ApiOrderService extends ApiBaseAction {
         //减少用户积分
         userVo.setPoints(userVo.getPoints().subtract(subtrahend));
         userService.update(userVo);
+        //积分记录
+        pointsRecordService.addPintsRecord(loginUser.getUserId(), 3, 2, subtrahend);
         orderInfo.setPointsPay(subtrahend);
         //使用的优惠券
         orderInfo.setCouponId(couponId);

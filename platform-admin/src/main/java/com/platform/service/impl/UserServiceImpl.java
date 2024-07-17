@@ -1,10 +1,13 @@
 package com.platform.service.impl;
 
+import com.platform.dao.PointsRecordDao;
 import com.platform.dao.UserDao;
 import com.platform.entity.UserEntity;
+import com.platform.service.PointsRecordService;
 import com.platform.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,6 +25,8 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private PointsRecordService pointsRecordService;
 
     @Override
     public UserEntity queryObject(Integer id) {
@@ -61,6 +66,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void setUserPoints(Map<String,Object> params) {
         // todo 发送邮箱
         SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
@@ -68,11 +74,14 @@ public class UserServiceImpl implements UserService {
         List<String> ids = (List<String>) params.get("userIds");
         for (String id : ids) {
             UserEntity userEntity = userDao.queryObject(id);
+            //发送邮件
             Integer s = (Integer) params.get("points");
             BigDecimal points = BigDecimal.valueOf(Double.valueOf(s));
             BigDecimal totalPoints = userEntity.getPoints().add(points);
-            String content = "您的积分发生变动，已获得积分：" + points+ "，剩余积分：" + totalPoints;
-            seedMailService.seedMessage(title,userEntity.getUsername(),content);
+            String content = "您的积分发生变动，已获得积分：" + points + "，剩余积分：" + totalPoints;
+            seedMailService.seedMessage(title, userEntity.getUsername(), content);
+            //保存积分记录
+            pointsRecordService.addPintsRecord(Integer.valueOf(id), 1, 1, BigDecimal.valueOf(Double.valueOf(s)));
         }
         userDao.setUserPoints(params);
     }
