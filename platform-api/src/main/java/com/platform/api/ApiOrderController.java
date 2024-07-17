@@ -212,9 +212,9 @@ public class ApiOrderController extends ApiBaseAction {
         if (orderVo.getPointsPay().compareTo(new BigDecimal(0)) > 0) {
             UserVo userVo = userService.queryObject(getUserId());
             userVo.setPoints(userVo.getPoints().add(orderVo.getPointsPay()));
-            userService.update(userVo);
             //积分记录
             pointsRecordService.addPintsRecord(loginUser.getUserId(),3,1,orderVo.getPointsPay());
+            userService.update(userVo);
         }
 
         orderVo.setOrderStatus(101);

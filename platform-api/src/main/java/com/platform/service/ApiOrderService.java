@@ -171,12 +171,12 @@ public class ApiOrderService extends ApiBaseAction {
         orderInfo.setFreightPrice(freightPrice.intValue());
         //留言
         orderInfo.setPostscript(postscript);
-        //减少用户积分
-        userVo.setPoints(userVo.getPoints().subtract(subtrahend));
-        userService.update(userVo);
         //积分记录
         pointsRecordService.addPintsRecord(loginUser.getUserId(), 3, 2, subtrahend);
         orderInfo.setPointsPay(subtrahend);
+        //减少用户积分
+        userVo.setPoints(userVo.getPoints().subtract(subtrahend));
+        userService.update(userVo);
         //使用的优惠券
         orderInfo.setCouponId(couponId);
         orderInfo.setCouponPrice(couponPrice);

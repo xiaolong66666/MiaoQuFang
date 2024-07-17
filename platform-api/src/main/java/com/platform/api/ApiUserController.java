@@ -176,11 +176,11 @@ public class ApiUserController extends ApiBaseAction {
             return R.error("邀请码已填写");
         }
         userVo.setUsedCode(userCode);
+        //增加积分记录
+        pointsRecordService.addPintsRecord(loginUser.getUserId(),2,1,new BigDecimal(5));
         //填写邀请码后，用户积分增加5
         userVo.setPoints(userVo.getPoints().add(new BigDecimal(5)));
         userService.update(userVo);
-        //增加积分记录
-        pointsRecordService.addPintsRecord(loginUser.getUserId(),2,1,new BigDecimal(5));
         return R.ok();
     }
 
