@@ -7,11 +7,24 @@ $(function () {
             {label: '变动积分', name: 'points', index: 'points', width: 80},
             {label: '来源', name: 'source', index: 'source', width: 80,
                 formatter: function (value) {
-                    return transIsSource(value);
+                    //1:系统 2:邀请 3:购物
+                    if (value == 1) {
+                        return '<span class="label label-success">系统</span>';
+                    }
+                    if (value == 2) {
+                        return '<span class="label label-primary">邀请</span>';
+                    }
+                    if (value == 3) {
+                        return '<span class="label label-warning">购物</span>';
+                    }
+                    return '<span class="label label-danger">未知</span>';
                 }},
             {label: '类型', name: 'type', index: 'type', width: 80,
                 formatter: function (value) {
-                    return transIsPointsRecord(value);
+                    if (value == 1) {
+                        return '<span class="label label-danger">增加</span>';
+                    }
+                    return '<span class="label label-success">减少</span>';
                 }},
             {label: '剩余积分', name: 'totalPoints', index: 'total_points', width: 80},
             {label: '记录时间', name: 'createTime', index: 'create_time', width: 80},

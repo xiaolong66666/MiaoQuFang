@@ -222,28 +222,6 @@ function transIsNot(value) {
     return '<span class="label label-danger">否</span>';
 };
 
-
-function transIsPointsRecord(value) {
-    if (value == 1) {
-        return '<span class="label label-danger">增加</span>';
-    }
-    return '<span class="label label-success">减少</span>';
-};
-
-function transIsSource(value) {
-    //1:系统 2:邀请 3:购物
-    if (value == 1) {
-        return '<span class="label label-success">系统</span>';
-    }
-    if (value == 2) {
-        return '<span class="label label-primary">邀请</span>';
-    }
-    if (value == 3) {
-        return '<span class="label label-warning">购物</span>';
-    }
-    return '<span class="label label-danger">未知</span>';
-};
-
 function transStatus(value) {
     if (value == 1) {
         return '<span class="label label-success">有效</span>';
