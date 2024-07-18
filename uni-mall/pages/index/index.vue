@@ -17,7 +17,7 @@
 			</view>
 		</view>
 
-		<view class="a-section a-topic" v-if="brands.length > 0">
+		<view class="a-section a-topic1" v-if="brands.length > 0">
 			<view class="a-section a-brand">
 				<view class="h">
 					<navigator url="/pages/brand/brand">
@@ -210,12 +210,12 @@
 <style lang="scss">
 	.banner {
 		width: 750rpx;
-		height: 417rpx;
+		height: 200rpx;
 	}
 
 	.banner image {
 		width: 100%;
-		height: 417rpx;
+		height: 200rpx;
 	}
 
 	.m-menu {
@@ -439,22 +439,73 @@
 		line-height: 50rpx;
 		font-size: 33rpx;
 	}
+  .a-topic1 .b {
+    height: 327.5rpx;
+    width: 750rpx;
+    padding: 0 0 48rpx 0;
+  }
+
+  .a-topic1 .b .list {
+    height: 327.5rpx;
+    width: 750rpx;
+    white-space: nowrap;
+  }
+
+  .a-topic1 .b .item {
+    display: inline-block;
+    height: 327.5rpx;
+    width: 680.5rpx;
+    margin-left: 30rpx;
+    overflow: hidden;
+  }
+
+  .a-topic1 .b .item:last-child {
+    margin-right: 30rpx;
+  }
+
+  .a-topic1 .b .img {
+    height: 182rpx;
+    width: 680.5rpx;
+    margin-bottom: 30rpx;
+  }
+
+  .a-topic1 .b .np {
+    height: 35rpx;
+    margin-bottom: 13.5rpx;
+    color: #333;
+    font-size: 30rpx;
+  }
+
+  .a-topic1 .b .np .price {
+    margin-left: 20.8rpx;
+    color: #b4282d;
+  }
+
+  .a-topic1 .b .desc {
+    display: block;
+    height: 30rpx;
+    color: #999;
+    font-size: 24rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
 	.a-topic .b {
-		height: 533rpx;
+		height: 826rpx;
 		width: 750rpx;
 		padding: 0 0 48rpx 0;
 	}
 
 	.a-topic .b .list {
-		height: 533rpx;
+		height: 826rpx;
 		width: 750rpx;
 		white-space: nowrap;
 	}
 
 	.a-topic .b .item {
 		display: inline-block;
-		height: 533rpx;
+		height: 826rpx;
 		width: 680.5rpx;
 		margin-left: 30rpx;
 		overflow: hidden;
@@ -465,7 +516,7 @@
 	}
 
 	.a-topic .b .img {
-		height: 387.5rpx;
+		height: 680.5rpx;
 		width: 680.5rpx;
 		margin-bottom: 30rpx;
 	}
