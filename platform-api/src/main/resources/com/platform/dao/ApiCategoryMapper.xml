@@ -35,7 +35,7 @@
             *
         </if>
         from nideshop_category
-        where 1 = 1
+        where is_show = 1
         <if test="parentId != null and parentId != null">
             and parent_id = #{parentId}
         </if>
