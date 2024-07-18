@@ -77,7 +77,7 @@ public class GoodsServiceImpl implements GoodsService {
         goodsSpecificationEntity.setGoodsId(id);
         goodsSpecificationEntity.setValue("默认规格");
         goodsSpecificationService.save(goodsSpecificationEntity);
-
+        goods.setMarketPrice(goods.getMarketPrice() == null ? new BigDecimal(9999) : goods.getMarketPrice());
         //保存产品信息
         ProductEntity productEntity = new ProductEntity();
         //默认规格
@@ -119,6 +119,7 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setCreateUserId(user.getUserId());
         goods.setUpdateUserId(user.getUserId());
         goods.setUpdateTime(new Date());
+
         return goodsDao.save(goods);
     }
 
