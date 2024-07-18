@@ -164,6 +164,9 @@
     <select id="queryByUserCode" resultType="com.platform.entity.UserVo">
         select id as userId from nideshop_user where `code` = #{code}
     </select>
+    <select id="getInviteUser" resultType="com.platform.entity.UserVo">
+        select * from nideshop_user where `code` = #{code}
+    </select>
 
     <insert id="saveSmsCodeLog" parameterType="com.platform.entity.SmsLogVo">
         insert into nideshop_sms_log(

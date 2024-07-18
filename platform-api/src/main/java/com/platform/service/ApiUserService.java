@@ -26,6 +26,10 @@ public class ApiUserService extends ApiBaseAction {
     @Autowired
     private ApiUserLevelMapper userLevelDao;
 
+    public UserVo getInviteUser(String code) {
+        return userDao.getInviteUser(code);
+    }
+
     public UserVo queryObject(Long userId) {
         return userDao.queryObject(userId);
     }

@@ -36,4 +36,6 @@ public interface ApiUserMapper extends BaseDao<UserVo> {
     UserVo getUserCode(@Param("userId")Long userId);
 
     UserVo queryByUserCode(@Param("code") String userCode);
+
+    UserVo getInviteUser(@Param("code") String code);
 }
