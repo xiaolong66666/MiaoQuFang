@@ -110,7 +110,7 @@
 
 	.topic-list .item {
 		width: 100%;
-		height: 625rpx;
+		height: 410rpx;
 		overflow: hidden;
 		background: #fff;
 		margin-bottom: 20rpx;
@@ -118,7 +118,7 @@
 
 	.topic-list .img {
 		width: 100%;
-		height: 415rpx;
+		height: 200rpx;
 	}
 
 	.topic-list .info {
