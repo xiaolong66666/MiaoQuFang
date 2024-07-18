@@ -28,7 +28,8 @@ public class ApiPointsRecordService {
         pointsRecordEntity.setPoints(points);
         pointsRecordEntity.setCreateTime(new Date());
         //查询用户总积分
-        BigDecimal totalPoints = userService.queryObject(Long.valueOf(userId)).getPoints();
+        UserVo userVo = userService.queryObject(userId);
+        BigDecimal totalPoints = userVo.getPoints();
         //判断是增加还是减少
         if (type == 1) {
             totalPoints = totalPoints.add(points);
@@ -38,7 +39,6 @@ public class ApiPointsRecordService {
         pointsRecordEntity.setTotalPoints(totalPoints);
         //发送邮件通知用户
         //发送邮件
-        UserVo userVo = userService.queryObject(userId);
         SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
         String title = "【妙趣坊】积分变动通知!";
         String change_from = (source == 1 ? "系统" : (source == 2 ? "邀请" : "购物"));

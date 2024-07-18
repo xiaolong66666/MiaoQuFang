@@ -192,7 +192,6 @@ public class ApiOrderController extends ApiBaseAction {
      */
     @ApiOperation(value = "取消订单")
     @PostMapping("cancelOrder")
-    @Transactional
     public Object cancelOrder(@RequestBody JSONObject jsonPrams , @LoginUser UserVo loginUser) {
         Integer orderId = jsonPrams.getInteger("orderId");
         OrderVo orderVo = orderService.queryObject(orderId);
@@ -206,6 +205,10 @@ public class ApiOrderController extends ApiBaseAction {
             return toResponseFail("已发货，不能取消");
         } else if (orderVo.getOrderStatus() == 301) {
             return toResponseFail("已收货，不能取消");
+        }
+        //判断是否已取消
+        if (orderVo.getOrderStatus() == 101) {
+            return toResponseFail("已取消");
         }
         // 需要退款
         // 退积分
@@ -232,7 +235,6 @@ public class ApiOrderController extends ApiBaseAction {
      */
     @ApiOperation(value = "确认收货")
     @PostMapping("confirmOrder")
-    @Transactional
     public Object confirmOrder(@RequestBody JSONObject jsonParams, @LoginUser UserVo loginUser) {
         try {
             Integer orderId = jsonParams.getInteger("orderId");
