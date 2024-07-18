@@ -95,7 +95,7 @@
 <style lang="scss">
 	page,
 	.container {
-		width: 750rpx;
+		width: 1300rpx;
 		height: 100%;
 		overflow: hidden;
 		background: #f4f4f4;
@@ -110,7 +110,7 @@
 
 	.topic-list .item {
 		width: 100%;
-		height: 410rpx;
+		height: 960rpx;
 		overflow: hidden;
 		background: #fff;
 		margin-bottom: 20rpx;
@@ -118,7 +118,7 @@
 
 	.topic-list .img {
 		width: 100%;
-		height: 200rpx;
+		height: 750rpx;
 	}
 
 	.topic-list .info {
