@@ -66,7 +66,7 @@
 	.brand-list .item {
 		display: block;
 		width: 750rpx;
-		height: 416rpx;
+		height: 200rpx;
 		position: relative;
 		margin-bottom: 4rpx;
 	}
@@ -77,13 +77,13 @@
 		top: 0;
 		z-index: 0;
 		width: 750rpx;
-		height: 417rpx;
+		height: 201rpx;
 		overflow: hidden;
 	}
 
 	.brand-list .item .img-bg image {
 		width: 750rpx;
-		height: 416rpx;
+		height: 200rpx;
 	}
 
 	.brand-list .item .txt-box {
@@ -93,7 +93,7 @@
 		display: table;
 		z-index: 0;
 		width: 750rpx;
-		height: 417rpx;
+		height: 201rpx;
 	}
 
 	.brand-list .item .line {
