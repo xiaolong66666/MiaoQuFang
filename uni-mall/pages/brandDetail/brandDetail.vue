@@ -39,7 +39,7 @@
 				brand: {},
 				goodsList: [],
 				page: 1,
-				size: 1000
+				size: 8
 			}
 		},
 		methods: {
@@ -64,7 +64,10 @@
 					size: that.size
 				}).then(function(res) {
 					if (res.errno === 0) {
-						that.goodsList = res.data.goodsList;
+            if (res.data.goodsList.length > 0) {
+              that.goodsList = that.goodsList.concat(res.data.goodsList)
+              that.page += 1
+            }
 					}
 				});
 			}
@@ -78,7 +81,13 @@
     onPullDownRefresh: function() {
       this.getBrand();
       uni.stopPullDownRefresh();
-    }
+    },
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function() {
+      this.getGoodsList()
+    },
 	}
 </script>
 
