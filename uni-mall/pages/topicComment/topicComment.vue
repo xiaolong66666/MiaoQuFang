@@ -38,6 +38,17 @@
 			}
 		},
 		methods: {
+      formatDate(timestamp) {
+        //将时间戳转化成"1970-01-21 05:43:22"格式
+        var date = new Date(timestamp * 1000);
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        var D = date.getDate() + ' ';
+        var h = date.getHours() + ':';
+        var m = date.getMinutes() + ':';
+        var s = date.getSeconds();
+        return Y + M + D + h + m + s;
+      },
 			getCommentCount: function() {
 				let that = this;
 				util.request(api.CommentCount, {
