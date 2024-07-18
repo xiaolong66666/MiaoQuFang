@@ -2,7 +2,7 @@
 	<view>
 		<scroll-view class="container">
 			<scroll-view class="content">
-				<uParse :content="topic.content" noData="" />
+				<uParse :content="topic.content" noData="" style="margin-top: 50rpx"/>
 			</scroll-view>
 			<view class="topic-goods">
 			</view>
