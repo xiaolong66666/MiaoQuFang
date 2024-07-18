@@ -164,7 +164,7 @@
     <select id="queryByUserCode" resultType="com.platform.entity.UserVo">
         select id as userId from nideshop_user where `code` = #{code}
     </select>
-    <select id="getInviteUser" resultType="com.platform.entity.UserVo">
+    <select id="getInviteUser" resultMap="userMap">
         select * from nideshop_user where `code` = #{code}
     </select>
 

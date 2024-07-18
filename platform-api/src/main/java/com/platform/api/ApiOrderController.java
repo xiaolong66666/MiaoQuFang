@@ -259,11 +259,12 @@ public class ApiOrderController extends ApiBaseAction {
             //积分记录
             pointsRecordService.addPintsRecord(loginUser.getUserId(),3,1,rebate);
             userVo.setPoints(userVo.getPoints().add(rebate));
+            userService.update(userVo);
             //获取邀请者信息
             UserVo inviteUser = userService.getInviteUser(userVo.getUsedCode());
             if (null != inviteUser) {
                 //返利邀请者
-                BigDecimal inviteRebate = orderVo.getActualPrice().multiply(new BigDecimal(0.1));
+                BigDecimal inviteRebate = orderVo.getOrderPrice().multiply(new BigDecimal(0.1));
                 //积分记录
                 pointsRecordService.addPintsRecord(inviteUser.getUserId(),2,1,inviteRebate);
                 inviteUser.setPoints(inviteUser.getPoints().add(inviteRebate));

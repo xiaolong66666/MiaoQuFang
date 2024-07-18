@@ -192,12 +192,6 @@
         uni.redirectTo({
           url: '/pages/payResult/payResult?orderId=' + this.orderId
         });
-				// let that = this;
-				// util.payOrder(parseInt(that.orderId)).then(res => {
-				// 	that.getOrderDetail();
-				// }).catch(res => {
-				// 	util.toast('支付失败');
-				// });
 			},
 			confirmOrder() {
 				//确认收货
@@ -208,10 +202,6 @@
 
 				var errorMessage = '';
 				switch (orderStatus) {
-					// case 300: {
-					//   errorMessage = '订单已发货';
-					//   break;
-					// }
 					case 301:
 						{
 							errorMessage = '订单已收货';
@@ -255,13 +245,14 @@
 								if (res.errno === 0) {
 									uni.showModal({
 										title: '提示',
-										content: res.data,
+										content: res.errmsg,
 										showCancel: false,
 										confirmText: '继续',
 										success: function(res) {
-											uni.navigateBack({
-												url: 'pages/ucenter/order/order',
-											});
+											//返回上一个界面并刷新界面
+                      uni.navigateBack({
+                        url: 'pages/ucenter/order/order',
+                      });
 										}
 									});
 								}

@@ -80,6 +80,8 @@
 			this.getOrderList()
 		},
 		onShow: function(options) {
+      this.page = 1;
+      this.orderList = [];
 			this.getOrderList();
 		},
     onPullDownRefresh: function() {
