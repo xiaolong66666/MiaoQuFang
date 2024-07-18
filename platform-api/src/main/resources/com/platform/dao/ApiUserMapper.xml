@@ -21,7 +21,7 @@
         <result property="weixinOpenid" column="weixin_openid"/>
         <result property="points" column="points"/>
         <result property="code" column="code"/>
-        <result property="usedCode" column="usedCode"/>
+        <result property="usedCode" column="used_code"/>
     </resultMap>
 
     <select id="queryObject" resultMap="userMap">

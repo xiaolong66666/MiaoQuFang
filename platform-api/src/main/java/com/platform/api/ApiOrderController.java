@@ -255,7 +255,7 @@ public class ApiOrderController extends ApiBaseAction {
             //获取当前用户信息
             UserVo userVo = userService.queryObject(userId);
             //返利当前用户
-            BigDecimal rebate = orderVo.getActualPrice().multiply(new BigDecimal(0.1));
+            BigDecimal rebate = orderVo.getOrderPrice().multiply(new BigDecimal(0.1));
             //积分记录
             pointsRecordService.addPintsRecord(loginUser.getUserId(),3,1,rebate);
             userVo.setPoints(userVo.getPoints().add(rebate));
