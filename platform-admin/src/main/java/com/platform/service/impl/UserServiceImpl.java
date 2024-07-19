@@ -75,10 +75,10 @@ public class UserServiceImpl implements UserService {
         for (String id : ids) {
             UserEntity userEntity = userDao.queryObject(id);
             //发送邮件
-            Integer s = (Integer) params.get("points");
+            Double s = Double.valueOf(params.get("points").toString());
             BigDecimal points = BigDecimal.valueOf(Double.valueOf(s));
             BigDecimal totalPoints = userEntity.getPoints().add(points);
-            String content = "您的积分发生变动，已获得积分：" + points + "，剩余积分：" + totalPoints;
+            String content = "您的积分发生变动，已获得积分：" + points + "，剩余积分：" + totalPoints + "，请注意查收！(http://miaoqufang.cn)";
             seedMailService.seedMessage(title, userEntity.getUsername(), content);
             //保存积分记录
             pointsRecordService.addPintsRecord(Integer.valueOf(id), 1, 1, BigDecimal.valueOf(Double.valueOf(s)));

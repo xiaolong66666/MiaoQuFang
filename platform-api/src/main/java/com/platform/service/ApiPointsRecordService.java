@@ -46,7 +46,7 @@ public class ApiPointsRecordService {
         //指定日期格式 yyyy-MM-dd HH:mm:ss
         String date_Str = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         //变化后的总积分（固定信息时间格式）
-        String content = "尊敬的用户"+userVo.getUsername()+"您好，您的积分账户于"+date_Str+"发生了一笔"+change_from+point_change_str+"，当前总积分为"+totalPoints+"。";
+        String content = "尊敬的用户"+userVo.getUsername()+"您好，您的积分账户于"+date_Str+"发生了一笔"+change_from+point_change_str+"，当前总积分为"+totalPoints+"。"+ "，请注意查收！(http://miaoqufang.cn)";
         seedMailService.seedMessage(title, userVo.getUsername(), content);
         return pointsRecordDao.save(pointsRecordEntity);
     }

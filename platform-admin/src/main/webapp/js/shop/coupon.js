@@ -25,9 +25,6 @@ $(function () {
                     return '-';
                 }
             },
-            // {label: '最小金额', name: 'minAmount', index: 'min_amount', width: 80},
-            // {label: '最大金额', name: 'maxAmount', index: 'max_amount', width: 80},
-
             {
                 label: '发放开始时间',
                 name: 'sendStartDate',
@@ -77,9 +74,6 @@ var vm = new Vue({
         title: null,
         coupon: {sendType: 0},
         ruleValidate: {
-            // name: [
-            //     {required: true, message: '优惠券名称不能为空', trigger: 'blur'}
-            // ]
         },
         q: {
             name: ''
