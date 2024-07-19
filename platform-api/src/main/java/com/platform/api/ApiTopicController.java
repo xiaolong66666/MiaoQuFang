@@ -72,7 +72,18 @@ public class ApiTopicController extends ApiBaseAction {
     @PostMapping("related")
     public Object related(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonParam) {
         Map<String, Object> param = new HashMap<>();
-        param.put("limit", 4);
+        //获取分页参数page、size，并校验
+        Integer page = jsonParam.getInteger("page");
+        Integer size = jsonParam.getInteger("size");
+        if (null == page) {
+            page = 1;
+        }
+        if (null == size) {
+            size = 5;
+        }
+        //封装分页查询参数limit、offset
+        param.put("offset", (page - 1) * size);
+        param.put("limit", size);
         List<TopicVo> topicEntities = topicService.queryList(param);
         return toResponseSuccess(topicEntities);
     }

@@ -66,7 +66,9 @@
 				topic: {},
 				topicList: [],
 				commentCount: 0,
-				commentList: []
+				commentList: [],
+        page: 1,
+        size: 5
 			}
 		},
 		methods: {
@@ -103,6 +105,31 @@
 					url: '/pages/commentPost/commentPost?valueId=' + this.id + '&typeId=1',
 				})
 			},
+      getTopicRelated() {
+        let that = this;
+        util.request(api.TopicRelated, {
+          id: that.id,
+          page: that.page,
+          size: that.size
+        }).then(function(res) {
+          if (res.errno === 0) {
+            if (res.data.length > 0) {
+              that.topicList = that.topicList.concat(res.data)
+              that.page += 1
+            }
+          }
+        });
+      },
+      getTopicDetail() {
+        let that = this;
+        util.request(api.TopicDetail, {
+          id: that.id
+        }).then(function(res) {
+          if (res.errno === 0) {
+            that.topic = res.data;
+          }
+        });
+      }
 		},
 		onShow: function() {
 			// 页面显示
@@ -112,27 +139,22 @@
 			// 页面初始化 options为页面跳转所带来的参数
 			var that = this;
 			that.id = parseInt(options.id)
-
-			util.request(api.TopicDetail, {
-				id: that.id
-			}).then(function(res) {
-				if (res.errno === 0) {
-					that.topic = res.data;
-				}
-			});
-
-			util.request(api.TopicRelated, {
-				id: that.id
-			}).then(function(res) {
-				if (res.errno === 0) {
-					that.topicList = res.data
-				}
-			});
+      this.getTopicDetail();
+			this.getTopicRelated();
 		},
     onPullDownRefresh: function() {
+      this.getCommentList();
+      this.getTopicDetail();
+      this.getTopicRelated();
       // 下拉刷新
       uni.stopPullDownRefresh();
-    }
+    },
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function() {
+      this.getTopicRelated();
+    },
 	}
 </script>
 
