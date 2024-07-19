@@ -16,7 +16,7 @@
 				</view>
 			</view>
 		</view>
-		<show-empty v-else text="暂无收藏"></show-empty>
+		<show-empty v-else text="暂无记录"></show-empty>
 	</view>
 </template>
 
@@ -32,38 +32,39 @@
 			}
 		},
 		methods: {
-			getFootprintList() {
-				let that = this;
-				var tmpFootPrint;
-				util.request(api.FootprintList,{
+      getFootprintList() {
+        let that = this;
+        var tmpFootPrintList;
+        util.request(api.FootprintList,{
           page: that.page,
           size: that.size
         }).then(function(res) {
-					if (res.errno === 0) {
-            if (res.data.data != undefined && res.data.data.length > 0) {
-              if (that.footprintList.length > 0) {
-                //判断直接追加列表还是子列表
-                for (var i =0; i < that.footprintList.length; i++) {
-                  for (var j = 0; j < res.data.data.length; j++) {
-                    if (that.footprintList[i][0].addTime == res.data.data[j][0].addTime) {
-                      that.footprintList[i] = that.footprintList[i].concat(res.data.data[j]);
-                      //删除重复的数据
-                      res.data.data.splice(j, 1);
-                      break;
+          if (res.errno === 0) {
+            tmpFootPrintList = res.data.data;
+            if (tmpFootPrintList !== undefined && tmpFootPrintList.length > 0) {
+              if (that.footprintList.length === 0) {
+                that.footprintList = res.data.data;
+              } else {
+                that.footprintList.forEach((item, index) => {
+                  for (var i = 0; i < tmpFootPrintList.length; i++) {
+                    if (item[0].addTime === tmpFootPrintList[i][0].addTime) {
+                      // 使用Vue.set来修改数组元素的值
+                      that.$set(that.footprintList, index, item.concat(tmpFootPrintList[i]));
+                      //tmpFootPrintList清空已添加元素tmpFootPrintList[i]
+                      tmpFootPrintList.splice(i, 1);
                     }
                   }
+                });
+                //如果tmpFootPrintList还有元素，那么就是新的日期
+                if (tmpFootPrintList.length > 0) {
+                  that.footprintList = that.footprintList.concat(tmpFootPrintList);
                 }
-                if (res.data.data.length > 0) {
-                  that.footprintList = that.footprintList.concat(res.data.data);
-                }
-              }else {
-                that.footprintList = that.footprintList.concat(res.data.data);
               }
               that.page++;
             }
-					}
-				});
-			},
+          }
+        });
+      },
 			deleteItem(event) {
 				let that = this;
 				let footprint = event.currentTarget.dataset.footprint;
