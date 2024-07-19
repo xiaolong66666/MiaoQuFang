@@ -415,7 +415,7 @@
 		height: auto;
 		width: 100%;
 		background: #fff;
-		margin-bottom: 18rpx;
+		margin-bottom: 100rpx;
 	}
 
 	.cart-view .item {
