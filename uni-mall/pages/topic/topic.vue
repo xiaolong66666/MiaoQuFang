@@ -95,7 +95,7 @@
 <style lang="scss">
 	page,
 	.container {
-		width: 1300rpx;
+		width: 750rpx;
 		height: 100%;
 		overflow: hidden;
 		background: #f4f4f4;
