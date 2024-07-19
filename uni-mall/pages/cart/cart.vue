@@ -415,7 +415,7 @@
 		height: auto;
 		width: 100%;
 		background: #fff;
-		margin-bottom: 100rpx;
+		margin-bottom: 80rpx;
 	}
 
 	.cart-view .item {
@@ -639,7 +639,7 @@
 		position: fixed;
 		bottom: 0;
 		left: 0;
-		height: 250rpx;
+		height: 200rpx;
 		width: 100%;
 		background: #fff;
 		display: flex;
