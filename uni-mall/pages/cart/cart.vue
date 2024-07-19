@@ -415,7 +415,7 @@
 		height: auto;
 		width: 100%;
 		background: #fff;
-		margin-bottom: 80rpx;
+		margin-bottom: 120rpx;
 	}
 
 	.cart-view .item {
@@ -462,7 +462,7 @@
 
 	.cart-view .item .t {
 		margin: 8rpx 0;
-		height: 28rpx;
+		height: 30rpx;
 		font-size: 25rpx;
 		color: #333;
 		overflow: hidden;
@@ -470,9 +470,9 @@
 
 
 	.cart-view .item .name {
-		height: 28rpx;
+		height: 30rpx;
 		max-width: 310rpx;
-		line-height: 28rpx;
+		line-height: 30rpx;
 		font-size: 25rpx;
 		color: #333;
 		overflow: hidden;
@@ -639,7 +639,7 @@
 		position: fixed;
 		bottom: 0;
 		left: 0;
-		height: 200rpx;
+		height: 250rpx;
 		width: 100%;
 		background: #fff;
 		display: flex;
