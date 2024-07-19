@@ -43,6 +43,13 @@ public class ApiCouponController extends ApiBaseAction {
         //获取分页参数
         Integer page = jsonParams.getInteger("page");
         Integer size = jsonParams.getInteger("size");
+        //校验参数，并初始化
+        if (null == page || page <= 0) {
+            page = 1;
+        }
+        if (null == size || size <= 0) {
+            size = 8;
+        }
         Map<String, Object> param = new HashMap<>();
         param.put("userId", loginUser.getUserId());
         //封装分页参数limit，offset

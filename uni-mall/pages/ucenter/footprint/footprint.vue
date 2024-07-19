@@ -26,7 +26,9 @@
 	export default {
 		data() {
 			return {
-				footprintList: []
+				footprintList: [],
+        page: 1,
+        size: 8,
 			}
 		},
 		methods: {

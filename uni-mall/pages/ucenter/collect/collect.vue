@@ -22,17 +22,24 @@
 		data() {
 			return {
 				typeId: 0,
-				collectList: []
+				collectList: [],
+        page: 1,
+        size: 8,
 			}
 		},
 		methods: {
 			getCollectList() {
 				let that = this;
 				util.request(api.CollectList, {
-					typeId: that.typeId
+					typeId: that.typeId,
+          page: that.page,
+          size: that.size
 				}).then(function(res) {
 					if (res.errno === 0) {
-						that.collectList = res.data;
+            if (res.data.length > 0) {
+              that.collectList = that.collectList.concat(res.data);
+              that.page++;
+            }
 					}
 				});
 			},
@@ -89,7 +96,13 @@
 		},
 		onShow: function() {
 			this.getCollectList();
-		}
+		},
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function() {
+      this.collectList();
+    },
 	}
 </script>
 

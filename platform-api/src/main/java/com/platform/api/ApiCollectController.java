@@ -34,10 +34,23 @@ public class ApiCollectController extends ApiBaseAction {
     @ApiOperation(value = "获取用户收藏")
     @PostMapping("list")
     public Object list(@LoginUser UserVo loginUser, @RequestBody JSONObject jsonParam) {
+        //获取分页参数
+        Integer page = jsonParam.getInteger("page");
+        Integer size = jsonParam.getInteger("size");
+        //校验参数，并初始化
+        if (null == page || page <= 0) {
+            page = 1;
+        }
+        if (null == size || size <= 0) {
+            size = 8;
+        }
         Integer typeId = jsonParam.getInteger("typeId");
         Map<String, Object> param = new HashMap<>();
         param.put("userId", loginUser.getUserId());
         param.put("typeId", typeId);
+        //添加分页参数
+        param.put("limit", size);
+        param.put("offset", (page - 1) * size);
         List<CollectVo> collectEntities = collectService.queryList(param);
         return toResponseSuccess(collectEntities);
     }
