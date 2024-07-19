@@ -305,14 +305,14 @@
 
 	.rec-box .b .item {
 		width: 690rpx;
-		height: 397rpx;
+		height: 761rpx;
 		padding: 24rpx 24rpx 30rpx 24rpx;
 		background: #fff;
 		margin-bottom: 30rpx;
 	}
 
 	.rec-box .b .item .img {
-		height: 278rpx;
+		height: 642rpx;
 		width: 642rpx;
 	}
 
