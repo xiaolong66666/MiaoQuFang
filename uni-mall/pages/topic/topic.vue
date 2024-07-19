@@ -11,7 +11,7 @@
 			</navigator>
 			<view class="page" v-if="showPage">
 				<view :class="'prev ' + (page <= 1 ? 'disabled' : '')" @tap="prevPage">上一页</view>
-				<view :class="'next ' + ((count / size) < page +1 ? 'disabled' : '')" @tap="nextPage">下一页</view>
+				<view :class="'next ' + ((count / size) < page  ? 'disabled' : '')" @tap="nextPage">下一页</view>
 			</view>
 		</scroll-view>
 		<tui-show-empty v-else text="暂无专题"></tui-show-empty>
@@ -27,7 +27,7 @@
 				// text:"这是一个页面"
 				topicList: [],
 				page: 1,
-				size: 10,
+				size: 5,
 				count: 0,
 				scrollTop: 0,
 				showPage: false
@@ -36,7 +36,7 @@
 		methods: {
 			nextPage: function(event) {
 				let that = this;
-				if (this.page + 1 > that.count / that.size) {
+				if (this.page  > that.count / that.size) {
 					return true;
 				}
 				that.page = parseInt(that.page) + 1
