@@ -64,13 +64,14 @@ public class ApiFootprintController extends ApiBaseAction {
             page = 1;
         }
         if (null == size) {
-            size = 10;
+            size = 8;
         }
+        //limit, offset
+        int offset = (page - 1) * size;
+        int limit = size;
         Map<String, Object> resultObj = new HashMap<String, Object>();
-
         //查询列表数据
-        PageHelper.startPage(0, 10, false);
-        List<FootprintVo> footprintVos = footprintService.queryListFootprint(loginUser.getUserId() + "");
+        List<FootprintVo> footprintVos = footprintService.queryListFootprint(loginUser.getUserId() + "",offset, limit);
 
         ApiPageUtils pageUtil = new ApiPageUtils(footprintVos, 0, size, page);
         //

@@ -35,14 +35,32 @@
 			getFootprintList() {
 				let that = this;
 				var tmpFootPrint;
-				util.request(api.FootprintList).then(function(res) {
+				util.request(api.FootprintList,{
+          page: that.page,
+          size: that.size
+        }).then(function(res) {
 					if (res.errno === 0) {
-						if (res.data.data != undefined) {
-							tmpFootPrint = res.data.data;
-						} else {
-							tmpFootPrint = [];
-						}
-						that.footprintList = tmpFootPrint;
+            if (res.data.data != undefined && res.data.data.length > 0) {
+              if (that.footprintList.length > 0) {
+                //判断直接追加列表还是子列表
+                for (var i =0; i < that.footprintList.length; i++) {
+                  for (var j = 0; j < res.data.data.length; j++) {
+                    if (that.footprintList[i][0].addTime == res.data.data[j][0].addTime) {
+                      that.footprintList[i] = that.footprintList[i].concat(res.data.data[j]);
+                      //删除重复的数据
+                      res.data.data.splice(j, 1);
+                      break;
+                    }
+                  }
+                }
+                if (res.data.data.length > 0) {
+                  that.footprintList = that.footprintList.concat(res.data.data);
+                }
+              }else {
+                that.footprintList = that.footprintList.concat(res.data.data);
+              }
+              that.page++;
+            }
 					}
 				});
 			},
@@ -100,7 +118,13 @@
 		},
 		onShow: function() {
 			this.getFootprintList();
-		}
+		},
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function() {
+      this.getFootprintList();
+    },
 	}
 </script>
 

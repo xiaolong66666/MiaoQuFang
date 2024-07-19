@@ -67,11 +67,14 @@
             nideshop_footprint f
                 LEFT JOIN nideshop_goods g ON f.goods_id = g.id
         WHERE
-            f.user_id = #{0}
+            f.user_id = #{userId}
         GROUP BY
             f.goods_id, f.user_id
         ORDER BY
             id DESC
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
     <select id="queryTotal" resultType="int">

@@ -23,8 +23,8 @@ public class ApiFootprintService {
     public List<FootprintVo> queryList(Map<String, Object> map) {
         return footprintDao.queryList(map);
     }
-    public List<FootprintVo> queryListFootprint(String userId) {
-    	return footprintDao.queryListFootprint(userId);
+    public List<FootprintVo> queryListFootprint(String userId,Integer offset,Integer limit) {
+    	return footprintDao.queryListFootprint(userId,offset,limit);
     }
 
     public List<FootprintVo> shareList(Map<String, Object> map) {
