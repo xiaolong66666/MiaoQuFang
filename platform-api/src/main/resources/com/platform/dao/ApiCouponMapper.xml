@@ -157,6 +157,9 @@
                 order by b.coupon_status asc
             </otherwise>
         </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
     <select id="queryMaxUserEnableCoupon" resultMap="couponMap">

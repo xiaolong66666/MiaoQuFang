@@ -39,9 +39,15 @@ public class ApiCouponController extends ApiBaseAction {
      */
     @ApiOperation(value = "获取优惠券列表")
     @PostMapping("/list")
-    public Object list(@LoginUser UserVo loginUser) {
+    public Object list(@LoginUser UserVo loginUser,@RequestBody JSONObject jsonParams) {
+        //获取分页参数
+        Integer page = jsonParams.getInteger("page");
+        Integer size = jsonParams.getInteger("size");
         Map<String, Object> param = new HashMap<>();
         param.put("userId", loginUser.getUserId());
+        //封装分页参数limit，offset
+        param.put("limit", size);
+        param.put("offset", (page - 1) * size);
         List<CouponVo> couponVos = apiCouponService.queryUserCoupons(param);
         return toResponseSuccess(couponVos);
     }

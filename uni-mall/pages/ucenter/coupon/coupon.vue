@@ -32,15 +32,23 @@
 	export default {
 		data() {
 			return {
-				couponList: null
+				couponList: [],
+        page: 1,
+        size: 8
 			}
 		},
 		methods: {
 			loadListData: function() {
 				let that = this;
-				util.request(api.CouponList).then(function(res) {
+				util.request(api.CouponList,{
+          page: that.page,
+          size: that.size
+        }).then(function(res) {
 					if (res.errno === 0) {
-						that.couponList = res.data
+            if (res.data.length > 0) {
+              that.couponList = that.couponList.concat(res.data);
+              that.page++;
+            }
 					}
 				});
 			}
@@ -49,9 +57,16 @@
 			this.loadListData()
 		},
     onPullDownRefresh: function() {
+      this.page = 1;
       this.loadListData()
       uni.stopPullDownRefresh();
-    }
+    },
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function() {
+      this.loadListData()
+    },
 	}
 </script>
 
