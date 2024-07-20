@@ -5,7 +5,7 @@
     <view class="login-form">
       <view class="list">
         <view class="label"><span>*</span>邮箱账号 </view>
-        <view class="right">
+        <view class="right1">
           <input type="email" placeholder="请输入" @blur="mailBlur" v-model="formData.mail">
         </view>
       </view>

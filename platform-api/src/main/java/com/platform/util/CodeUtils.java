@@ -17,8 +17,23 @@ public class CodeUtils {
         String substring = last.substring(last.length() - 6);
         //将验证码存入缓存
         J2CacheUtils.putCode(mail,substring);
-        log.info("向客户{}发送验证码：{}",mail,substring);
+        if (checkCode(mail,substring)) {
+            return null;
+        }
         return substring;
+    }
+    //检查是否存入缓存，重试三次发送
+    public boolean checkCode(String mail,String str){
+        int i = 0;
+        while (i < 3) {
+            Object code = J2CacheUtils.getCode(mail);
+            if (code != null) {
+                return true;
+            }
+            J2CacheUtils.putCode(mail,str);
+            i++;
+        }
+        return false;
     }
     public String getCode(String mail){
         return (String) J2CacheUtils.getCode(mail);

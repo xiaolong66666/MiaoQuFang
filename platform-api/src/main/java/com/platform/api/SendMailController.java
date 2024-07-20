@@ -27,6 +27,9 @@ public class SendMailController {
         }
         SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
         String generator = codeUtils.generator(mail);
+        if (generator == null || "".equals(generator)) {
+            return R.error("验证码生成失败!请重试!");
+        }
         String title = "妙趣坊商城验证码:"+generator;
         seedMailService.seedMessage(title,mail,"欢迎"+mail+"来到妙趣坊商城！验证码将在1分钟后失效! 请尽快使用!");
         return R.ok("验证码发送成功!");
