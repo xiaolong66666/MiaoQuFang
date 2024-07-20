@@ -17,4 +17,6 @@ import java.util.Map;
 public interface UserDao extends BaseDao<UserEntity> {
 
     public int setUserPoints(Map<String,Object> params);
+
+    int setUserPayouts(Integer... ids);
 }

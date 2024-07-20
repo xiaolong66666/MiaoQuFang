@@ -159,4 +159,14 @@ public class UserController {
         userService.setUserPoints(param.getInnerMap());
         return R.ok();
     }
+    /**
+     * 一键提现
+     */
+    @RequestMapping("/setPayouts")
+    @RequiresPermissions("user:payouts")
+    public R setUserPayouts(@RequestBody JSONObject param) {
+        Integer[] ids = param.getObject("userIds", Integer[].class);
+        userService.setUserPayouts(ids);
+        return R.ok();
+    }
 }

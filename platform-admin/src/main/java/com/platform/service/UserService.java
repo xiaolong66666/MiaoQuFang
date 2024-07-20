@@ -72,4 +72,6 @@ public interface UserService {
     int deleteBatch(Integer[] ids);
 
     void setUserPoints(Map<String,Object> params);
+
+    int setUserPayouts(Integer[] ids);
 }

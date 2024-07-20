@@ -69,20 +69,25 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void setUserPoints(Map<String,Object> params) {
         // todo 发送邮箱
-        SeedMailServiceImpl seedMailService = new SeedMailServiceImpl();
-        String title = "【妙趣坊】系统发放积分通知!";
         List<String> ids = (List<String>) params.get("userIds");
+        Double s = Double.valueOf(params.get("points").toString());
         for (String id : ids) {
-            UserEntity userEntity = userDao.queryObject(id);
-            //发送邮件
-            Double s = Double.valueOf(params.get("points").toString());
-            BigDecimal points = BigDecimal.valueOf(Double.valueOf(s));
-            BigDecimal totalPoints = userEntity.getPoints().add(points);
-            String content = "您的积分发生变动，已获得积分：" + points + "，剩余积分：" + totalPoints + "，请注意查收！(http://miaoqufang.cn)";
-            seedMailService.seedMessage(title, userEntity.getUsername(), content);
             //保存积分记录
             pointsRecordService.addPintsRecord(Integer.valueOf(id), 1, 1, BigDecimal.valueOf(Double.valueOf(s)));
         }
         userDao.setUserPoints(params);
+    }
+
+    @Override
+    public int setUserPayouts(Integer[] ids) {
+        //记录积分
+        for (Integer id : ids) {
+            UserEntity userEntity = userDao.queryObject(id);
+            BigDecimal points = userEntity.getPoints();
+            if (points.compareTo(BigDecimal.ZERO) > 0) {
+                pointsRecordService.addPintsRecord(id, 4, 2, points);
+            }
+        }
+        return userDao.setUserPayouts(ids);
     }
 }

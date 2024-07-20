@@ -68,6 +68,24 @@ var vm = new Vue({
         userLevels: []
     },
     methods: {
+        setPayouts: function () {
+            var ids = getSelectedRows("#jqGrid");
+            Ajax.request({
+                type: "POST",
+                url: "../user/setPayouts",
+                contentType: "application/json",
+                params: JSON.stringify({
+                    userIds: ids,
+                    points: vm.sendPoints
+                }),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        //关闭窗口#sendDiv
+                        vm.reload();
+                    });
+                }
+            });
+        },
         setPoints: function () {
             var ids = getSelectedRows("#jqGrid");
             if (ids == null) {

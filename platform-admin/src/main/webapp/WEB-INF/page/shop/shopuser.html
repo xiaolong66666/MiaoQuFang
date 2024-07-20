@@ -18,6 +18,9 @@
                 #if($shiro.hasPermission("user:points"))
                 <i-button type="info" @click="setPoints"><i class="fa fa-plus"></i>&nbsp;发放积分</i-button>
                 #end
+                #if($shiro.hasPermission("user:payouts"))
+                <i-button type="info" @click="setPayouts"><i class="fa fa-plus"></i>&nbsp;一键提现</i-button>
+                #end
                 #if($shiro.hasPermission("user:save"))
                 <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
                 #end
