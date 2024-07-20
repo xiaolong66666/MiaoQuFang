@@ -95,6 +95,8 @@ public class ApiCatalogController extends ApiBaseAction {
         //获取子分类数据
         if (null != currentCategory && null != currentCategory.getId()) {
             params.put("parentId", currentCategory.getId());
+            params.put("sidx", "sort_order");
+            params.put("order", "asc");
             currentCategory.setSubCategoryList(categoryService.queryList(params));
         }
         resultObj.put("currentCategory", currentCategory);
