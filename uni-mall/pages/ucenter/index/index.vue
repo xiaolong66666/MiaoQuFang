@@ -76,7 +76,7 @@
 		<view class="logout" v-if="userInfo.userName!='点击去登录'" @tap="exitLogin">退出登录</view>
 		<view class="logout" v-else @tap="goLogin">点击去登录</view>
     <view class='company'>
-          深圳市妙趣坊贸易有限公司
+          合作可联系小龙:MiaoQuF(微信号)
     </view>
 	</view>
 </template>
