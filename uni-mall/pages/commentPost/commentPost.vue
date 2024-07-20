@@ -49,13 +49,15 @@
 					})
 				  }
 				});
-			  }
+			  },
+      onClose() {
+        //返回上一个界面
+        uni.navigateBack({
+          delta: 1
+        });
+      },
 		},
-		onClose:function() {
-			uni.navigateBack({
-				delta: 1
-			});
-		},
+
 		onLoad: function(options) {
 			var that = this;
 			that.typeId= parseInt(options.typeId)
