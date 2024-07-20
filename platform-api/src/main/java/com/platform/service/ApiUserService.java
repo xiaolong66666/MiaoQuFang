@@ -8,12 +8,14 @@ import com.platform.entity.UserInfo;
 import com.platform.entity.UserLevelVo;
 import com.platform.entity.UserVo;
 import com.platform.util.ApiBaseAction;
+import com.platform.util.CommonUtil;
 import com.platform.utils.CharUtil;
 import com.platform.utils.RRException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,8 @@ public class ApiUserService extends ApiBaseAction {
     private ApiUserMapper userDao;
     @Autowired
     private ApiUserLevelMapper userLevelDao;
+    @Autowired
+    private HttpServletRequest request;
 
     public UserVo getInviteUser(String code) {
         return userDao.getInviteUser(code);
@@ -86,7 +90,8 @@ public class ApiUserService extends ApiBaseAction {
         if (!checkCode.equals(code)) {
             throw new RRException("验证码错误");
         }
-
+        //获取远程ip
+        String ipAddress = CommonUtil.getIpAddress(request);
         if (null == userVo) {
             //账号不存在,创建账号
             userVo = new UserVo();
@@ -94,8 +99,8 @@ public class ApiUserService extends ApiBaseAction {
             userVo.setUsername(mail);
             userVo.setPassword(DigestUtils.sha256Hex("123456"));
             userVo.setRegisterTime(new Date());
-            userVo.setRegisterIp(this.getClientIp());
-            userVo.setLastLoginIp(this.getClientIp());
+            userVo.setRegisterIp(ipAddress);
+            userVo.setLastLoginIp(ipAddress);
             userVo.setLastLoginTime(new Date());
             //初始化创建用户为普通用户
             userVo.setUserLevelId(1);
@@ -104,7 +109,7 @@ public class ApiUserService extends ApiBaseAction {
             save(userVo);
         }else {
             //更新登录信息
-            userVo.setLastLoginIp(this.getClientIp());
+            userVo.setLastLoginIp(ipAddress);
             userVo.setLastLoginTime(new Date());
             update(userVo);
         }
