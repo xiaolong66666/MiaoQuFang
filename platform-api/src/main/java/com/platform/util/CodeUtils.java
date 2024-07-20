@@ -17,7 +17,7 @@ public class CodeUtils {
         String substring = last.substring(last.length() - 6);
         //将验证码存入缓存
         J2CacheUtils.putCode(mail,substring);
-        if (checkCode(mail,substring)) {
+        if (!checkCode(mail,substring)) {
             return null;
         }
         return substring;
