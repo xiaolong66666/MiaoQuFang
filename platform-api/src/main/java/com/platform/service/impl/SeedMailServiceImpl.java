@@ -38,7 +38,7 @@ public class SeedMailServiceImpl implements SendMailService {
             // 创建session，并验证用户名和密码
             Session session = Session.getDefaultInstance(prop, new Authenticator(){
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(from, "iiasvfniiovzecfa");
+                    return new PasswordAuthentication(from, "ovcdaejmrjavdhjg");
                 }});
             // 开启Session的debug模式，这样就可以查看到程序发送Email的运行状态
             session.setDebug(true);
