@@ -54,11 +54,11 @@ public class GoodsSpecificationServiceImpl implements GoodsSpecificationService 
                 .queryList(map)
                 .stream()
                 .filter(goodsSpecificationEntity -> {
+                    if (isShowAll.equals(1)) {
+                        return true;
+                    }
                     if (finalIds.contains(goodsSpecificationEntity.getId())) {
-                        if (isShowAll.equals(1)) {
-                            return true;
-                        }
-                        if (finalCur_id != null && finalCur_id == goodsSpecificationEntity.getId()) {
+                        if (finalCur_id != null && finalCur_id.equals(goodsSpecificationEntity.getId())) {
                             return true;
                         }
                         return false;
