@@ -17,6 +17,9 @@ $(function () {
                     if (value == 3) {
                         return '<span class="label label-warning">购物</span>';
                     }
+                    if (value == 4){
+                        return '<span class="label label-info">提现</span>';
+                    }
                     return '<span class="label label-danger">未知</span>';
                 }},
             {label: '类型', name: 'type', index: 'type', width: 80,
