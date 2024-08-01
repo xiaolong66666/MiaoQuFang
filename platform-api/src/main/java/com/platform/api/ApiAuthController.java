@@ -65,7 +65,7 @@ public class ApiAuthController extends ApiBaseAction {
             UserVo userVo = userService.queryByUsername(mail);
             if (userVo != null) {
                 TokenEntity tokenEntity = tokenService.queryByUserId(userVo.getUserId());
-                if (tokenEntity != null) {
+                if (tokenEntity != null && tokenEntity.getExpireTime().getTime() > System.currentTimeMillis()) {
                     Map<String, Object> map = new HashMap<>();
                     map.put("token", tokenEntity.getToken());
                     map.put("userInfo", userVo);
