@@ -157,6 +157,7 @@
 	.catalog .nav {
 		width: 162rpx;
 		height: 100%;
+    margin-bottom: 100rpx;
 	}
 
 	.catalog .nav .item {
@@ -180,6 +181,7 @@
 		flex: 1;
 		height: 100%;
 		padding: 0 30rpx 0 30rpx;
+    margin-bottom: 100rpx;
 	}
 
 	.banner {
