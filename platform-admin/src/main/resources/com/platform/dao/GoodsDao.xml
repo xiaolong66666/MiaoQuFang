@@ -267,4 +267,7 @@
     <select id="queryMaxId" resultType="java.lang.Integer" parameterType="map">
         SELECT MAX(id) FROM nideshop_goods
     </select>
+    <select id="queryAll" resultType="com.platform.entity.GoodsEntity">
+        select id,name from nideshop_goods where is_delete = 0
+    </select>
 </mapper>

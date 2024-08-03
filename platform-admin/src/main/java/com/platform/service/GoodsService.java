@@ -93,4 +93,6 @@ public interface GoodsService {
      * @return
      */
     int unSale(Integer id);
+
+    List<GoodsEntity> queryAll();
 }

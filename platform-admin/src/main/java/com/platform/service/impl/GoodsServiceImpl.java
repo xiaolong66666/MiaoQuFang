@@ -220,4 +220,9 @@ public class GoodsServiceImpl implements GoodsService {
         goodsEntity.setUpdateTime(new Date());
         return goodsDao.update(goodsEntity);
     }
+
+    @Override
+    public List<GoodsEntity> queryAll() {
+        return goodsDao.queryAll();
+    }
 }

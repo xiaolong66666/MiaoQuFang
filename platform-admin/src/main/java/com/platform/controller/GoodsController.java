@@ -91,9 +91,7 @@ public class GoodsController {
      */
     @RequestMapping("/queryAll")
     public R queryAll(@RequestParam Map<String, Object> params) {
-
-        params.put("isDelete", 0);
-        List<GoodsEntity> list = goodsService.queryList(params);
+        List<GoodsEntity> list = goodsService.queryAll();
 
         return R.ok().put("list", list);
     }
