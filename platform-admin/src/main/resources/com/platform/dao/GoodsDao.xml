@@ -103,6 +103,9 @@
         <if test="categoryName != null and categoryName != ''">
             AND nideshop_category.name LIKE concat('%',#{categoryName},'%')
         </if>
+        <if test="brandName != null and brandName != ''">
+            AND nideshop_brand.name LIKE concat('%',#{brandName},'%')
+        </if>
         AND nideshop_goods.is_Delete = #{isDelete}
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
