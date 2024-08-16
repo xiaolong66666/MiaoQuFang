@@ -203,7 +203,9 @@
 		},
 		onLoad: function(options) {
 			this.getIndexData();
-      uni.setStorageSync('kefu', options.n);
+      if (options.n) {
+        uni.setStorageSync('kefu',options.n);
+      }
 		}
 	}
 </script>
