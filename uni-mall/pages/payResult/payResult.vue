@@ -18,7 +18,7 @@
         </view>
 				<view class="btns">
 					<navigator class="btn" url="/pages/ucenter/order/order" open-type="redirect">查看订单</navigator>
-          <a href="https://work.weixin.qq.com/kfid/kfce9524b2cf9333141" class="btn">联系客服</a>
+          <a :href="kefu" class="btn">联系客服</a>
 				</view>
 			</view>
 		</view>
@@ -34,6 +34,7 @@
 				status: false,
 				orderId: 0,
         pay: 0,
+        kefu:'https://work.weixin.qq.com/kfid/kfce9524b2cf9333141'
 			}
 		},
 		methods: {
@@ -66,6 +67,11 @@
 			// 页面初始化 options为页面跳转所带来的参数
 			this.orderSn = options.orderSn
 			this.pay = options.pay
+      let kefu = uni.getStorageSync('kefu');
+      //客服
+      if (kefu) {
+        this.kefu = 'https://work.weixin.qq.com/kfid/'+kefu;
+      }
 		},
     onPullDownRefresh() {
       // 增加下拉刷新数据的功能

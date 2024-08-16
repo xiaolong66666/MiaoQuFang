@@ -201,8 +201,9 @@
 				path: '/pages/index/index'
 			}
 		},
-		onLoad: function() {
+		onLoad: function(options) {
 			this.getIndexData();
+      uni.setStorageSync('kefu', options.n);
 		}
 	}
 </script>

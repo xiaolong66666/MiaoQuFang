@@ -48,7 +48,7 @@
 			</view>
 			<button class='service' open-type="contact">
 				<view class="item no-border">
-          <a href="https://work.weixin.qq.com/kfid/kfce9524b2cf9333141" class="a no-underline">
+          <a :href="kefu" class="a no-underline">
             <text class="icon kefu"></text>
             <text class="txt">联系客服</text>
           </a>
@@ -91,7 +91,8 @@
 				canIUseGetUserProfile: false,
 				userInfo: {},
 				hasMobile: '',
-        userPoints: 0
+        userPoints: 0,
+        kefu: 'https://work.weixin.qq.com/kfid/kfce9524b2cf9333141'
 			}
 		},
 		methods: {
@@ -198,8 +199,12 @@
 		onShow: function() {
 			let that = this;
 			let userInfo = uni.getStorageSync('userInfo');
+			let kefu = uni.getStorageSync('kefu');
 			let token = uni.getStorageSync('token');
-
+      //客服
+      if (kefu) {
+        that.kefu = 'https://work.weixin.qq.com/kfid/'+kefu;
+      }
 			// 页面显示
 			if (userInfo && token) {
 				app.globalData.userInfo = userInfo;
