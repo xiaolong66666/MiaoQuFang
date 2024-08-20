@@ -91,7 +91,7 @@
         left join nideshop_goods_specification ngs on np.goods_id = ngs.goods_id
         where ng.is_delete = 0 and ng.is_on_sale = 1
         <if test="goodsName != null and goodsName.trim() != ''">
-            AND nideshop_goods.name LIKE concat('%',#{goodsName},'%')
+            AND ng.name LIKE concat('%',#{goodsName},'%')
         </if>
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
