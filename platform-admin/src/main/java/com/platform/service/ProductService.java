@@ -1,6 +1,7 @@
 package com.platform.service;
 
 import com.platform.entity.ProductEntity;
+import com.platform.utils.Query;
 
 import java.util.List;
 import java.util.Map;
@@ -69,4 +70,8 @@ public interface ProductService {
      * @return 删除条数
      */
     int deleteBatch(Integer[] ids);
+
+    List<ProductEntity> queryProfitsList(Query query);
+
+    int queryProfitsTotal(Query query);
 }

@@ -42,6 +42,21 @@ public class ProductController {
 
         return R.ok().put("page", pageUtil);
     }
+    /**
+     * 查看列表
+     */
+    @RequestMapping("/profitsList")
+    public R profitsList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+
+        List<ProductEntity> productList = productService.queryProfitsList(query);
+        int total = productService.queryProfitsTotal(query);
+
+        PageUtils pageUtil = new PageUtils(productList, total, query.getLimit(), query.getPage());
+
+        return R.ok().put("page", pageUtil);
+    }
 
     /**
      * 查看信息

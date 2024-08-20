@@ -41,4 +41,5 @@ public class ProductEntity implements Serializable {
     //商品
     private String goodsName;
     private String specificationValue;
+    private String profits;
 }

@@ -72,6 +72,31 @@
             AND nideshop_goods.name LIKE concat('%',#{goodsName},'%')
         </if>
     </select>
+    <select id="queryProfitsTotal" resultType="java.lang.Integer">
+        select count(*) from nideshop_product
+        LEFT JOIN nideshop_goods ON nideshop_product.goods_id = nideshop_goods.id
+        WHERE nideshop_goods.is_on_sale = 1 AND nideshop_goods.is_delete = 0
+        <if test="goodsId != null and goodsId.trim() != ''">
+            AND nideshop_product.goods_id = #{goodsId}
+        </if>
+        <if test="goodsName != null and goodsName.trim() != ''">
+            AND nideshop_goods.name LIKE concat('%',#{goodsName},'%')
+        </if>
+    </select>
+    <select id="queryProfitsList" resultType="com.platform.entity.ProductEntity">
+        select ng.name goods_name ,ngs.value specificationValue,np.retail_price,
+        IF((np.retail_price-np.cost_price) &lt; 3, 0, (np.retail_price-np.cost_price-3) * 0.8) AS profits
+        from nideshop_product as np
+        left join nideshop_goods ng on ng.id = np.goods_id
+        left join nideshop_goods_specification ngs on np.goods_id = ngs.goods_id
+        where ng.is_delete = 0 and ng.is_on_sale = 1
+        <if test="goodsName != null and goodsName.trim() != ''">
+            AND nideshop_goods.name LIKE concat('%',#{goodsName},'%')
+        </if>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
     <insert id="save" parameterType="com.platform.entity.ProductEntity" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_product(

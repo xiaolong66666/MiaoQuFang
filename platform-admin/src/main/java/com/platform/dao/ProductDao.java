@@ -1,6 +1,9 @@
 package com.platform.dao;
 
 import com.platform.entity.ProductEntity;
+import com.platform.utils.Query;
+
+import java.util.List;
 
 /**
  * Dao
@@ -11,4 +14,7 @@ import com.platform.entity.ProductEntity;
  */
 public interface ProductDao extends BaseDao<ProductEntity> {
 
+    List<ProductEntity> queryProfitsList(Query query);
+
+    int queryProfitsTotal(Query query);
 }

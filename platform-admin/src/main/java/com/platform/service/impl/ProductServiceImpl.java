@@ -3,6 +3,7 @@ package com.platform.service.impl;
 import com.platform.dao.GoodsSpecificationDao;
 import com.platform.entity.GoodsSpecificationEntity;
 import com.platform.utils.BeanUtils;
+import com.platform.utils.Query;
 import com.platform.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,5 +91,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int deleteBatch(Integer[] ids) {
         return productDao.deleteBatch(ids);
+    }
+
+    @Override
+    public List<ProductEntity> queryProfitsList(Query query) {
+        return productDao.queryProfitsList(query);
+    }
+
+    @Override
+    public int queryProfitsTotal(Query query) {
+        return productDao.queryProfitsTotal(query);
     }
 }
