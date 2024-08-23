@@ -84,7 +84,9 @@
 			`status`, 
 			`create_user_id`,
 			`dept_id`,
-			`create_time`
+			`create_time`,
+		    `service_link`,
+		 	`mark`
 		)
 		values
 		(
@@ -96,7 +98,9 @@
 			#{status}, 
 			#{createUserId},
 			#{deptId},
-			#{createTime}
+			#{createTime},
+			#{serviceLink},
+		 	#{mark}
 		)
 	</insert>
 	 
@@ -108,6 +112,8 @@
 			<if test="mobile != null">`mobile` = #{mobile}, </if>
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="deptId != null">`dept_id` = #{deptId}, </if>
+		    <if test="serviceLink != null">`service_link` = #{serviceLink}, </if>
+		    <if test="mark != null">`mark` = #{mark}, </if>
 		</set>
 		where user_id = #{userId} 
 		<if test="createUserId != null">

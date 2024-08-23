@@ -40,6 +40,7 @@
         <result property="callbackStatus" column="callback_status"/>
         <result property="orderType" column="order_type"/>
         <result property="userName" column="username"/>
+        <result property="mark" column="mark"/>
     </resultMap>
 
     <select id="queryObject" resultType="com.platform.entity.OrderEntity">
@@ -68,6 +69,9 @@
         </if>
         <if test="orderType != null and orderType.trim() != ''">
             AND o.order_type = #{orderType}
+        </if>
+        <if test="mark != null and mark != ''">
+            AND o.mark = #{mark}
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">

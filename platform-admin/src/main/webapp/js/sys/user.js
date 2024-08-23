@@ -6,7 +6,7 @@ $(function () {
             {label: '用户名', name: 'username', width: 75},
             {label: '所属部门', name: 'deptName', width: 75},
             {label: '邮箱', name: 'email', width: 90},
-            {label: '手机号', name: 'mobile', width: 100},
+            // {label: '手机号', name: 'mobile', width: 100},
             {
                 label: '状态', name: 'status', width: 80, formatter: function (value) {
                     return value === 0 ?
@@ -18,7 +18,25 @@ $(function () {
                 label: '创建时间', name: 'createTime', index: "create_time", width: 80, formatter: function (value) {
                     return transDate(value);
                 }
-            }]
+            },
+            {
+                label: '创建时间', name: 'createTime', index: "create_time", width: 80, formatter: function (value) {
+                    return transDate(value);
+                }
+            },
+            {
+                label: '客服链接', name: 'serviceLink', index: "service_link", width: 80, formatter: function (value, col, row) {
+                    return value === null ? '' :
+                        '<a href="' + value + '" target="_blank">客服链接</a>';
+                }
+            },
+            {
+                label: '网站入口', name: 'mark', index: "mark", width: 80, formatter: function (value, col, row) {
+                    return value === null ? '' :
+                        '<a href="http://miaoqufang.cn/h5/#/?n=' + value + '" target="_blank">网站入口</a>';
+                }
+            },
+            ]
     });
 });
 
@@ -55,13 +73,13 @@ var vm = new Vue({
             username: [
                 {required: true, message: '姓名不能为空', trigger: 'blur'}
             ],
-            email: [
-                {required: true, message: '邮箱不能为空', trigger: 'blur'},
-                {type: 'email', message: '邮箱格式不正确', trigger: 'blur'}
-            ],
-            mobile: [
-                {required: true, message: '手机号不能为空', trigger: 'blur'}
-            ]
+            // email: [
+            //     {required: true, message: '邮箱不能为空', trigger: 'blur'},
+            //     {type: 'email', message: '邮箱格式不正确', trigger: 'blur'}
+            // ],
+            // mobile: [
+            //     {required: true, message: '手机号不能为空', trigger: 'blur'}
+            // ]
         }
     },
     methods: {

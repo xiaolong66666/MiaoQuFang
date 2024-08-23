@@ -198,7 +198,8 @@
 				util.request(api.OrderSubmit, {
 					addressId: that.addressId,
 					couponId: that.couponId,
-					type: that.buyType
+					type: that.buyType,
+          mark: uni.getStorageSync('kefu')
 				}, 'POST', 'application/json').then(res => {
 					if (res.errno === 0) {
 						const orderSn = res.data.orderInfo.orderSn;

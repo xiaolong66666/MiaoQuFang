@@ -97,4 +97,6 @@ public class OrderEntity implements Serializable {
 
     //
     private String userName;
+    //客服标识
+    private String mark;
 }

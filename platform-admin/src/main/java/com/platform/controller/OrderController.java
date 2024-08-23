@@ -2,7 +2,9 @@ package com.platform.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.platform.entity.OrderEntity;
+import com.platform.entity.SysUserEntity;
 import com.platform.service.OrderService;
+import com.platform.service.SysUserService;
 import com.platform.utils.PageUtils;
 import com.platform.utils.Query;
 import com.platform.utils.R;
@@ -21,9 +23,12 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("order")
-public class OrderController {
+public class OrderController extends AbstractController {
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private SysUserService sysUserService;
 
     /**
      * 列表
@@ -31,6 +36,13 @@ public class OrderController {
     @RequestMapping("/list")
     @RequiresPermissions("order:list")
     public R list(@RequestParam Map<String, Object> params) {
+        // 如果非管理员部门，则只查询自己客服的订单列表
+        SysUserEntity sysUserEntity = sysUserService.queryObject(getUserId());
+        List<Long> role_ids = sysUserEntity.getRoleIdList();
+        if (!role_ids.contains(5L) && !role_ids.contains(6L)) {
+            params.put("mark", sysUserEntity.getMark());
+        }
+
         // 查询列表数据
         Query query = new Query(params);
 

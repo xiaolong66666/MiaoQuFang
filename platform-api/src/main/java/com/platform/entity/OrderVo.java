@@ -106,6 +106,8 @@ public class OrderVo implements Serializable {
     private BigDecimal fullCutPrice; //订单满减
     private String fullRegion;//区县
     private String orderType; // 订单状态
+    //客服标记
+    private String mark;
 
     public String getFullRegion() {
         if (StringUtils.isNotEmpty(this.fullRegion)) {

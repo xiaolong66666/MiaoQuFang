@@ -63,6 +63,11 @@
                     </Radio>
                 </Radio-group>
             </Form-item>
+
+            <Form-item label="客服链接" prop="serviceLink">
+                <i-input v-model="user.serviceLink" placeholder="客服链接"/>
+            </Form-item>
+
             <Form-item>
                 <i-button type="primary" @click="handleSubmit('formValidate')">提交</i-button>
                 <i-button type="warning" @click="reload" style="margin-left: 8px">返回</i-button>

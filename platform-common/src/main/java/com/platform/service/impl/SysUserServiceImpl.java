@@ -56,7 +56,12 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public SysUserEntity queryObject(Long userId) {
-        return sysUserDao.queryObject(userId);
+        SysUserEntity sysUserEntity = sysUserDao.queryObject(userId);
+        if (sysUserEntity != null) {
+            List<Long> ids = sysUserRoleService.queryRoleIdList(userId);
+            sysUserEntity.setRoleIdList(ids);
+        }
+        return sysUserEntity;
     }
 
     @Override
@@ -75,6 +80,14 @@ public class SysUserServiceImpl implements SysUserService {
         user.setCreateTime(new Date());
         //sha256加密
         user.setPassword(new Sha256Hash(Constant.DEFAULT_PASS_WORD).toHex());
+
+        //设置客服标识
+        if (StringUtils.isNotEmpty(user.getServiceLink())){
+            //使用/分割字符串，取最后一个
+            String[] split = user.getServiceLink().split("/");
+            user.setMark(split[split.length-1]);
+        }
+
         sysUserDao.save(user);
 
         //检查角色是否越权
@@ -91,6 +104,12 @@ public class SysUserServiceImpl implements SysUserService {
             user.setPassword(new Sha256Hash(Constant.DEFAULT_PASS_WORD).toHex());
         } else {
             user.setPassword(new Sha256Hash(user.getPassword()).toHex());
+        }
+        //设置客服标识
+        if (StringUtils.isNotEmpty(user.getServiceLink())){
+            //使用/分割字符串，取最后一个
+            String[] split = user.getServiceLink().split("/");
+            user.setMark(split[split.length-1]);
         }
         sysUserDao.update(user);
 

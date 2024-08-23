@@ -2,6 +2,7 @@ package com.platform.entity;
 
 import com.platform.validator.group.AddGroup;
 import com.platform.validator.group.UpdateGroup;
+import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * @email 939961241@qq.com
  * @date 2016年9月18日 上午9:28:55
  */
+@Data
 public class SysUserEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -38,8 +40,8 @@ public class SysUserEntity implements Serializable {
     /**
      * 邮箱
      */
-    @NotBlank(message = "邮箱不能为空", groups = {AddGroup.class, UpdateGroup.class})
-    @Email(message = "邮箱格式不正确", groups = {AddGroup.class, UpdateGroup.class})
+//    @NotBlank(message = "邮箱不能为空", groups = {AddGroup.class, UpdateGroup.class})
+//    @Email(message = "邮箱格式不正确", groups = {AddGroup.class, UpdateGroup.class})
     private String email;
 
     /**
@@ -73,6 +75,16 @@ public class SysUserEntity implements Serializable {
      * 部门名称
      */
     private String deptName;
+
+    /**
+     * 客服链接
+     */
+    private String serviceLink;
+
+    /**
+     * 客服标识
+     */
+    private String mark;
 
     /**
      * 设置：

@@ -25,7 +25,9 @@
 	</select>
 
 	<select id="queryList" resultType="com.platform.entity.OrderGoodsEntity">
-		select * from nideshop_order_goods
+		select nideshop_order_goods.*,nideshop_goods.list_pic_url listPicUrl from
+		nideshop_order_goods
+		left join nideshop_goods on nideshop_order_goods.goods_id = nideshop_goods.id
 		WHERE 1=1
 		<if test="orderId != null and orderId != ''">
 			AND order_id = #{orderId}

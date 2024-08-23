@@ -197,7 +197,9 @@ public class ApiOrderService extends ApiBaseAction {
         } else {
             orderInfo.setOrderType("4");
         }
-
+        //客服标记
+        String mark = jsonParam.getString("mark");
+        orderInfo.setMark(mark);
         //开启事务，插入订单信息和订单商品
         apiOrderMapper.save(orderInfo);
         if (null == orderInfo.getId()) {

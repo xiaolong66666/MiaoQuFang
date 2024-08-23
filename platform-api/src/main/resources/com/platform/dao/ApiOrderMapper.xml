@@ -41,6 +41,7 @@
         <result property="callbackStatus" column="callback_status"/>
         <result property="fullCutPrice" column="full_cut_price"/>
         <result property="pointsPay" column="points_pay"/>
+        <result property="mark" column="mark"/>
     </resultMap>
 
     <select id="queryObject" resultMap="orderMap">
@@ -116,7 +117,8 @@
 			`callback_status`,
 			`full_cut_price`,
 			`order_type`,
-		    `points_pay`
+		    `points_pay`,
+		    `mark`
 		)
 		values
 		(
@@ -153,7 +155,8 @@
 			#{callbackStatus},
 			#{fullCutPrice},
 			#{orderType},
-		    #{pointsPay}
+		    #{pointsPay},
+		    #{mark}
 		)
 	</insert>
 
